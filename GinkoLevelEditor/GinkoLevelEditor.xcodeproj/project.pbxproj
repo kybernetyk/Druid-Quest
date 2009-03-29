@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0392566A0F7FB1DC008964C8 /* MapEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 039256690F7FB1DC008964C8 /* MapEntity.m */; };
+		03993FCC0F7FFBE000770565 /* block_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 03993FCB0F7FFBE000770565 /* block_5.png */; };
 		03CF02EE0F7ED7B800798FE9 /* block_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 03CF02E90F7ED7B800798FE9 /* block_4.png */; };
 		03CF02EF0F7ED7B800798FE9 /* block_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03CF02EA0F7ED7B800798FE9 /* block_2.png */; };
 		03CF02F00F7ED7B800798FE9 /* block_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 03CF02EB0F7ED7B800798FE9 /* block_3.png */; };
@@ -25,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		039256680F7FB1DC008964C8 /* MapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEntity.h; sourceTree = "<group>"; };
+		039256690F7FB1DC008964C8 /* MapEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapEntity.m; sourceTree = "<group>"; };
+		03993FCB0F7FFBE000770565 /* block_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_5.png; sourceTree = "<group>"; };
 		03CF02E90F7ED7B800798FE9 /* block_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_4.png; sourceTree = "<group>"; };
 		03CF02EA0F7ED7B800798FE9 /* block_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_2.png; sourceTree = "<group>"; };
 		03CF02EB0F7ED7B800798FE9 /* block_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_3.png; sourceTree = "<group>"; };
@@ -107,6 +112,8 @@
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
 				03CF030E0F7EDA4800798FE9 /* RenderView.h */,
 				03CF030F0F7EDA4800798FE9 /* RenderView.m */,
+				039256680F7FB1DC008964C8 /* MapEntity.h */,
+				039256690F7FB1DC008964C8 /* MapEntity.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -123,6 +130,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03993FCB0F7FFBE000770565 /* block_5.png */,
 				03CF03E70F7EE42700798FE9 /* finish.png */,
 				03CF03E50F7EE3D300798FE9 /* player.png */,
 				03CF02E90F7ED7B800798FE9 /* block_4.png */,
@@ -202,6 +210,7 @@
 				03CF02F20F7ED7B800798FE9 /* block_1.png in Resources */,
 				03CF03E60F7EE3D300798FE9 /* player.png in Resources */,
 				03CF03E80F7EE42700798FE9 /* finish.png in Resources */,
+				03993FCC0F7FFBE000770565 /* block_5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +224,7 @@
 				8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				03CF03100F7EDA4800798FE9 /* RenderView.m in Sources */,
+				0392566A0F7FB1DC008964C8 /* MapEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

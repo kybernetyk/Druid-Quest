@@ -10,6 +10,8 @@
 #import "GameInfo.h"
 #import "SpriteController.h"
 #import "AngularBlockController.h"
+#import "Waypoint.h"
+#import "BlockFactory.h"
 
 @implementation SpriteLayer
 @synthesize playerController;
@@ -19,6 +21,7 @@ enum spriteTags
 	kPlayerSprite = 200
 };
 
+
 #pragma mark -- init / dealloc
 - (id) initWithLevelFile: (NSString *) filename
 {
@@ -26,9 +29,71 @@ enum spriteTags
 	if (self)
 	{
 		spriteControllers = [[NSMutableArray alloc] init];
+		NSString *p = [[NSBundle mainBundle] pathForResource:@"map1" ofType:@"plist"];
+	//	NSLog(@"%@",p);
 		
-		id node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"player.png"]];
-		[node setPosition: cpv(32*4,32*4)];
+		NSDictionary *mapInfo = [NSDictionary dictionaryWithContentsOfFile:p];
+		NSLog(@"dict: %@",mapInfo);
+	
+		[[GameInfo sharedInstance] setLevelGridWidth: [[mapInfo objectForKey:@"MapGridWidth"] intValue]];
+		[[GameInfo sharedInstance] setLevelGridHeight: [[mapInfo objectForKey:@"MapGridHeight"] intValue]];
+		
+		NSArray *mapEntities = [mapInfo objectForKey:@"Entities"];
+		if (!mapEntities)
+		{
+			NSLog(@"map corrup! no entities found!");
+			exit(24);
+		}
+		
+		for (NSDictionary *entDict in mapEntities)
+		{
+			NSString *spriteFileName = @"";
+			int _entType = [[entDict objectForKey:@"type"] intValue];
+			int _entXPos = [[entDict objectForKey:@"gridPositionX"] intValue];
+			int _entYPos = [[entDict objectForKey:@"gridPositionY"] intValue];
+			
+			id controller = nil;
+			id node = nil;
+			
+			NSDictionary *nodecon = [BlockFactory createBlockControllerPair:_entType positionX:_entXPos positionY:_entYPos];
+			controller = [nodecon objectForKey:@"controller"];
+			node = [nodecon objectForKey:@"node"];
+			
+			if (controller)
+			{	
+				if (_entType == kPlayer)
+				{
+					playerController = controller;
+				}
+				else
+				{
+					[spriteControllers addObject: controller];
+				}
+			}
+			
+			if (node)
+			{
+				if (_entType == kPlayer)
+				{
+					[self addChild: node z: 0 tag: kPlayerSprite];
+				}
+				else
+				{
+					[self addChild: node z: 0];
+				}
+			}
+			
+			if (_entType == kFinish)
+			{
+				[[GameInfo sharedInstance] setFinishPosition: cpv(_entXPos,_entYPos)];
+			}
+			
+			[nodecon release];
+				
+		}
+		
+		
+/*		[node setPosition: cpv(32*4,32*4)];
 		[self addChild: node z: 0 tag: kPlayerSprite];
 
 		playerController = [[PlayerController alloc] initWithSprite: node];
@@ -64,7 +129,7 @@ enum spriteTags
 		
 		abc = [[AngularBlockController alloc] initWithSprite: node];
 		[abc setNormalVector: cpv(1.0,-1.0)];
-	[spriteControllers addObject: abc];
+	[spriteControllers addObject: abc];*/
 
 	}
 	
@@ -78,6 +143,7 @@ enum spriteTags
 	[playerController update];
 	for (id spriteController in spriteControllers)
 	{
+	//	NSLog(@"updating: %@",spriteController);
 		[spriteController update];
 	}
 }
@@ -109,14 +175,14 @@ enum spriteTags
 #pragma mark -- pathfinding
 
 //globale fieldcopy - cause passing pointer to multidimensional arrays sucks in C
-SpriteController *fieldcopy[16][11];
+SpriteController *fieldcopy[32][32];
 
 //casts a ray along (direction) starting at _position
 //if it finds a block that adds just a waypoint and not a final point
 //it sets bContinue to YES, sets the _position to the found block and the blocks bounce vector as the new direction
 //the pathfinding loop will call this method then again with these modified values
 //it sucks but hey ...
-- (NSValue *) getWaypointByCastingRayFrom: (cpVect *) _position withDirection: (cpVect *) direction continuePointer: (BOOL *) bContinue
+- (Waypoint *) getWaypointByCastingRayFrom: (cpVect *) _position withDirection: (cpVect *) direction continuePointer: (BOOL *) bContinue
 {
 	int xAdd = direction->x;
 	int yAdd = direction->y;
@@ -133,26 +199,44 @@ SpriteController *fieldcopy[16][11];
 	{
 		xPos += xAdd;
 		yPos += yAdd;
-		if (xPos < 0 || xPos >= 15)
+		if (xPos < 0 || xPos >= [[GameInfo sharedInstance] levelGridWidth])
 			break;
-		if (yPos < 0 || yPos >= 10)
+		if (yPos < 0 || yPos >= [[GameInfo sharedInstance] levelGridHeight])
 			break;
 		
 		if (fieldcopy[xPos][yPos] != nil)
 		{
 			SpriteController *c = fieldcopy[xPos][yPos];
-	//		NSLog(@"%i,%i, hit object: %@",xPos,yPos,c);
 			cpVect bounce = [c bounceVector: *direction];
+			
+			//fuehrt uns das ins ziel?
+			if (xPos == [[GameInfo sharedInstance] finishPosition].x &&
+				yPos == [[GameInfo sharedInstance] finishPosition].y)
+			{
+				cpVect ret = cpv(xPos*32,yPos*32);
+				*bContinue = NO;
+				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+
+				[v setLocation: ret];
+				[v setAssignedObject: c];
+				return v;
+			}
+
+			//nullvector - bitte vor diesem feld stehen bleiben
 			if (bounce.x == 0.0f && bounce.y == 0.0f)
 			{
 				//NSLog(@"got no bounce vector back!");
 				cpVect ret = cpv((xPos-xAdd)*32,(yPos-yAdd)*32);
+				//cpVect ret = cpv(xPos*32,yPos*32);
 				//NSLog(@"our final vector is: %i,%i",xPos-xAdd,yPos-yAdd);
 				*bContinue = NO;
-				NSValue *v = [NSValue valueWithCGPoint: ret];
+				//NSValue *v = [NSValue valueWithCGPoint: ret];
+				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setLocation: ret];
+				[v setAssignedObject: c];
 				return v;
 			}
-			else
+			else //ansonsten auf dieses feld bewegen und naechsten wegpunkt holen
 			{
 				//NSLog(@"got bounce vector back! let's rock!");
 				cpVect ret = cpv(xPos*32,yPos*32);
@@ -161,7 +245,11 @@ SpriteController *fieldcopy[16][11];
 				direction->y = bounce.y;
 				_position->x = xPos;
 				_position->y = yPos;
-				NSValue *v = [NSValue valueWithCGPoint: ret];
+//				NSValue *v = [NSValue valueWithCGPoint: ret];
+				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setLocation: ret];
+				[v setAssignedObject: c];
+				
 				return v;
 			}
 		}
@@ -171,9 +259,13 @@ SpriteController *fieldcopy[16][11];
 	
 	//player will die ... he shot himself to the border lol
 	cpVect ret = cpv((xPos)*32,(yPos)*32);
-	//NSLog(@"die die die: %i,%i",xPos,yPos);
+	NSLog(@"die die die: %i,%i",xPos,yPos);
 	*bContinue = NO;
-	NSValue *v = [NSValue valueWithCGPoint: ret];
+//	NSValue *v = [NSValue valueWithCGPoint: ret];
+	Waypoint *v = [[[Waypoint alloc] init] autorelease];
+	[v setLocation: ret];
+	[v setAssignedObject: nil];
+	
 	return v;
 }
 

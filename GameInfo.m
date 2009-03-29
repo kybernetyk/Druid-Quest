@@ -13,6 +13,8 @@
 @synthesize score, lives;
 @synthesize activeGraphicsPack;
 @synthesize zoom,maxZoom,minZoom;
+@synthesize levelGridWidth, levelGridHeight;
+@synthesize finishPosition;
 
 static GameInfo *sharedSingleton = nil;
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "cocos2d.h"
 
 @interface GameInfo : NSObject 
 {
@@ -17,6 +17,12 @@
 	float zoom;
 	float maxZoom;
 	float minZoom;
+	
+	int levelGridWidth;
+	int levelGridHeight;
+	
+	cpVect finishPosition;
+	
 }
 +(GameInfo *) sharedInstance;
 
@@ -25,6 +31,10 @@
 @property (readwrite, assign) float zoom;
 @property (readwrite, assign) float maxZoom;
 @property (readwrite, assign) float minZoom;
+@property (readwrite, assign) int levelGridWidth;
+@property (readwrite, assign) int levelGridHeight;
+
+@property (readwrite,assign) cpVect finishPosition;
 
 - (void) reset;
 

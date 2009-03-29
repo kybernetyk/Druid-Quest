@@ -20,6 +20,7 @@
 
 - (id) initWithLevelFile: (NSString *) filename;
 
+//array of waypoints
 - (NSArray *) getPathForPosition: (cpVect) startPosition andVector: (cpVect) directionVector;
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "PlayerController.h"
-
+#import "Waypoint.h"
+#import "GameInfo.h"
 
 @implementation PlayerController
 @synthesize controlledSprite;
@@ -43,10 +44,16 @@
 	
 	//player dies :(
 	//not the perfect place for this ... as there might be deadly blocks later
-	if (((int)gridPosition.x) < 0 || ((int)(gridPosition.x)) >= 480/32 ||
-		((int)gridPosition.y) < 0 || ((int)(gridPosition.y)) >= 320/32)
+	if (((int)gridPosition.x) < 0 || ((int)(gridPosition.x)) >= [[GameInfo sharedInstance] levelGridWidth] ||
+		((int)gridPosition.y) < 0 || ((int)(gridPosition.y)) >= [[GameInfo sharedInstance] levelGridHeight] )
 	{
 		NSLog(@"\n\n\n\n\nO M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+	}
+	
+	if (gridPosition.x == [[GameInfo sharedInstance] finishPosition].x &&
+		gridPosition.y == [[GameInfo sharedInstance] finishPosition].y)
+	{
+		NSLog(@"WIN WIN WIN!");
 	}
 	
 }
@@ -67,22 +74,23 @@
 	isMoving = YES;
 	
 	Sequence *tmpseq = [Sequence actions:[MoveBy actionWithDuration: 0.01 position: cpvzero],nil];
-	CGPoint p = [controlledSprite position];
-	for (NSValue *waypoint in path)
+	CGPoint currentPosition = [controlledSprite position];
+	for (Waypoint *waypoint in path)
 	{
-		CGPoint r = [waypoint CGPointValue];
-		CGPoint l = cpvsub(r,p);
-//		NSLog(@"start: %f,%f",p.x,p.y);
-//		NSLog(@"stop: %f,%f",r.x,r.y);
+		//geschwindigkeit festlegen mit der wir uns bewegen
+		//damit nicht alles 2 sekunden dauert, sondern je nach laenge schneller geht
+		CGPoint waypointPosition = [waypoint location];
+		CGPoint distance = cpvsub(waypointPosition,currentPosition);
 
-		p = r;
+		//next calc from current waypoint position
+		currentPosition = waypointPosition;
 		
-		float len = cpvlength(l);
+		float len = cpvlength(distance);
 		float time = 1.5f/296.0f*len;
 		
-//		NSLog(@"len: %f, time: %f",len,time);
+		//NSLog(@"waypoint: (%f,%f) - %@",[waypoint location].x,[waypoint location].y,[[waypoint assignedObject] controlledSprite]);
 		
-		id action = [MoveTo actionWithDuration: time position: r];
+		id action = [MoveTo actionWithDuration: time position: waypointPosition];
 		tmpseq = [Sequence actionOne: tmpseq two: action];
 		[waypoint release];
 	}

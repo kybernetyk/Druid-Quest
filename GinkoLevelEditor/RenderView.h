@@ -12,10 +12,16 @@
 @interface RenderView : NSView 
 {
 	NSImage *backgroundImage;
-	NSArray *blocksToDraw;
-
+	NSArray *entitiesToDraw;
+	NSImage *cursorImage;
+	NSPoint cursorLocation;
+	NSSize drawSize;
+	
+	IBOutlet NSDocument *parentDocument;
 }
 @property (readwrite,retain) NSImage *backgroundImage;
-@property (readwrite,assign) NSArray *blocksToDraw;
+@property (readwrite,assign) NSImage *cursorImage;
+@property (readwrite,assign) NSArray *entitiesToDraw;
+@property (readwrite,assign) NSSize drawSize;
 
 @end
