@@ -14,6 +14,7 @@
 	int score;
 	int lives;
 	int currentLevel;
+	int lastLevel;
 	
 	NSString *activeGraphicsPack;
 	NSString *activeMapPack;
@@ -34,7 +35,7 @@
 }
 +(GameInfo *) sharedInstance;
 
-@property (readwrite, assign) int score, lives,currentLevel;
+@property (readwrite, assign) int score, lives,currentLevel,lastLevel;
 @property (readwrite, assign) NSString *activeGraphicsPack;
 @property (readwrite, assign) NSString *activeMapPack;
 @property (readwrite, assign) float zoom;

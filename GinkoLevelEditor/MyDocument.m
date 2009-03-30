@@ -182,11 +182,11 @@ enum blockTags
 	NSMutableDictionary *mapInfo = [NSMutableDictionary dictionary];
 	NSString *mapName = @"dummy";
 	
-	
 	[mapInfo setObject:[NSNumber numberWithInt:mapGridWidth] forKey:@"MapGridWidth"];
 	[mapInfo setObject:[NSNumber numberWithInt:mapGridHeight] forKey:@"MapGridHeight"];
 	[mapInfo setObject:mapName forKey:@"MapName"];
 	[mapInfo setObject:entitiesInLevel forKey:@"Entities"];
+
 	[mapInfo retain];
 	
 	return mapInfo;
@@ -206,6 +206,15 @@ enum blockTags
 	{
 		[convEnts addObject: [MapEntity entityToDictionary: ent]];
 	}
+
+	NSString *backgroundGraphic = @"small"; 
+	
+	
+	if (mapGridWidth > 15)
+		backgroundGraphic = @"medium";
+	if (mapGridWidth > 23)
+		backgroundGraphic = @"large";
+	
 	
 //	NSSize mapSize = [[mapInfo objectForKey:@"MapSize"] sizeValue];
 	NSMutableDictionary *e = [NSMutableDictionary dictionary];
@@ -215,6 +224,7 @@ enum blockTags
 	
 	[e setObject:[NSNumber numberWithFloat: _mwidth] forKey:@"MapGridWidth"];
 	[e setObject:[NSNumber numberWithFloat: _mheight] forKey:@"MapGridHeight"];	
+	[e setObject:backgroundGraphic forKey:@"BackgroundGraphic"];
 	
 	BOOL b = [e writeToFile:filename atomically:NO];
 	NSLog(@"b: %i",b);

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BackgroundGraphic</key>
+	<string>small</string>
 	<key>Entities</key>
 	<array>
 		<dict>
@@ -54,7 +56,7 @@
 		</dict>
 	</array>
 	<key>MapGridHeight</key>
-	<real>10</real>
+	<integer>10</integer>
 	<key>MapGridWidth</key>
 	<real>15</real>
 </dict>

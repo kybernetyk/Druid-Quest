@@ -13,7 +13,7 @@
 #import "GameInfo.h"
 #import "SpriteLayer.h"
 #import "PlayerController.h"
-
+#import "MenuScene.h"
 
 @implementation GameScene
 
@@ -89,9 +89,19 @@ enum GameSceneLayerTags
 
 - (void) loadNextLevel
 {
+	id _nextScene = nil;
 	[[GameInfo sharedInstance] setCurrentLevel: [[GameInfo sharedInstance] currentLevel] + 1];
 
-	GameScene * gs = [GameScene node];
+	if ([[GameInfo sharedInstance] currentLevel] > [[GameInfo sharedInstance] lastLevel])
+	{
+		_nextScene = [MenuScene node];
+	}
+	else
+	{
+		_nextScene = [GameScene node];
+	}
+
+
 	
 //	[[Director sharedDirector] replaceScene: gs];
 	
@@ -99,7 +109,7 @@ enum GameSceneLayerTags
 	
 	
 //	[[Director sharedDirector] replaceScene: [FadeBLTransition transitionWithDuration:5.0 scene: gs]];
-	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:gs withColorRGB:0x000000]];
+	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:_nextScene withColorRGB:0x000000]];
 
 	//[[Director sharedDirector] replaceScene: [SlideInLTransition transitionWithDuration:2.0 scene: gs]];
 }
@@ -359,7 +369,6 @@ BOOL mayActivateCross = YES;
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
 	mayMoveCamera = YES;
 	
-	NSLog(@"daun!");
 
 	//checken ob der user den spieler bewegen will (abfrage == true)
 	//oder ob er aufs spielfeld getappt hat, um das feld zu bewegen (abfrage == false)

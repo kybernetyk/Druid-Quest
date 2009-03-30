@@ -21,7 +21,15 @@ enum BackgroundLayerNodeTags
     self = [super init];
     if (self) 
 	{
-        Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"game_background.png"]];
+		NSDictionary *mapInfo = [NSDictionary dictionaryWithContentsOfFile: [[GameInfo sharedInstance] currentMapFilename]];
+		NSAssert(mapInfo,@"map not found!");
+		
+		NSString *filename = [NSString stringWithFormat:@"%@_background.png",[mapInfo objectForKey:@"BackgroundGraphic"]];
+		NSLog(@"filename is: %@",filename);
+		
+        Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: filename]];
+		NSAssert(backgroundImage,@"could not load background image!");
+		
 		[backgroundImage setPosition:cpv(0, 0)];
 		
 		//assign

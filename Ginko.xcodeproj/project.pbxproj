@@ -81,7 +81,6 @@
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
 		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
 		03F8F4C10F7A4B1300E6E02E /* GameBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */; };
-		03F8F4F20F7A4D7900E6E02E /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F10F7A4D7900E6E02E /* game_background.png */; };
 		03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F50F7A4DAD00E6E02E /* gpacks */; };
 		03F8F56D0F7A52B400E6E02E /* ControllerCrossLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F56C0F7A52B400E6E02E /* ControllerCrossLayer.m */; };
 		03F8F74C0F7AEB0800E6E02E /* PlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F74B0F7AEB0800E6E02E /* PlayerController.m */; };
@@ -239,7 +238,6 @@
 		039940AC0F80F4DC00770565 /* mpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mpacks; sourceTree = "<group>"; };
 		03F8F4BF0F7A4B1300E6E02E /* GameBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBackgroundLayer.h; sourceTree = "<group>"; };
 		03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBackgroundLayer.m; sourceTree = "<group>"; };
-		03F8F4F10F7A4D7900E6E02E /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_background.png; path = gpacks/blue/game_background.png; sourceTree = "<group>"; };
 		03F8F4F50F7A4DAD00E6E02E /* gpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gpacks; sourceTree = "<group>"; };
 		03F8F56B0F7A52B400E6E02E /* ControllerCrossLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerCrossLayer.h; sourceTree = "<group>"; };
 		03F8F56C0F7A52B400E6E02E /* ControllerCrossLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerCrossLayer.m; sourceTree = "<group>"; };
@@ -584,7 +582,6 @@
 				039940AC0F80F4DC00770565 /* mpacks */,
 				03F8F4F50F7A4DAD00E6E02E /* gpacks */,
 				03F8F4F00F7A4D7900E6E02E /* blue */,
-				03F8F4F10F7A4D7900E6E02E /* game_background.png */,
 				030F499C0F78E36D004EA3FE /* help_background.png */,
 				030F48C60F78D68E004EA3FE /* fire.png */,
 				030F48950F78D597004EA3FE /* menu_background.png */,
@@ -655,7 +652,6 @@
 				030F48960F78D597004EA3FE /* menu_background.png in Resources */,
 				030F48C70F78D68E004EA3FE /* fire.png in Resources */,
 				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,
-				03F8F4F20F7A4D7900E6E02E /* game_background.png in Resources */,
 				03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */,
 				039940B10F80F4DC00770565 /* mpacks in Resources */,
 			);

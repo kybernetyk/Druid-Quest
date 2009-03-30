@@ -10,7 +10,7 @@
 
 
 @implementation GameInfo
-@synthesize score, lives,currentLevel;
+@synthesize score, lives,currentLevel,lastLevel;
 @synthesize activeGraphicsPack;
 @synthesize activeMapPack;
 @synthesize zoom,maxZoom,minZoom;
@@ -98,6 +98,7 @@ static GameInfo *sharedSingleton = nil;
 	[self setLives: 0];
 	[self setZoom: 1.0f];
 	[self setCurrentLevel: 1];
+	[self setLastLevel: 4];
 	[self setActiveGraphicsPack: @"blue"];
 	[self setActiveMapPack: @"lite"];
 	[self setWorldWidth: 480];

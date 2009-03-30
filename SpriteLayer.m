@@ -197,7 +197,7 @@ SpriteController *fieldcopy[32][32];
 
 
 	
-	NSLog(@"playerController rataincount: %i",[playerController retainCount]);
+//	NSLog(@"playerController rataincount: %i",[playerController retainCount]);
 	[playerController release];
 	
 	playerController = nil;

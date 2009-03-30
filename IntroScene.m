@@ -46,7 +46,7 @@
 - (void) proceedToMainMenuScene
 {
 	[[Director sharedDirector] removeEventHandler: self];
-	[[Director sharedDirector] replaceScene: [[MenuScene alloc] init]];
+	[[Director sharedDirector] replaceScene: [MenuScene node]];
 	[self release];	
 }
 
