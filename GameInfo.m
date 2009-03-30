@@ -10,11 +10,13 @@
 
 
 @implementation GameInfo
-@synthesize score, lives;
+@synthesize score, lives,currentLevel;
 @synthesize activeGraphicsPack;
+@synthesize activeMapPack;
 @synthesize zoom,maxZoom,minZoom;
 @synthesize levelGridWidth, levelGridHeight;
 @synthesize finishPosition;
+@synthesize worldWidth, worldHeight;
 
 static GameInfo *sharedSingleton = nil;
 
@@ -95,8 +97,24 @@ static GameInfo *sharedSingleton = nil;
 	[self setScore: 0];
 	[self setLives: 0];
 	[self setZoom: 1.0f];
+	[self setCurrentLevel: 1];
 	[self setActiveGraphicsPack: @"blue"];
+	[self setActiveMapPack: @"lite"];
+	[self setWorldWidth: 480];
+	[self setWorldHeight: 320];
 }
+
+-(NSString*) fullPathFromRelativePath:(NSString*) relPath
+{
+	NSMutableArray *imagePathComponents = [NSMutableArray arrayWithArray:[relPath pathComponents]];
+	NSString *file = [imagePathComponents lastObject];
+	
+	[imagePathComponents removeLastObject];
+	NSString *imageDirectory = [NSString pathWithComponents:imagePathComponents];
+	
+	return [[NSBundle mainBundle] pathForResource:file ofType:nil inDirectory:imageDirectory];	
+}
+
 
 - (NSString *) pathForGraphicsFile: (NSString *) filename
 {
@@ -105,5 +123,17 @@ static GameInfo *sharedSingleton = nil;
 	return ret;
 }
 
+- (NSString *) pathForMapFile: (NSString *) filename
+{
+	NSString *fullFilename = [NSString stringWithFormat:@"mpacks/%@/%@",activeMapPack, filename];
+	NSString *ret = [self fullPathFromRelativePath: fullFilename];
+	NSAssert1(ret,@"Full Path for map file %@ not found!",fullFilename);
+	return ret;
+}
+
+- (NSString *) currentMapFilename
+{
+	return [self pathForMapFile: [NSString stringWithFormat:@"map%i.plist",currentLevel]];
+}
 
 @end

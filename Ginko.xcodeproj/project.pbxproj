@@ -79,7 +79,7 @@
 		039255880F7FA9C0008964C8 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 039255870F7FA9C0008964C8 /* Waypoint.m */; };
 		03993F900F7FF84D00770565 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03993F8F0F7FF84D00770565 /* BlockFactory.m */; };
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
-		0399406A0F8002A800770565 /* map1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 039940690F8002A800770565 /* map1.plist */; };
+		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
 		03F8F4C10F7A4B1300E6E02E /* GameBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */; };
 		03F8F4F20F7A4D7900E6E02E /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F10F7A4D7900E6E02E /* game_background.png */; };
 		03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F50F7A4DAD00E6E02E /* gpacks */; };
@@ -236,7 +236,7 @@
 		03993F8F0F7FF84D00770565 /* BlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockFactory.m; sourceTree = "<group>"; };
 		0399403F0F7FFFFF00770565 /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		039940400F7FFFFF00770565 /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
-		039940690F8002A800770565 /* map1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map1.plist; sourceTree = "<group>"; };
+		039940AC0F80F4DC00770565 /* mpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mpacks; sourceTree = "<group>"; };
 		03F8F4BF0F7A4B1300E6E02E /* GameBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBackgroundLayer.h; sourceTree = "<group>"; };
 		03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBackgroundLayer.m; sourceTree = "<group>"; };
 		03F8F4F10F7A4D7900E6E02E /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_background.png; path = gpacks/blue/game_background.png; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				039940690F8002A800770565 /* map1.plist */,
+				039940AC0F80F4DC00770565 /* mpacks */,
 				03F8F4F50F7A4DAD00E6E02E /* gpacks */,
 				03F8F4F00F7A4D7900E6E02E /* blue */,
 				03F8F4F10F7A4D7900E6E02E /* game_background.png */,
@@ -657,7 +657,7 @@
 				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,
 				03F8F4F20F7A4D7900E6E02E /* game_background.png in Resources */,
 				03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */,
-				0399406A0F8002A800770565 /* map1.plist in Resources */,
+				039940B10F80F4DC00770565 /* mpacks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

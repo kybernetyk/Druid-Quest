@@ -14,7 +14,7 @@
 {
 	BOOL	isMoving;
 }
-
+@property (readonly,assign) BOOL isMoving;
 
 - (void) _movementActionEnded;
 

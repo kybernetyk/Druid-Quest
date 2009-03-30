@@ -44,7 +44,7 @@
 #pragma mark -- normal Vector
 - (cpVect) bounceVector: (cpVect) attackVector
 {
-	NSLog(@"simple sprite bounceblock!");
+	//NSLog(@"simple sprite bounceblock!");
 	return cpvzero;
 }
 

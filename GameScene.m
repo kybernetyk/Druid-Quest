@@ -17,8 +17,8 @@
 
 @implementation GameScene
 
-#define LEVEL_WIDTH 720
-#define LEVEL_HEIGHT 480
+//#define LEVEL_WIDTH 720
+//#define LEVEL_HEIGHT 480
 
 enum GameSceneLayerTags 
 {
@@ -35,8 +35,11 @@ enum GameSceneLayerTags
 	self = [super init];
 	if (self)
 	{
+//		NSLog(@"self retaincount: %i",[self retainCount]);
+		NSLog(@"gameScene init");
 		[self loadScene];
-		
+
+//		NSLog(@"self retaincount: %i",[self retainCount]);		
 	}
 	
 	return self;
@@ -44,9 +47,25 @@ enum GameSceneLayerTags
 
 - (void) dealloc
 {
+
+	[self unloadScene];
+
 	NSLog(@"game scene dealloc");
-	
 	[super dealloc];
+}
+
+- (void) onEnter
+{
+	[super onEnter];
+ 	[[Director sharedDirector] addEventHandler: self];
+}
+
+- (void) onExit
+{
+	[super onExit];
+	
+//	[self unloadScene];
+	[[Director sharedDirector] removeEventHandler: self];
 }
 
 #pragma mark -- main loop
@@ -56,6 +75,9 @@ enum GameSceneLayerTags
 	//[cameraLayer setRotation: [cameraLayer rotation]+1.0f];
 
 	//NSLog(@"%i",[self retainCount]);
+	
+	
+//	NSLog(@"playerController retaincount: %i",[playerController retainCount]);
 }
 
 #pragma mark -- loading / unloading / reseting
@@ -65,23 +87,40 @@ enum GameSceneLayerTags
 	[self loadScene];
 }
 
+- (void) loadNextLevel
+{
+	[[GameInfo sharedInstance] setCurrentLevel: [[GameInfo sharedInstance] currentLevel] + 1];
+
+	GameScene * gs = [GameScene node];
+	
+//	[[Director sharedDirector] replaceScene: gs];
+	
+	//NSLog(@"gameScene retaincount: %i",[self retainCount]);
+	
+	
+//	[[Director sharedDirector] replaceScene: [FadeBLTransition transitionWithDuration:5.0 scene: gs]];
+	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:gs withColorRGB:0x000000]];
+
+	//[[Director sharedDirector] replaceScene: [SlideInLTransition transitionWithDuration:2.0 scene: gs]];
+}
+
 - (void) loadScene
 {
+	NSLog(@"gameScene loadScene");
 	id cameraLayer = [[Layer alloc] init];
 	[self addChild: cameraLayer z: 0 tag: kCameraLayer];
 	[cameraLayer setPosition: cpv(0,0)];
 	//[cameraLayer setPosition: cpv (480/2,320/2)];
 
-	
 	id node = [[GameBackgroundLayer alloc] init];
 	[cameraLayer addChild: node z: -1 tag: kBackgroundLayer];
 	//[node setPosition:cpv (960/2,640/2)];
 	//[node setPosition:cpv(720/2,480/2)];
-	[node setPosition:cpv(LEVEL_WIDTH/2,LEVEL_HEIGHT/2)];
+	[node setPosition:cpv([[GameInfo sharedInstance] worldWidth]/2,[[GameInfo sharedInstance] worldHeight]/2)];
 
 //	float world_w = 960.0f;
 	//float world_w = 720.0f;
-	float world_w = LEVEL_WIDTH;
+	float world_w = [[GameInfo sharedInstance] worldWidth];
 	
 	float screen_w = 480.0f;
 
@@ -90,7 +129,7 @@ enum GameSceneLayerTags
 	[node setPosition:cpv(480/2,320/2)];
 	[self addChild: node z: 5 tag: kControllerCrossLayer];
 	
-	node = [[SpriteLayer alloc] initWithLevelFile:@"level1.lvl"];
+	node = [[SpriteLayer alloc] initWithLevelFile: [[GameInfo sharedInstance] currentMapFilename]];
 	[node setPosition: cpv(+16,+16)];
 	[cameraLayer addChild: node z: 1 tag: kSpriteLayer];
 	
@@ -105,16 +144,13 @@ enum GameSceneLayerTags
 	
 	float x,y,z;
 	[c eyeX:&x eyeY:&y eyeZ:&z];
-	NSLog(@"init cam: %f,%f,%f",x,y,z);
+//	NSLog(@"init cam: %f,%f,%f",x,y,z);
 	
 	[[GameInfo sharedInstance] setMinZoom: z];
 	[[GameInfo sharedInstance] setMaxZoom: z*(world_w/screen_w)];//(3.0/2.0)];
 	[[GameInfo sharedInstance] setZoom: z];
 	//[[GameInfo sharedInstance] setZoom: z*1.50];
 	[self checkCameraBounds];
-	
-	
-	[[Director sharedDirector] addEventHandler: self];
 }
 
 // o m f g - es klappt. aber warum?
@@ -153,8 +189,8 @@ enum GameSceneLayerTags
  	min_x += diff;
 	min_y -= diff;
 
-	float img_width = LEVEL_WIDTH;
-	float img_height = LEVEL_HEIGHT;
+	float img_width = [[GameInfo sharedInstance] worldWidth];
+	float img_height = [[GameInfo sharedInstance] worldHeight];
 
 	//fuer 960x640 |optimal zoom 0.5 
 	float y_mirror = img_height / 2 + 80; // = 400
@@ -190,28 +226,32 @@ enum GameSceneLayerTags
 
 - (void) unloadScene
 {
-	[[Director sharedDirector] removeEventHandler: self];
-
+	NSLog(@"gameScene unload");
 	id cameraLayer = [self getChildByTag: kCameraLayer];
+	//NSLog(@"kCameraLayer %@ refcount: %i",cameraLayer,[cameraLayer retainCount]);
 	
-	id node = [self getChildByTag: kBackgroundLayer];
+	id node = [cameraLayer getChildByTag: kBackgroundLayer];
+//	NSLog(@"kBackgroundLayer %@ refcount: %i",node,[node retainCount]);
 	[cameraLayer removeChild: node cleanup: YES];
+
 	[node release];
-	
-	node = [self getChildByTag: kSpriteLayer];
+
+	node = [cameraLayer getChildByTag: kSpriteLayer];
+//	NSLog(@"kSpriteLayer %@ refcount: %i",node,[node retainCount]);
 	[cameraLayer removeChild: node cleanup: YES];
 	[node release];
 
 	[self removeChild: cameraLayer cleanup: YES];
-	
+	[cameraLayer release];
 
 	node = [self getChildByTag: kControllerCrossLayer];
+//	NSLog(@"kControllerCrossLayer %@ refcount: %i",node,[node retainCount]);
 	[self removeChild: node cleanup: YES];
 	[node release];
-	
-		
-	
+
 	[self removeAllChildrenWithCleanup: YES];
+	
+	playerController = nil;
 }
 
 //unloads and releases scene - before switching to new scene plox
@@ -319,6 +359,7 @@ BOOL mayActivateCross = YES;
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
 	mayMoveCamera = YES;
 	
+	NSLog(@"daun!");
 
 	//checken ob der user den spieler bewegen will (abfrage == true)
 	//oder ob er aufs spielfeld getappt hat, um das feld zu bewegen (abfrage == false)
@@ -573,16 +614,22 @@ BOOL mayActivateCross = YES;
 	if (CGRectContainsPoint (CGRectMake(32.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightUpperCross: NO];
+		if ([playerController isMoving])
+			return kEventHandled;
+
 		id cameraLayer = [self getChildByTag: kCameraLayer];
 		id spriteLayer = [cameraLayer getChildByTag: kSpriteLayer];
 		NSArray *path = [spriteLayer getPathForPosition: [playerController gridPosition] andVector: cpv(0.0,1.0)];
-		NSLog(@"%@",path);
+		//NSLog(@"%@",path);
 		[playerController moveAlongPath: path];
 		return kEventHandled;
 	}
 	if (CGRectContainsPoint (CGRectMake(0.0f, 0.0f, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightLowerCross: NO];
+		if ([playerController isMoving])
+			return kEventHandled;
+
 		id cameraLayer = [self getChildByTag: kCameraLayer];
 		id spriteLayer = [cameraLayer getChildByTag: kSpriteLayer];
 		NSArray *path = [spriteLayer getPathForPosition: [playerController gridPosition] andVector: cpv(0.0,-1.0)];
@@ -599,6 +646,9 @@ BOOL mayActivateCross = YES;
 	if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 256.0f),location))
 	{
 		[crosslayer highlightLeftCross: NO];
+		if ([playerController isMoving])
+			return kEventHandled;
+
 		id cameraLayer = [self getChildByTag: kCameraLayer];
 		id spriteLayer = [cameraLayer getChildByTag: kSpriteLayer];
 		
@@ -608,18 +658,20 @@ BOOL mayActivateCross = YES;
 		 [cameraLayer setPosition: pos];*/
 		
 		NSArray *path = [spriteLayer getPathForPosition: [playerController gridPosition] andVector: cpv(-1.0,0.0)];
-		NSLog(@"%@",path);
+		//NSLog(@"%@",path);
 		[playerController moveAlongPath: path];
 		return kEventHandled;
 	}
 	if (CGRectContainsPoint (CGRectMake(448.0f-DICKE_FINGER_TAP_TOLLERANZ, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 256.0f),location))
 	{
 		[crosslayer highlightRightCross: NO];
+		if ([playerController isMoving])
+			return kEventHandled;
 		
 		id cameraLayer = [self getChildByTag: kCameraLayer];
 		id spriteLayer = [cameraLayer getChildByTag: kSpriteLayer];
 		NSArray *path = [spriteLayer getPathForPosition: [playerController gridPosition] andVector: cpv(1.0,0.0)];
-		NSLog(@"%@",path);
+	//	NSLog(@"%@",path);
 		[playerController moveAlongPath: path];
 		return kEventHandled;
 	}

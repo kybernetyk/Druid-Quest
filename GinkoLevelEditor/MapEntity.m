@@ -10,7 +10,7 @@
 
 
 @implementation MapEntity
-@synthesize image, gridPosition,type;
+@synthesize image, gridPosition,type, imageName;
 
 - (id)initWithCoder:(NSCoder *)coder 
 {
@@ -20,10 +20,12 @@
 	NSNumber *tpe = [coder decodeObject];
 	type = [tpe intValue];
 	NSData *d = [coder decodeDataObject];
-	NSString *imgName = [[NSString alloc] initWithData: d encoding: NSUTF8StringEncoding];
-	image = [[NSImage alloc] initWithContentsOfFile: 	[[NSBundle mainBundle] pathForImageResource: imgName]];
+	imageName = [[NSString alloc] initWithData: d encoding: NSUTF8StringEncoding];
+	[imageName retain];
+	NSLog(@"imgname: %@",imageName);
+	image = [[NSImage alloc] initWithContentsOfFile: 	[[NSBundle mainBundle] pathForImageResource: imageName]];
 	[image retain];
-	
+//	[image setName: imgName];
     return self;
 }
 
@@ -32,7 +34,7 @@
 	[coder encodePoint: gridPosition];
 	NSNumber *tpe = [NSNumber numberWithInt: type];
 	[coder encodeObject: tpe];
-	[coder encodeDataObject: [[image name] dataUsingEncoding:NSUTF8StringEncoding]];
+	[coder encodeDataObject: [imageName dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 + (NSDictionary *) entityToDictionary: (MapEntity *) entity

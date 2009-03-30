@@ -73,7 +73,9 @@ enum MenuSceneNodeTags
 	[[GameInfo sharedInstance] reset];
 	
 	[[Director sharedDirector] removeEventHandler: self];
-	[[Director sharedDirector] replaceScene: [[GameScene alloc] init]];
+	//[[Director sharedDirector] replaceScene: [[GameScene alloc] init]];
+	
+	[[Director sharedDirector] replaceScene: [GameScene node]];
 	[self release];	
 }
 

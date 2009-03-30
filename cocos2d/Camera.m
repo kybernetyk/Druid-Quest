@@ -96,7 +96,7 @@
 +(float) getZEye
 {
 	CGSize s = [[Director sharedDirector] displaySize];
-	NSLog(@"s.height: %f",s.height);
+//	NSLog(@"s.height: %f",s.height);
 	return ( s.height / 1.1566f );
 }
 

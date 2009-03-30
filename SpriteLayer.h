@@ -14,9 +14,10 @@
 {
 	PlayerController *playerController;
 	NSMutableArray *spriteControllers;
+	NSMutableArray *sprites;
 }
 
-@property (readonly) PlayerController *playerController;
+@property (readonly,assign) PlayerController *playerController;
 
 - (id) initWithLevelFile: (NSString *) filename;
 

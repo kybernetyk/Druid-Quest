@@ -9,10 +9,12 @@
 #import "PlayerController.h"
 #import "Waypoint.h"
 #import "GameInfo.h"
+#import "GameScene.h"
 
 @implementation PlayerController
 @synthesize controlledSprite;
 @synthesize gridPosition;
+@synthesize isMoving;
 
 #pragma mark -- init / dealloc
 - (id) initWithSprite: (Sprite *) spriteToControll
@@ -39,7 +41,7 @@
 	isMoving = NO;
 	
 	[self update];
-	NSLog(@"%f,%f",gridPosition.x,gridPosition.y);
+	//NSLog(@"%f,%f",gridPosition.x,gridPosition.y);
 	
 	
 	//player dies :(
@@ -47,13 +49,20 @@
 	if (((int)gridPosition.x) < 0 || ((int)(gridPosition.x)) >= [[GameInfo sharedInstance] levelGridWidth] ||
 		((int)gridPosition.y) < 0 || ((int)(gridPosition.y)) >= [[GameInfo sharedInstance] levelGridHeight] )
 	{
-		NSLog(@"\n\n\n\n\nO M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+		NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+		GameScene *currentScene = [[Director sharedDirector] runningScene];
+		[currentScene resetScene];
 	}
 	
 	if (gridPosition.x == [[GameInfo sharedInstance] finishPosition].x &&
 		gridPosition.y == [[GameInfo sharedInstance] finishPosition].y)
 	{
-		NSLog(@"WIN WIN WIN!");
+		NSLog(@"WIN WIN WIN! %i",[self retainCount]);
+		
+		GameScene *currentScene = [[Director sharedDirector] runningScene];
+
+		[currentScene loadNextLevel];
+//		[[Director sharedDirector] pause];
 	}
 	
 }
@@ -71,6 +80,10 @@
 		[path release];
 		return;
 	}
+//	NSLog(@"path length: %i",[path count]);
+	if ([path count] <= 0)
+		return;
+	
 	isMoving = YES;
 	
 	Sequence *tmpseq = [Sequence actions:[MoveBy actionWithDuration: 0.01 position: cpvzero],nil];
@@ -94,8 +107,10 @@
 		tmpseq = [Sequence actionOne: tmpseq two: action];
 		[waypoint release];
 	}
+//	NSLog(@"retcount: %i",[self retainCount]);
 	id fc = [CallFunc actionWithTarget: self selector: @selector(_movementActionEnded)];
 	tmpseq = [Sequence actionOne: tmpseq two: fc];
+	//NSLog(@"retcount: %i",[self retainCount]);
 	
 	[controlledSprite runAction: tmpseq];
 	[path release];

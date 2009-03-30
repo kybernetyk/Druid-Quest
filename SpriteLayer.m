@@ -5,6 +5,7 @@
 //  Created by jrk on 26.03.09.
 //  Copyright 2009 flux forge. All rights reserved.
 //
+#import <UIKit/UIKit.h>
 
 #import "SpriteLayer.h"
 #import "GameInfo.h"
@@ -13,6 +14,7 @@
 #import "Waypoint.h"
 #import "BlockFactory.h"
 
+
 @implementation SpriteLayer
 @synthesize playerController;
 
@@ -20,34 +22,40 @@ enum spriteTags
 {
 	kPlayerSprite = 200
 };
-
+SpriteController *fieldcopy[32][32];
 
 #pragma mark -- init / dealloc
 - (id) initWithLevelFile: (NSString *) filename
 {
+	NSAssert(filename,@"Filename may not be nil!");
+	
 	self = [super init];
 	if (self)
 	{
+		memset(fieldcopy,0x00,32*32*sizeof(SpriteController *));
+		
 		spriteControllers = [[NSMutableArray alloc] init];
-		NSString *p = [[NSBundle mainBundle] pathForResource:@"map1" ofType:@"plist"];
+		sprites = [[NSMutableArray alloc] init];
+		//NSString *p = [[NSBundle mainBundle] pathForResource:@"map1" ofType:@"plist"];
 	//	NSLog(@"%@",p);
 		
-		NSDictionary *mapInfo = [NSDictionary dictionaryWithContentsOfFile:p];
-		NSLog(@"dict: %@",mapInfo);
-	
+		NSDictionary *mapInfo = [NSDictionary dictionaryWithContentsOfFile: filename];
+	//	NSLog(@"dict: %@",mapInfo);
+		
+		NSAssert1(mapInfo,@"Error! Map File %@ not found!",filename);
+		
 		[[GameInfo sharedInstance] setLevelGridWidth: [[mapInfo objectForKey:@"MapGridWidth"] intValue]];
 		[[GameInfo sharedInstance] setLevelGridHeight: [[mapInfo objectForKey:@"MapGridHeight"] intValue]];
 		
 		NSArray *mapEntities = [mapInfo objectForKey:@"Entities"];
 		if (!mapEntities)
 		{
-			NSLog(@"map corrup! no entities found!");
+			NSLog(@"map %@ corrupt! no entities found!",filename);
 			exit(24);
 		}
 		
 		for (NSDictionary *entDict in mapEntities)
 		{
-			NSString *spriteFileName = @"";
 			int _entType = [[entDict objectForKey:@"type"] intValue];
 			int _entXPos = [[entDict objectForKey:@"gridPositionX"] intValue];
 			int _entYPos = [[entDict objectForKey:@"gridPositionY"] intValue];
@@ -56,14 +64,18 @@ enum spriteTags
 			id node = nil;
 			
 			NSDictionary *nodecon = [BlockFactory createBlockControllerPair:_entType positionX:_entXPos positionY:_entYPos];
+			[nodecon release];
+
 			controller = [nodecon objectForKey:@"controller"];
 			node = [nodecon objectForKey:@"node"];
+//			NSLog(@"nodecon retaincount: %i",[nodecon retainCount]);
 			
 			if (controller)
 			{	
 				if (_entType == kPlayer)
 				{
 					playerController = controller;
+					//NSLog(@"playerController retaincount: %i",[playerController retainCount]);
 				}
 				else
 				{
@@ -81,15 +93,18 @@ enum spriteTags
 				{
 					[self addChild: node z: 0];
 				}
+				
+			//	NSLog(@"adding to sprites: %@ = %x",node,node);
+				[sprites addObject: node];
 			}
 			
 			if (_entType == kFinish)
 			{
 				[[GameInfo sharedInstance] setFinishPosition: cpv(_entXPos,_entYPos)];
 			}
+
 			
-			[nodecon release];
-				
+			node = nil;	
 		}
 		
 		
@@ -139,7 +154,8 @@ enum spriteTags
 - (void) draw
 {
 	[super draw];
-	
+
+	memset(fieldcopy,0x00,32*32*sizeof(SpriteController *));
 	[playerController update];
 	for (id spriteController in spriteControllers)
 	{
@@ -152,11 +168,13 @@ enum spriteTags
 - (void) dealloc
 {
 	NSLog(@"Sprite Layer dealloc");
+	memset(fieldcopy,0x00,32*32*sizeof(SpriteController *));
+	
+//	id node = [self getChildByTag: kPlayerSprite];
+//	[self removeChild: node cleanup: YES];
+//	[node release];
 
-	id node = [self getChildByTag: kPlayerSprite];
-	[self removeChild: node cleanup: YES];
-	[node release];
-
+	
 	[self removeAllChildrenWithCleanup: YES];
 	
 	for (id spriteContoller in spriteControllers)
@@ -164,10 +182,25 @@ enum spriteTags
 		[spriteContoller release];
 	}
 	
+	
 	[spriteControllers removeAllObjects];
 	[spriteControllers release];
+	spriteControllers = nil;
+
+	for (id sprite in sprites)
+	{
+		[sprite release];
+	}
+	[sprites removeAllObjects];
+	[sprites release];
 	
+
+
+	
+	NSLog(@"playerController rataincount: %i",[playerController retainCount]);
 	[playerController release];
+	
+	playerController = nil;
 	
 	[super dealloc];
 }
@@ -175,7 +208,7 @@ enum spriteTags
 #pragma mark -- pathfinding
 
 //globale fieldcopy - cause passing pointer to multidimensional arrays sucks in C
-SpriteController *fieldcopy[32][32];
+
 
 //casts a ray along (direction) starting at _position
 //if it finds a block that adds just a waypoint and not a final point

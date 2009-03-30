@@ -14,9 +14,11 @@
 	NSImage *image;
 	NSPoint gridPosition;
 	NSInteger type;
+	NSString *imageName;
 }
 
 @property (readwrite, assign) NSImage *image;
+@property (readwrite, assign) NSString *imageName;
 @property (readwrite, assign) NSPoint gridPosition;
 @property (readwrite, assign) NSInteger type;
 

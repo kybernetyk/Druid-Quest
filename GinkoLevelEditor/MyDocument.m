@@ -108,10 +108,11 @@ enum blockTags
 		finishEntity = nil;
 	}
 	
-	NSLog(@"adding Entity %i at %f,%f with Image %@",currentylSelectedBlocktype,gridPosition.x,gridPosition.y,[sender cursorImage]);
+	NSLog(@"adding Entity %i at %f,%f with Image %@ [%@]",currentylSelectedBlocktype,gridPosition.x,gridPosition.y,[sender cursorImage],[[sender cursorImage] name]);
 	NSImage *entityImage = [sender cursorImage];
 	MapEntity *ent = [[[MapEntity alloc] init] autorelease];
 	[ent setImage: entityImage];
+	[ent setImageName: [entityImage name]];
 	[ent setGridPosition: gridPosition];
 	[ent setType: currentylSelectedBlocktype];
 

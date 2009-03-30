@@ -136,7 +136,7 @@ enum {
 @property(readwrite,assign) cpVect position;
 /** A Camera object that lets you move the node using camera coordinates.
  * If you use the Camera then position, scale & rotation won't be used */
-@property(readonly) Camera* camera;
+@property(readwrite,assign) Camera* camera;
 /** A Grid object that is used when applying Effects */
 @property(readwrite,retain) GridBase* grid;
 /** Whether of not the node is visible. Default is YES */

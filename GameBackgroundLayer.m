@@ -26,6 +26,11 @@ enum BackgroundLayerNodeTags
 		
 		//assign
 		[self addChild:backgroundImage z: 0 tag: kBackgroundImage];
+		
+		[[GameInfo sharedInstance] setWorldWidth: [[backgroundImage texture] contentSize].width];
+		[[GameInfo sharedInstance] setWorldHeight: [[backgroundImage texture] contentSize].height];
+		
+		NSLog(@"%i,%i",[[GameInfo sharedInstance] worldWidth],[[GameInfo sharedInstance] worldHeight]);
     }
     return self;
 }

@@ -29,7 +29,7 @@
 			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[PlayerController alloc] initWithSprite: node];
-			NSLog(@"player!");
+		//	NSLog(@"player %i!",[controller retainCount]);
 			break;
 			
 		case kFinish:
@@ -38,7 +38,7 @@
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[FinishController alloc] initWithSprite: node];
 			
-			NSLog(@"finish! %@",node);
+		//	NSLog(@"finish! %@",node);
 			break;
 			
 		case kSimpleBlock:
@@ -46,43 +46,44 @@
 			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[SpriteController alloc] initWithSprite: node];
+
 			break;
 			
 		case kBlockNormal_South_East:
 			spriteFileName = @"block_4.png";
-			node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[AngularBlockController alloc] initWithSprite: node];
 			[controller setNormalVector: cpv(1.0,-1.0)];
-			NSLog(@"south_east! %i,%i",posX,posY);
+			//NSLog(@"south_east! %i,%i",posX,posY);
 			break;
 
 		case kBlockNormal_North_East:
 			spriteFileName = @"block_3.png";
-			node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[AngularBlockController alloc] initWithSprite: node];
 			[controller setNormalVector: cpv(1.0,1.0)];
-			NSLog(@"north_east! %i,%i",posX,posY);
+			//NSLog(@"north_east! %i,%i",posX,posY);
 			break;
 			
 			
 		case kBlockNormal_North_West:
 			spriteFileName = @"block_2.png";
-			node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[AngularBlockController alloc] initWithSprite: node];
 			[controller setNormalVector: cpv(-1.0,1.0)];
-			NSLog(@"north_west! %i,%i",posX,posY);
+			//NSLog(@"north_west! %i,%i",posX,posY);
 			break;
 			
 		case kBlockNormal_South_West:
 			spriteFileName = @"block_5.png";
-			node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[AngularBlockController alloc] initWithSprite: node];
 			[controller setNormalVector: cpv(-1.0,-1.0)];
-			NSLog(@"north_west! %i,%i",posX,posY);
+			//NSLog(@"north_west! %i,%i",posX,posY);
 			break;
 			
 		case kEmpty:
@@ -93,7 +94,7 @@
 			controller = nil;
 			break;
 	}
-
+			//NSLog(@"%@ == %@",node,spriteFileName);
 	NSDictionary *ret = [NSDictionary dictionaryWithObjectsAndKeys:node,@"node",controller,@"controller",nil];
 	[ret retain];
 	//NSLog(@"%@",ret);

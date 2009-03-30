@@ -21,6 +21,7 @@
 
 
 @interface CocosNode (Private)
+
 -(void) step_: (ccTime) dt;
 // activate all scheduled timers
 -(void) activateTimers;
@@ -46,6 +47,7 @@
 @synthesize grid;
 @synthesize zOrder;
 @synthesize tag;
+@synthesize camera;
 
 +(id) node
 {

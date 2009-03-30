@@ -31,8 +31,9 @@
 
 
 	[[Director sharedDirector] setLandscape: YES];
+	[[Director sharedDirector] setDisplayFPS: YES];
 	[[Director sharedDirector] setAnimationInterval:1.0/60];
-	[[Director sharedDirector] setDisplayFPS: NO];
+	
 	
 	
     // Override point for customization after application launch

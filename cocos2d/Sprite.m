@@ -28,13 +28,13 @@
 #pragma mark Sprite - image file
 + (id) spriteWithFile:(NSString*) filename
 {
-	NSLog(@"%@",filename);
+//	NSLog(@"%@",filename);
 	return [[[self alloc] initWithFile:filename] autorelease];
 }
 
 - (id) initWithFile:(NSString*) filename
 {
-	NSLog(@"%@",filename);
+	//NSLog(@"%@",filename);
 	self = [super init];
 	if( self ) {
 		self.texture = [[[TextureMgr sharedTextureMgr] addImage: filename] retain];
