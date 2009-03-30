@@ -65,7 +65,6 @@
 		030F47230F7850A9004EA3FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030F47220F7850A9004EA3FE /* QuartzCore.framework */; };
 		030F472A0F7850C3004EA3FE /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F47290F7850C3004EA3FE /* fps_images.png */; };
 		030F47550F7851BB004EA3FE /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F47540F7851BB004EA3FE /* IntroScene.m */; };
-		030F47D20F78566F004EA3FE /* mockup.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F47D10F78566F004EA3FE /* mockup.png */; };
 		030F47EB0F78578D004EA3FE /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F47EA0F78578D004EA3FE /* MenuScene.m */; };
 		030F48780F78D357004EA3FE /* MenuBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F48770F78D357004EA3FE /* MenuBackgroundLayer.m */; };
 		030F48960F78D597004EA3FE /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F48950F78D597004EA3FE /* menu_background.png */; };
@@ -211,7 +210,6 @@
 		030F47290F7850C3004EA3FE /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		030F47530F7851BB004EA3FE /* IntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScene.h; sourceTree = "<group>"; };
 		030F47540F7851BB004EA3FE /* IntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScene.m; sourceTree = "<group>"; };
-		030F47D10F78566F004EA3FE /* mockup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mockup.png; sourceTree = "<group>"; };
 		030F47E90F78578D004EA3FE /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		030F47EA0F78578D004EA3FE /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		030F48760F78D357004EA3FE /* MenuBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBackgroundLayer.h; sourceTree = "<group>"; };
@@ -585,7 +583,6 @@
 				030F499C0F78E36D004EA3FE /* help_background.png */,
 				030F48C60F78D68E004EA3FE /* fire.png */,
 				030F48950F78D597004EA3FE /* menu_background.png */,
-				030F47D10F78566F004EA3FE /* mockup.png */,
 				030F47290F7850C3004EA3FE /* fps_images.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -648,7 +645,6 @@
 			files = (
 				030F46ED0F784FEC004EA3FE /* CMakeLists.txt in Resources */,
 				030F472A0F7850C3004EA3FE /* fps_images.png in Resources */,
-				030F47D20F78566F004EA3FE /* mockup.png in Resources */,
 				030F48960F78D597004EA3FE /* menu_background.png in Resources */,
 				030F48C70F78D68E004EA3FE /* fire.png in Resources */,
 				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,

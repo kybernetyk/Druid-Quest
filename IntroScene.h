@@ -12,6 +12,12 @@
 @interface IntroScene : Scene <TouchEventsDelegate>
 {
 	CocosNode *background;
+	CocosNode *loadingBar;
+	CocosNode *prevLoadingBar;
+	int _preloadCounter;
+	float prevPercent;
+	NSArray *preloadArray;
+	BOOL isPreloading;
 }
 
 - (void) proceedToMainMenuScene;

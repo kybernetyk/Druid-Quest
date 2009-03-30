@@ -41,9 +41,13 @@
 	
 	
 	
-	[[Director sharedDirector] runWithScene: [[IntroScene alloc] init]];
+	[[Director sharedDirector] runWithScene: [IntroScene node]];
 }
 
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+	[[TextureMgr sharedTextureMgr] removeAllTextures];
+}
 
 - (void)dealloc {
     [window release];
