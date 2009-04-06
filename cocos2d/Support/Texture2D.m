@@ -295,9 +295,12 @@ static ccTexParams _texParamsCopy;
 	
 	
 	CGContextSetGrayFillColor(context, 1.0f, 1.0f);
+	
 	CGContextTranslateCTM(context, 0.0f, height);
 	CGContextScaleCTM(context, 1.0f, -1.0f); //NOTE: NSString draws in UIKit referential i.e. renders upside-down compared to CGBitmapContext referential
 	UIGraphicsPushContext(context);
+	//[[UIColor redColor] set];
+	
 		[string drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:alignment];
 	UIGraphicsPopContext();
 	

@@ -31,7 +31,7 @@
 
 
 	[[Director sharedDirector] setLandscape: YES];
-	[[Director sharedDirector] setDisplayFPS: YES];
+	[[Director sharedDirector] setDisplayFPS: NO];
 	[[Director sharedDirector] setAnimationInterval:1.0/60];
 	
 	

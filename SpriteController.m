@@ -20,6 +20,7 @@
 	if (self)
 	{
 		controlledSprite = spriteToControll;
+		[controlledSprite retain];
 	}
 	
 	return self;
@@ -31,6 +32,12 @@
 	exit (23);
 	
 	return nil;
+}
+
+- (void) dealloc
+{
+	[controlledSprite release];
+	[super dealloc];
 }
 
 #pragma mark game logic

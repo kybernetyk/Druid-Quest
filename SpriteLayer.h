@@ -15,6 +15,7 @@
 	PlayerController *playerController;
 	NSMutableArray *spriteControllers;
 	NSMutableArray *sprites;
+
 }
 
 @property (readonly,assign) PlayerController *playerController;

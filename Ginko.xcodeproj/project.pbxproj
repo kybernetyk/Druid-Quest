@@ -76,6 +76,11 @@
 		030F4A200F78E772004EA3FE /* GameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F4A1F0F78E772004EA3FE /* GameInfo.m */; };
 		0350CF990F7BCEC700C45E8D /* AngularBlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350CF980F7BCEC700C45E8D /* AngularBlockController.m */; };
 		039255880F7FA9C0008964C8 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 039255870F7FA9C0008964C8 /* Waypoint.m */; };
+		039301280F8A5B420022DB77 /* BirdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039301270F8A5B420022DB77 /* BirdController.m */; };
+		039303DF0F8A9B820022DB77 /* HudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 039303DE0F8A9B820022DB77 /* HudLayer.m */; };
+		0393046E0F8AA16C0022DB77 /* font2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0393046D0F8AA16C0022DB77 /* font2.png */; };
+		039304980F8AA4DE0022DB77 /* font3.png in Resources */ = {isa = PBXBuildFile; fileRef = 039304970F8AA4DE0022DB77 /* font3.png */; };
+		039304E70F8AAAE20022DB77 /* numfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 039304E60F8AAAE20022DB77 /* numfont.png */; };
 		03993F900F7FF84D00770565 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03993F8F0F7FF84D00770565 /* BlockFactory.m */; };
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
 		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
@@ -229,6 +234,13 @@
 		0350CF980F7BCEC700C45E8D /* AngularBlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngularBlockController.m; sourceTree = "<group>"; };
 		039255860F7FA9C0008964C8 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
 		039255870F7FA9C0008964C8 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
+		039301260F8A5B420022DB77 /* BirdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirdController.h; sourceTree = "<group>"; };
+		039301270F8A5B420022DB77 /* BirdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirdController.m; sourceTree = "<group>"; };
+		039303DD0F8A9B820022DB77 /* HudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudLayer.h; sourceTree = "<group>"; };
+		039303DE0F8A9B820022DB77 /* HudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudLayer.m; sourceTree = "<group>"; };
+		0393046D0F8AA16C0022DB77 /* font2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font2.png; sourceTree = "<group>"; };
+		039304970F8AA4DE0022DB77 /* font3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font3.png; sourceTree = "<group>"; };
+		039304E60F8AAAE20022DB77 /* numfont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = numfont.png; sourceTree = "<group>"; };
 		03993F8E0F7FF84D00770565 /* BlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockFactory.h; sourceTree = "<group>"; };
 		03993F8F0F7FF84D00770565 /* BlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockFactory.m; sourceTree = "<group>"; };
 		0399403F0F7FFFFF00770565 /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
@@ -504,6 +516,8 @@
 				03F8F56C0F7A52B400E6E02E /* ControllerCrossLayer.m */,
 				03F8F7910F7AF06C00E6E02E /* SpriteLayer.h */,
 				03F8F7920F7AF06C00E6E02E /* SpriteLayer.m */,
+				039303DD0F8A9B820022DB77 /* HudLayer.h */,
+				039303DE0F8A9B820022DB77 /* HudLayer.m */,
 			);
 			name = Layer;
 			sourceTree = "<group>";
@@ -527,6 +541,8 @@
 				0350CF980F7BCEC700C45E8D /* AngularBlockController.m */,
 				0399403F0F7FFFFF00770565 /* FinishController.h */,
 				039940400F7FFFFF00770565 /* FinishController.m */,
+				039301260F8A5B420022DB77 /* BirdController.h */,
+				039301270F8A5B420022DB77 /* BirdController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -577,6 +593,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				039304E60F8AAAE20022DB77 /* numfont.png */,
+				039304970F8AA4DE0022DB77 /* font3.png */,
+				0393046D0F8AA16C0022DB77 /* font2.png */,
 				039940AC0F80F4DC00770565 /* mpacks */,
 				03F8F4F50F7A4DAD00E6E02E /* gpacks */,
 				03F8F4F00F7A4D7900E6E02E /* blue */,
@@ -650,6 +669,9 @@
 				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,
 				03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */,
 				039940B10F80F4DC00770565 /* mpacks in Resources */,
+				0393046E0F8AA16C0022DB77 /* font2.png in Resources */,
+				039304980F8AA4DE0022DB77 /* font3.png in Resources */,
+				039304E70F8AAAE20022DB77 /* numfont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +753,8 @@
 				039255880F7FA9C0008964C8 /* Waypoint.m in Sources */,
 				03993F900F7FF84D00770565 /* BlockFactory.m in Sources */,
 				039940410F7FFFFF00770565 /* FinishController.m in Sources */,
+				039301280F8A5B420022DB77 /* BirdController.m in Sources */,
+				039303DF0F8A9B820022DB77 /* HudLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,11 +23,19 @@
 	if (self)
 	{
 		isMoving = NO;
-		spriteFrame = 0;
+		spriteFrame = 1;
 		frameThreshold = 0;
-		frame0 = [[spriteToControll texture] retain];
+		initialTexture = [spriteToControll texture];
+		frame0 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player0.png"]] retain];
 		frame1 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player1.png"]] retain];
+		frame2 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player2.png"]] retain];
+		frame3 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player3.png"]] retain];
 		rotadd = 0.0;
+		frameAdd = 1;
+		lastX = [controlledSprite position].x / 32;
+		lastY = [controlledSprite position].y / 32;
+		[controlledSprite setTexture: frame0];
+		
 		
 		if( gettimeofday( &lastUpdated, NULL) != 0 ) {
 			NSException* myException = [NSException
@@ -44,8 +52,13 @@
 
 - (void) dealloc
 {
+	[controlledSprite setTexture: initialTexture];
+	
+	[controlledSprite stopAllActions];
 	[frame0 release];
 	[frame1 release];
+	[frame2 release];
+	[frame3 release];
 	NSLog(@"player controller dealloc");
 	[super dealloc];
 }
@@ -54,7 +67,20 @@
 {
 	//gridPosition = cpv([controlledSprite position].x/32,[controlledSprite position].y/32);
 	[super update];
-
+	int curx = [controlledSprite position].x / 32;
+	if (curx != lastX)
+	{
+		lastX = curx;
+		[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
+	}
+	
+	int cury = [controlledSprite position].y / 32;
+	if (cury != lastY)
+	{
+		lastY = cury;
+		[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
+	}
+	
 	
 	struct timeval now;
 	
@@ -76,19 +102,32 @@
 	if (isMoving)
 	{	
 		frameThreshold += dt;
-		if (frameThreshold > 0.05)
+		if (frameThreshold > 0.15)
 		{
 			frameThreshold = 0.0f;
-			if (++spriteFrame > 1)
+			spriteFrame += frameAdd;
+			if (spriteFrame > 3)
 			{
 				spriteFrame = 0;
+				//frameAdd = -1;
+			}
+			if (spriteFrame < 0)
+			{
+				spriteFrame = 0;
+				frameAdd = 1;
 			}
 			
 			if (spriteFrame == 0)
 				[controlledSprite setTexture: frame0];
 			if (spriteFrame == 1)
 				[controlledSprite setTexture: frame1];
-				
+			if (spriteFrame == 2)
+				[controlledSprite setTexture: frame2];
+			if (spriteFrame == 3)
+				[controlledSprite setTexture: frame3];
+			
+			
+			
 			//printf("frame: %i\n",spriteFrame);
 		}
 	}
@@ -96,6 +135,7 @@
 	{
 		spriteFrame = 0;
 		[controlledSprite setTexture: frame0];
+		
 	}
 	
 
@@ -108,11 +148,12 @@
 - (void) _movementActionEnded
 {
 	isMoving = NO;
-	
+//	[controlledSprite setRotation: [controlledSprite rotation]-90];
+	[controlledSprite stopAllActions];	
 	[self update];
 	//NSLog(@"%f,%f",gridPosition.x,gridPosition.y);
 	
-	
+
 	//player dies :(
 	//not the perfect place for this ... as there might be deadly blocks later
 	if (((int)gridPosition.x) < 0 || ((int)(gridPosition.x)) >= [[GameInfo sharedInstance] levelGridWidth] ||
@@ -154,6 +195,8 @@
 		return;
 	
 	isMoving = YES;
+	lastX = [controlledSprite position].x / 32;
+	lastY = [controlledSprite position].y / 32;
 	
 	Sequence *tmpseq = [Sequence actions:[MoveBy actionWithDuration: 0.01 position: cpvzero],nil];
 	CGPoint currentPosition = [controlledSprite position];

@@ -15,6 +15,7 @@
 	int lives;
 	int currentLevel;
 	int lastLevel;
+	float time;
 	
 	NSString *activeGraphicsPack;
 	NSString *activeMapPack;
@@ -41,6 +42,7 @@
 @property (readwrite, assign) float zoom;
 @property (readwrite, assign) float maxZoom;
 @property (readwrite, assign) float minZoom;
+@property (readwrite, assign) float time;
 @property (readwrite, assign) int worldWidth, worldHeight;
 @property (readwrite, assign) int levelGridWidth;
 @property (readwrite, assign) int levelGridHeight;

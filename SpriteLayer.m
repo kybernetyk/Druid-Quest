@@ -13,6 +13,7 @@
 #import "AngularBlockController.h"
 #import "Waypoint.h"
 #import "BlockFactory.h"
+#import "BirdController.h"
 
 
 @implementation SpriteLayer
@@ -28,7 +29,7 @@ SpriteController *fieldcopy[32][32];
 - (id) initWithLevelFile: (NSString *) filename
 {
 	NSAssert(filename,@"Filename may not be nil!");
-	
+	srand(time(0));
 	self = [super init];
 	if (self)
 	{
@@ -36,6 +37,7 @@ SpriteController *fieldcopy[32][32];
 		
 		spriteControllers = [[NSMutableArray alloc] init];
 		sprites = [[NSMutableArray alloc] init];
+		
 		//NSString *p = [[NSBundle mainBundle] pathForResource:@"map1" ofType:@"plist"];
 	//	NSLog(@"%@",p);
 		
@@ -53,7 +55,7 @@ SpriteController *fieldcopy[32][32];
 			NSLog(@"map %@ corrupt! no entities found!",filename);
 			exit(24);
 		}
-		
+		int birdSet = 0;
 		for (NSDictionary *entDict in mapEntities)
 		{
 			int _entType = [[entDict objectForKey:@"type"] intValue];
@@ -92,6 +94,50 @@ SpriteController *fieldcopy[32][32];
 				else
 				{
 					[self addChild: node z: 0];
+					BOOL createBird = NO;
+
+					if (rand()%100 <= 20)
+						createBird = YES;
+						
+					if (_entType == kSimpleBlock && birdSet < 5 && createBird)
+					{
+						Sprite *bird = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird0.png"]];
+						[self addChild: bird z: 10];
+						cpVect p = [(Sprite*)node position];
+						p.x -= rand()%16;
+						p.y += 16;
+						
+						[sprites addObject: bird];
+					
+						[bird setPosition: p];
+						
+						NSString *pref = nil;
+						
+						if (birdSet%3 == 0)
+							pref = @"yellow";
+						if (birdSet%2 == 0)
+							pref = @"red";
+
+						
+						BirdController *bc = [[BirdController alloc] initWithSprite: bird colorPrefix: pref];
+						[spriteControllers addObject: bc];
+
+						
+						
+						if (birdSet%2 == 0)
+						{	
+							[bc setDestPoint: cpv(rand()%1000+1000, 700)];
+							[bird setScaleX: -1.0f];
+						}
+						else
+						{
+							
+							[bc setDestPoint: cpv(rand()%1000+1000, 700)];
+						}
+						
+						birdSet++;
+					}
+					
 				}
 				
 			//	NSLog(@"adding to sprites: %@ = %x",node,node);
@@ -145,7 +191,19 @@ SpriteController *fieldcopy[32][32];
 		abc = [[AngularBlockController alloc] initWithSprite: node];
 		[abc setNormalVector: cpv(1.0,-1.0)];
 	[spriteControllers addObject: abc];*/
+		
+		for (int i = 0; i < 10; i++)
+		{
+		Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower.png"]];
+			
+		[flower setPosition: cpv((rand()%15)*32,(rand()%10)*32)];
+		[self addChild: flower z:-5];
+			[sprites addObject: flower];
 
+			
+		}
+		
+		
 	}
 	
 	return self;
@@ -187,13 +245,16 @@ SpriteController *fieldcopy[32][32];
 	[spriteControllers release];
 	spriteControllers = nil;
 
+	
 	for (id sprite in sprites)
 	{
+		[sprite stopAllActions];
 		[sprite release];
 	}
 	[sprites removeAllObjects];
 	[sprites release];
 	
+
 
 
 	
@@ -323,7 +384,8 @@ SpriteController *fieldcopy[32][32];
 		int x = [spriteController gridPosition].x;
 		int y = [spriteController gridPosition].y;
 		
-		fieldcopy[x][y] = spriteController;
+		if (x != -1 && y != -1)
+			fieldcopy[x][y] = spriteController;
 		
 	//	NSLog(@"%i,%i: %@",x,y,fieldcopy[x][y]);
 	}

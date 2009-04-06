@@ -14,6 +14,7 @@
 #import "SpriteLayer.h"
 #import "PlayerController.h"
 #import "MenuScene.h"
+#import "HudLayer.h"
 
 @implementation GameScene
 
@@ -25,7 +26,8 @@ enum GameSceneLayerTags
 	kBackgroundLayer = 20,
 	kControllerCrossLayer,
 	kSpriteLayer,
-	kCameraLayer
+	kCameraLayer,
+	kHudLayer
 };
 
 
@@ -36,9 +38,17 @@ enum GameSceneLayerTags
 	if (self)
 	{
 //		NSLog(@"self retaincount: %i",[self retainCount]);
+
 		NSLog(@"gameScene init");
 		[self loadScene];
-
+		if( gettimeofday( &lastUpdated, NULL) != 0 ) {
+			NSException* myException = [NSException
+										exceptionWithName:@"GetTimeOfDay"
+										reason:@"GetTimeOfDay abnormal error"
+										userInfo:nil];
+			@throw myException;
+		}
+		
 //		NSLog(@"self retaincount: %i",[self retainCount]);		
 	}
 	
@@ -75,16 +85,46 @@ enum GameSceneLayerTags
 	//[cameraLayer setRotation: [cameraLayer rotation]+1.0f];
 
 	//NSLog(@"%i",[self retainCount]);
+	struct timeval now;
 	
+	if( gettimeofday( &now, NULL) != 0 ) {
+		NSException* myException = [NSException
+									exceptionWithName:@"GetTimeOfDay"
+									reason:@"GetTimeOfDay abnormal error"
+									userInfo:nil];
+		@throw myException;
+	}
+	
+	
+	float dt;
+	
+	dt = (now.tv_sec - lastUpdated.tv_sec) + (now.tv_usec - lastUpdated.tv_usec) / 1000000.0f;
+	dt = MAX(0,dt);
+	lastUpdated = now;	
+	
+	timeThreshold += dt;
+	if (timeThreshold >= 0.1)
+	{
+		[[GameInfo sharedInstance] setTime: [[GameInfo sharedInstance] time] + timeThreshold];
+		timeThreshold = 0.0f;
+	}
+			
 	
 //	NSLog(@"playerController retaincount: %i",[playerController retainCount]);
+	
+	HudLayer *hud = [self getChildByTag: kHudLayer];
+	if (hud)
+	{
+		[hud update];
+	}
 }
 
 #pragma mark -- loading / unloading / reseting
 - (void) resetScene
 {
-	[self unloadScene];
-	[self loadScene];
+	//[self unloadScene];
+	//[self loadScene];
+	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:[GameScene node] withColorRGB:0x000000]];
 }
 
 - (void) loadNextLevel
@@ -138,6 +178,11 @@ enum GameSceneLayerTags
 	node = [[ControllerCrossLayer alloc] init];
 	[node setPosition:cpv(480/2,320/2)];
 	[self addChild: node z: 5 tag: kControllerCrossLayer];
+
+	node = [[HudLayer alloc] init];
+	[node setPosition:cpv(480/2,320/2)];
+	[self addChild: node z:6 tag: kHudLayer];
+	
 	
 	node = [[SpriteLayer alloc] initWithLevelFile: [[GameInfo sharedInstance] currentMapFilename]];
 	[node setPosition: cpv(+16,+16)];
@@ -259,17 +304,17 @@ enum GameSceneLayerTags
 	[self removeChild: node cleanup: YES];
 	[node release];
 
+	node = [self getChildByTag: kHudLayer];
+	//	NSLog(@"kControllerCrossLayer %@ refcount: %i",node,[node retainCount]);
+	[self removeChild: node cleanup: YES];
+	[node release];
+	
+	
 	[self removeAllChildrenWithCleanup: YES];
 	
 	playerController = nil;
 }
 
-//unloads and releases scene - before switching to new scene plox
-- (void) destroyScene
-{
-	[self unloadScene];
-	[self release];
-}
 
 #define DICKE_FINGER_TAP_TOLLERANZ 16
 

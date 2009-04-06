@@ -44,7 +44,8 @@
 {
 	NSString *spriteFileName = [preloadArray objectAtIndex: _preloadCounter];
 	NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
-	[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+	id tex = [[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+	[tex retain];
 	
 	_preloadCounter ++;
 	if (_preloadCounter >= [preloadArray count])
@@ -145,6 +146,18 @@
 						@"large_background.png",
 						@"player0.png",
 						@"player1.png",
+						@"player2.png",
+						@"player3.png",						
+						@"bird0.png",
+						@"bird1.png",
+						@"bird2.png",
+						@"redbird0.png",
+						@"redbird1.png",
+						@"redbird2.png",
+						@"yellowbird0.png",
+						@"yellowbird1.png",
+						@"yellowbird2.png",
+						@"flower.png",
 						@"small_background.png",
 						@"vert_cross_back.png",
 						nil];

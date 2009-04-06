@@ -304,7 +304,8 @@ enum {
 	
 	
 	label = [Label labelWithString:value fontName:_fontName fontSize:_fontSize];
-
+//	NSLog(@"%@\n",_fontName);
+	
 	[label retain];
 	[label setOpacity:opacity];
 	

@@ -13,11 +13,13 @@
 @interface GameScene : Scene <TouchEventsDelegate>
 {
 	PlayerController *playerController;
+	struct  timeval lastUpdated;
+	float	timeThreshold;
+
 }
 
 - (void) loadScene;
 - (void) unloadScene;
-- (void) destroyScene;
 - (void) resetScene;
 
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
