@@ -23,6 +23,20 @@
 	if (self)
 	{
 		isMoving = NO;
+		spriteFrame = 0;
+		frameThreshold = 0;
+		frame0 = [[spriteToControll texture] retain];
+		frame1 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player1.png"]] retain];
+		rotadd = 0.0;
+		
+		if( gettimeofday( &lastUpdated, NULL) != 0 ) {
+			NSException* myException = [NSException
+										exceptionWithName:@"GetTimeOfDay"
+										reason:@"GetTimeOfDay abnormal error"
+										userInfo:nil];
+			@throw myException;
+		}
+		
 	}
 	
 	return self;
@@ -30,10 +44,65 @@
 
 - (void) dealloc
 {
+	[frame0 release];
+	[frame1 release];
 	NSLog(@"player controller dealloc");
 	[super dealloc];
 }
 #pragma mark gameLogic
+- (void) update
+{
+	//gridPosition = cpv([controlledSprite position].x/32,[controlledSprite position].y/32);
+	[super update];
+
+	
+	struct timeval now;
+	
+	if( gettimeofday( &now, NULL) != 0 ) {
+		NSException* myException = [NSException
+									exceptionWithName:@"GetTimeOfDay"
+									reason:@"GetTimeOfDay abnormal error"
+									userInfo:nil];
+		@throw myException;
+	}
+	
+
+	float dt;
+	
+	dt = (now.tv_sec - lastUpdated.tv_sec) + (now.tv_usec - lastUpdated.tv_usec) / 1000000.0f;
+	dt = MAX(0,dt);
+	lastUpdated = now;	
+	
+	if (isMoving)
+	{	
+		frameThreshold += dt;
+		if (frameThreshold > 0.05)
+		{
+			frameThreshold = 0.0f;
+			if (++spriteFrame > 1)
+			{
+				spriteFrame = 0;
+			}
+			
+			if (spriteFrame == 0)
+				[controlledSprite setTexture: frame0];
+			if (spriteFrame == 1)
+				[controlledSprite setTexture: frame1];
+				
+			//printf("frame: %i\n",spriteFrame);
+		}
+	}
+	else
+	{
+		spriteFrame = 0;
+		[controlledSprite setTexture: frame0];
+	}
+	
+
+	
+
+
+}
 
 #pragma mark private managment funcs
 - (void) _movementActionEnded
@@ -95,15 +164,48 @@
 		CGPoint waypointPosition = [waypoint location];
 		CGPoint distance = cpvsub(waypointPosition,currentPosition);
 
+		printf("dist: %f,%f\n",distance.x,distance.y);
 		//next calc from current waypoint position
 		currentPosition = waypointPosition;
 		
 		float len = cpvlength(distance);
 		float time = 1.5f/296.0f*len;
+//		time = 1.0f;
 		
 		//NSLog(@"waypoint: (%f,%f) - %@",[waypoint location].x,[waypoint location].y,[[waypoint assignedObject] controlledSprite]);
 		
-		id action = [MoveTo actionWithDuration: time position: waypointPosition];
+		id action = nil;
+		//rechts
+		if (distance.x > 0.0)
+		{	
+			action = [RotateTo actionWithDuration: 0.25 angle: 90.0f];
+			tmpseq = [Sequence actionOne: tmpseq two: action];
+		}
+
+		//links
+		if (distance.x  < 0.0)
+		{	
+			action = [RotateTo actionWithDuration: 0.25 angle: -90.0f];
+			tmpseq = [Sequence actionOne: tmpseq two: action];
+		}
+		
+		//oben
+		if (distance.y > 0.0)
+		{	
+			action = [RotateTo actionWithDuration: 0.25 angle: 0.0f];
+			tmpseq = [Sequence actionOne: tmpseq two: action];
+		}
+		
+
+		//unten
+		if (distance.y < 0.0)
+		{	
+			action = [RotateTo actionWithDuration: 0.25 angle: 180.0f];
+			tmpseq = [Sequence actionOne: tmpseq two: action];
+		}
+		
+		
+		action = [MoveTo actionWithDuration: time position: waypointPosition];
 		tmpseq = [Sequence actionOne: tmpseq two: action];
 		[waypoint release];
 	}

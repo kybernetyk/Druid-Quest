@@ -87,7 +87,7 @@ SpriteController *fieldcopy[32][32];
 			{
 				if (_entType == kPlayer)
 				{
-					[self addChild: node z: 0 tag: kPlayerSprite];
+					[self addChild: node z: 10 tag: kPlayerSprite];
 				}
 				else
 				{

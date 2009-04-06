@@ -13,6 +13,12 @@
 @interface PlayerController : SpriteController
 {
 	BOOL	isMoving;
+	int		spriteFrame;
+	struct  timeval lastUpdated;
+	float	frameThreshold;
+	float   rotadd;
+	
+	Texture2D *frame0, *frame1;
 }
 @property (readonly,assign) BOOL isMoving;
 

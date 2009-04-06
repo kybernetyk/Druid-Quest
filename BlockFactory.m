@@ -25,10 +25,12 @@
 	{
 			//player is handled extra lol
 		case kPlayer:
-			spriteFileName = @"player.png";
+			spriteFileName = @"player0.png";
 			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[PlayerController alloc] initWithSprite: node];
+			//[node setzOrder: 10];
+			//node.zOrder = 10;
 		//	NSLog(@"player %i!",[controller retainCount]);
 			break;
 			

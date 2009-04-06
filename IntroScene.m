@@ -143,7 +143,8 @@
 						@"cross_up.png",
 						@"horiz_cross_back.png",
 						@"large_background.png",
-						@"player.png",
+						@"player0.png",
+						@"player1.png",
 						@"small_background.png",
 						@"vert_cross_back.png",
 						nil];

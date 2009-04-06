@@ -98,9 +98,9 @@ static GameInfo *sharedSingleton = nil;
 	[self setLives: 0];
 	[self setZoom: 1.0f];
 	[self setCurrentLevel: 1];
-	[self setLastLevel: 4];
+	[self setLastLevel: 7];
 	[self setActiveGraphicsPack: @"blue"];
-	[self setActiveMapPack: @"lite"];
+	[self setActiveMapPack: @"demo"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
 }

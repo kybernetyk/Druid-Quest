@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) 
 	{
-		backgroundImage = [[NSImage alloc] initWithContentsOfFile:@"/game_background.png"];
+		backgroundImage = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForImageResource: @"game_background"]];
 		cursorImage = nil;
     }
     return self;
