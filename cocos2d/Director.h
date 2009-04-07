@@ -221,6 +221,7 @@ and when to execute the Scenes
  */
 -(void) startAnimation;
 
+- (ccTime) deltaTime;
 
 // Events
 

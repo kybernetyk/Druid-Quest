@@ -13,7 +13,6 @@
 {
 	BOOL isMoving;
 	int		spriteFrame;
-	struct  timeval lastUpdated;
 	float	frameThreshold;	
 	cpVect destPoint;
 	float idleFlapTime;

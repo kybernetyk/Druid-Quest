@@ -19,7 +19,8 @@ enum BackgroundLayerNodeTags
 	kCrossVertBackOne,
 	kCrossVertBackTwo,
 	kCrossHorizBackOne,
-	kCrossHorizBackTwo
+	kCrossHorizBackTwo,
+	kMenuImage
 };
 
 
@@ -69,6 +70,12 @@ enum BackgroundLayerNodeTags
 		[image setPosition:cpv(-480/2+16, 0)];
 		[image setOpacity: 64];
 		[self addChild:image z: 1 tag: kCrossLeftImage];
+
+		image = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"menu.png"]];
+		[image setPosition:cpv(-480/2+16, 320/2-16)];
+		[image setOpacity: 200];
+		[self addChild:image z: 1 tag: kCrossLeftImage];
+		
 	}
     return self;
 }
@@ -107,6 +114,10 @@ enum BackgroundLayerNodeTags
 	[node release];
 	
 	node = [self getChildByTag: kCrossHorizBackTwo];
+	[self removeChild: node cleanup: YES];
+	[node release];
+
+	node = [self getChildByTag: kMenuImage];
 	[self removeChild: node cleanup: YES];
 	[node release];
 	

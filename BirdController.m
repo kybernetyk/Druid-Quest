@@ -58,15 +58,6 @@
 		
 		printf("flap: %f, %f\n",idleFlapTime, idleTurnTime);
 		
-		if( gettimeofday( &lastUpdated, NULL) != 0 ) 
-		{
-			NSException* myException = [NSException
-										exceptionWithName:@"GetTimeOfDay"
-										reason:@"GetTimeOfDay abnormal error"
-										userInfo:nil];
-			@throw myException;
-		}
-		
 	}
 	
 	return self;
@@ -80,22 +71,7 @@
 	//gridPosition = cpv([controlledSprite position].x/32,[controlledSprite position].y/32);
 	gridPosition = cpv(-1,-1);
 	struct timeval now;
-	
-	if( gettimeofday( &now, NULL) != 0 ) 
-	{
-		NSException* myException = [NSException
-									exceptionWithName:@"GetTimeOfDay"
-									reason:@"GetTimeOfDay abnormal error"
-									userInfo:nil];
-		@throw myException;
-	}
-	
-	
-	float dt;
-	
-	dt = (now.tv_sec - lastUpdated.tv_sec) + (now.tv_usec - lastUpdated.tv_usec) / 1000000.0f;
-	dt = MAX(0,dt);
-	lastUpdated = now;	
+	float dt = [[Director sharedDirector] deltaTime];
 	
 	if (!isMoving)
 	{

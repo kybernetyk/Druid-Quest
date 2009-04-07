@@ -18,6 +18,7 @@
 @synthesize levelGridWidth, levelGridHeight;
 @synthesize finishPosition;
 @synthesize worldWidth, worldHeight;
+@synthesize isPaused;
 
 static GameInfo *sharedSingleton = nil;
 
@@ -86,7 +87,7 @@ static GameInfo *sharedSingleton = nil;
 {
     self = [super init];
     sharedSingleton = self;
-	
+
     //initialize here
 	[self reset];
 	
@@ -105,6 +106,7 @@ static GameInfo *sharedSingleton = nil;
 	[self setActiveMapPack: @"demo"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
+	[self setIsPaused: NO];
 }
 
 -(NSString*) fullPathFromRelativePath:(NSString*) relPath

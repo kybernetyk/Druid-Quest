@@ -15,6 +15,8 @@
 #import "PlayerController.h"
 #import "MenuScene.h"
 #import "HudLayer.h"
+#import "PauseScene.h"
+#import "cocoslive.h"
 
 @implementation GameScene
 
@@ -41,14 +43,6 @@ enum GameSceneLayerTags
 
 		NSLog(@"gameScene init");
 		[self loadScene];
-		if( gettimeofday( &lastUpdated, NULL) != 0 ) {
-			NSException* myException = [NSException
-										exceptionWithName:@"GetTimeOfDay"
-										reason:@"GetTimeOfDay abnormal error"
-										userInfo:nil];
-			@throw myException;
-		}
-		
 //		NSLog(@"self retaincount: %i",[self retainCount]);		
 	}
 	
@@ -73,6 +67,7 @@ enum GameSceneLayerTags
 - (void) onExit
 {
 	[super onExit];
+	NSLog(@"game scene on exit!");
 	
 //	[self unloadScene];
 	[[Director sharedDirector] removeEventHandler: self];
@@ -84,25 +79,8 @@ enum GameSceneLayerTags
 //	Layer *cameraLayer = [self getChildByTag: kCameraLayer];
 	//[cameraLayer setRotation: [cameraLayer rotation]+1.0f];
 
-	//NSLog(@"%i",[self retainCount]);
-	struct timeval now;
-	
-	if( gettimeofday( &now, NULL) != 0 ) {
-		NSException* myException = [NSException
-									exceptionWithName:@"GetTimeOfDay"
-									reason:@"GetTimeOfDay abnormal error"
-									userInfo:nil];
-		@throw myException;
-	}
-	
-	
-	float dt;
-	
-	dt = (now.tv_sec - lastUpdated.tv_sec) + (now.tv_usec - lastUpdated.tv_usec) / 1000000.0f;
-	dt = MAX(0,dt);
-	lastUpdated = now;	
-	
-	timeThreshold += dt;
+
+	timeThreshold += [[Director sharedDirector] deltaTime];
 	if (timeThreshold >= 0.1)
 	{
 		[[GameInfo sharedInstance] setTime: [[GameInfo sharedInstance] time] + timeThreshold];
@@ -127,6 +105,17 @@ enum GameSceneLayerTags
 	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:[GameScene node] withColorRGB:0x000000]];
 }
 
+-(void) scorePostOk:(id) sender
+{
+	NSLog(@"score post ok!");
+}
+
+-(void) scorePostFail:(id) sender
+{
+	NSLog(@"score post failed!");
+}
+
+
 - (void) loadNextLevel
 {
 	id _nextScene = nil;
@@ -135,6 +124,33 @@ enum GameSceneLayerTags
 	if ([[GameInfo sharedInstance] currentLevel] > [[GameInfo sharedInstance] lastLevel])
 	{
 		_nextScene = [MenuScene node];
+		id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
+		NSMutableDictionary *d = [NSMutableDictionary dictionary];
+		
+		float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+		int minutes = [[GameInfo sharedInstance] time]/60;
+		int hours = [[GameInfo sharedInstance] time]/60/60;
+		int seconds = [[GameInfo sharedInstance] time];
+		
+		if (seconds >= 60)
+			seconds = seconds%60;
+		
+		if (minutes >= 60)
+			minutes = minutes%60;
+		
+		
+		NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
+		
+		[d setObject:@"rolf" forKey:@"cc_playername"];
+		[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
+		[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
+		[d setObject:timeString forKey:@"usr_time"];
+		[d setObject:[NSNumber numberWithInt:(int)[[GameInfo sharedInstance] score]] forKey:@"usr_steps"];
+		
+		
+		
+		d = [NSDictionary dictionaryWithDictionary: d];
+		[rolf sendScore: d];
 	}
 	else
 	{
@@ -417,19 +433,19 @@ BOOL mayActivateCross = YES;
 
 	//checken ob der user den spieler bewegen will (abfrage == true)
 	//oder ob er aufs spielfeld getappt hat, um das feld zu bewegen (abfrage == false)
-	if (CGRectContainsPoint (CGRectMake(32.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	if (CGRectContainsPoint (CGRectMake(64.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 384.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightUpperCross: YES];
 		mayMoveCamera = NO;
 		mayActivateCross = YES;
 	}
-	if (CGRectContainsPoint (CGRectMake(0.0f, 0.0f, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	if (CGRectContainsPoint (CGRectMake(32.0f, 0.0f, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightLowerCross: YES];
 		mayMoveCamera = NO;
 		mayActivateCross = YES;
 	}
-	if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 256.0f),location))
+	if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 224.0f),location))
 	{
 		[crosslayer highlightLeftCross: YES];
 		mayMoveCamera = NO;
@@ -524,7 +540,7 @@ BOOL mayActivateCross = YES;
 	if ([allTouches count] == 1 && mayActivateCross)
 	{
 		
-		if (CGRectContainsPoint (CGRectMake(32.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+		if (CGRectContainsPoint (CGRectMake(64.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 384.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 		{
 			[crosslayer highlightUpperCross: YES];
 			return kEventHandled;
@@ -540,7 +556,7 @@ BOOL mayActivateCross = YES;
 		else
 			[crosslayer highlightLowerCross: NO];
 
-		if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 256.0f),location))
+		if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 224.0f),location))
 		{
 			[crosslayer highlightLeftCross: YES];
 			return kEventHandled;
@@ -647,6 +663,24 @@ BOOL mayActivateCross = YES;
 
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
 
+	//NSLog(@"%f,%f",location.x,location.y);
+	
+	if (CGRectContainsPoint (CGRectMake(0.0f, 320-32-DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	{
+		[[GameInfo sharedInstance] setIsPaused: ![[GameInfo sharedInstance] isPaused]];
+
+		
+		NSLog(@"paused: %i",[[GameInfo sharedInstance] isPaused]);
+		
+	//	[[Director sharedDirector] pause];
+		//[[Director sharedDirector] pushScene:[FadeTransition transitionWithDuration:0.6 scene:[PauseScene node] withColorRGB:0x000000]];
+		[[Director sharedDirector] pushScene: [PauseScene node]];
+		//NSLog(@"pause!");
+		
+		return kEventHandled;
+	}
+	
+	
 	//waren 2 finger aktiv? dann das kreuz deaktiviern
 	if ([allTouches count] != 1)
 	{
@@ -665,7 +699,7 @@ BOOL mayActivateCross = YES;
 
 	
 	//player movement
-	if (CGRectContainsPoint (CGRectMake(32.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	if (CGRectContainsPoint (CGRectMake(64.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 384.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightUpperCross: NO];
 		if ([playerController isMoving])
@@ -678,7 +712,7 @@ BOOL mayActivateCross = YES;
 		[playerController moveAlongPath: path];
 		return kEventHandled;
 	}
-	if (CGRectContainsPoint (CGRectMake(0.0f, 0.0f, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	if (CGRectContainsPoint (CGRectMake(32.0f, 0.0f, 416.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[crosslayer highlightLowerCross: NO];
 		if ([playerController isMoving])
@@ -697,7 +731,7 @@ BOOL mayActivateCross = YES;
 		return kEventHandled;
 		
 	}
-	if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 256.0f),location))
+	if (CGRectContainsPoint (CGRectMake(0.0f, 32.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 224.0f),location))
 	{
 		[crosslayer highlightLeftCross: NO];
 		if ([playerController isMoving])
@@ -744,7 +778,7 @@ BOOL mayActivateCross = YES;
 	
 	//translate location to landscape mode
 	location = [[Director sharedDirector] convertCoordinate: location];
-	
+	NSLog(@"Cancelled!");
 	return kEventHandled;
 	
 }

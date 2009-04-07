@@ -20,6 +20,7 @@
 	NSString *activeGraphicsPack;
 	NSString *activeMapPack;
 
+	BOOL isPaused;
 	
 	float zoom;
 	float maxZoom;
@@ -43,6 +44,7 @@
 @property (readwrite, assign) float maxZoom;
 @property (readwrite, assign) float minZoom;
 @property (readwrite, assign) float time;
+@property (readwrite, assign) BOOL isPaused;
 @property (readwrite, assign) int worldWidth, worldHeight;
 @property (readwrite, assign) int levelGridWidth;
 @property (readwrite, assign) int levelGridHeight;

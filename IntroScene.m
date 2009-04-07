@@ -143,7 +143,6 @@
 						@"cross_right.png",
 						@"cross_up.png",
 						@"horiz_cross_back.png",
-						@"large_background.png",
 						@"player0.png",
 						@"player1.png",
 						@"player2.png",
@@ -158,6 +157,7 @@
 						@"yellowbird1.png",
 						@"yellowbird2.png",
 						@"flower.png",
+						@"menu.png",
 						@"small_background.png",
 						@"vert_cross_back.png",
 						nil];

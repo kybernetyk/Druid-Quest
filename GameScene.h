@@ -13,7 +13,6 @@
 @interface GameScene : Scene <TouchEventsDelegate>
 {
 	PlayerController *playerController;
-	struct  timeval lastUpdated;
 	float	timeThreshold;
 
 }

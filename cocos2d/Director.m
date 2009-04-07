@@ -199,6 +199,11 @@ static Director *_sharedDirector = nil;
 	[_openGLView swapBuffers];	
 }
 
+- (ccTime) deltaTime
+{
+	return dt;
+}
+
 -(void) calculateDeltaTime
 {
 	struct timeval now;
