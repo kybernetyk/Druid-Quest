@@ -27,6 +27,7 @@
 	[window setMultipleTouchEnabled:YES];
 	
 	[FastDirector sharedDirector];
+	[[Director sharedDirector] setPixelFormat: kRGBA8];
 	[[Director sharedDirector] attachInWindow:window];
 
 

@@ -141,7 +141,7 @@ enum GameSceneLayerTags
 		
 		NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
 		
-		[d setObject:@"rolf" forKey:@"cc_playername"];
+		[d setObject:@"omegaman" forKey:@"cc_playername"];
 		[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
 		[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
 		[d setObject:timeString forKey:@"usr_time"];
