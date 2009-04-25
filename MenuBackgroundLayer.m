@@ -7,14 +7,13 @@
 //
 
 #import "MenuBackgroundLayer.h"
-
+#import "GameInfo.h"
 
 @implementation MenuBackgroundLayer
 
 enum BackgroundLayerNodeTags 
 {
-	kBackgroundImage,
-	kParticleEffect
+	kBackgroundImage
 };
 
 - (id) init 
@@ -22,19 +21,21 @@ enum BackgroundLayerNodeTags
     self = [super init];
     if (self) 
 	{
-        Sprite *backgroundImage = [[Sprite alloc] initWithFile: @"menu_background.png"];
+		
+
+        Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_bg.png"]];
 		[backgroundImage setPosition:cpv(0, 0)];
   
 		//assign
 		[self addChild:backgroundImage z: 0 tag: kBackgroundImage];
 		
-		id part = [[ParticleFire alloc] init];//[[ParticleFire alloc] initWithTotalParticles: 256];
-		[part setPosition: cpv(0,-160)];
-		[part setScaleX: 6.0f];
-		[part setScaleY: 0.3f];
+	//	id part = [[ParticleFire alloc] init];//[[ParticleFire alloc] initWithTotalParticles: 256];
+	//	[part setPosition: cpv(0,-160)];
+	//	[part setScaleX: 6.0f];
+	//	[part setScaleY: 0.3f];
 
 		//assign
-		[self addChild: part z: 1 tag: kParticleEffect];
+	//	[self addChild: part z: 1 tag: kParticleEffect];
 		
     }
     return self;
@@ -45,13 +46,11 @@ enum BackgroundLayerNodeTags
 	NSLog(@"menu background layer dealloc");
 	
 	Sprite *backgroundImage = (Sprite*)[self getChildByTag: kBackgroundImage];
-	ParticleFire *fire = (ParticleFire*)[self getChildByTag: kParticleEffect];
 	
 	[self removeChildByTag: kBackgroundImage cleanup: YES];
-	[self removeChildByTag: kParticleEffect cleanup: YES];
+
 	
 	[backgroundImage release];
-	[fire release];
 	
 
 	

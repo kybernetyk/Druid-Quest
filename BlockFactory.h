@@ -17,11 +17,11 @@ enum blockTags
 	kPlayer = 1,
 	kFinish = 2,
 	kSimpleBlock = 3,
-	
 	kBlockNormal_South_East = 4,
 	kBlockNormal_North_East = 5,
 	kBlockNormal_North_West = 6,
 	kBlockNormal_South_West = 7
+
 };
 
 

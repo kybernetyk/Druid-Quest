@@ -44,7 +44,10 @@
 			break;
 			
 		case kSimpleBlock:
-			spriteFileName = @"block_1.png";
+			spriteFileName = @"block_1_1.png";
+			if (rand()%2 == 1)
+				spriteFileName = @"block_1_2.png";	
+			
 			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 			[node setPosition:cpv(posX *32,posY *32)];
 			controller = [[SpriteController alloc] initWithSprite: node];

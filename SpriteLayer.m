@@ -89,7 +89,7 @@ SpriteController *fieldcopy[32][32];
 			{
 				if (_entType == kPlayer)
 				{
-					[self addChild: node z: 10 tag: kPlayerSprite];
+					[self addChild: node z: 5 tag: kPlayerSprite];
 				}
 				else
 				{
@@ -102,10 +102,12 @@ SpriteController *fieldcopy[32][32];
 					if (_entType == kSimpleBlock && birdSet < 5 && createBird)
 					{
 						Sprite *bird = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird0.png"]];
-						[self addChild: bird z: 10];
+						[self addChild: bird z: 5];
 						cpVect p = [(Sprite*)node position];
-						p.x -= rand()%16;
-						p.y += 16;
+						p.x -= 16;
+						
+						p.x += rand()%32;
+						p.y += 12;
 						
 						[sprites addObject: bird];
 					
@@ -113,27 +115,10 @@ SpriteController *fieldcopy[32][32];
 						
 						NSString *pref = nil;
 						
-						if (birdSet%3 == 0)
-							pref = @"yellow";
-						if (birdSet%2 == 0)
-							pref = @"red";
-
-						
 						BirdController *bc = [[BirdController alloc] initWithSprite: bird colorPrefix: pref];
 						[spriteControllers addObject: bc];
 
-						
-						
-						if (birdSet%2 == 0)
-						{	
-							[bc setDestPoint: cpv(rand()%1000+1000, 700)];
-							[bird setScaleX: -1.0f];
-						}
-						else
-						{
-							
-							[bc setDestPoint: cpv(rand()%1000+1000, 700)];
-						}
+						[bc setDestPoint: cpv(p.x, 700)];
 						
 						birdSet++;
 					}
@@ -149,60 +134,130 @@ SpriteController *fieldcopy[32][32];
 				[[GameInfo sharedInstance] setFinishPosition: cpv(_entXPos,_entYPos)];
 			}
 
+			if (_entType == kSimpleBlock)
+			{
+	//			shadow_block_1_1.png
+				
+				Sprite *_shadow = nil;
+				if ([[node lolFilename] isEqualToString: [[GameInfo sharedInstance] pathForGraphicsFile:@"block_1_1.png"]])
+					_shadow = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"shadow_block_1_1.png"]];
+				else
+					_shadow = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"shadow_block_1_2.png"]];
+				
+				NSLog(@"lolfilename: %@",[node lolFilename]);
+				
+				//[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+				cpVect po = [((Sprite *)node) position];
+				po.x += 8;
+				po.y -= 8;
+				
+				[_shadow setPosition: po];
+				
+				[self addChild: _shadow z:-4];
+				[sprites addObject: _shadow];
+				
+			}
+			
 			
 			node = nil;	
 		}
 		
-		
-/*		[node setPosition: cpv(32*4,32*4)];
-		[self addChild: node z: 0 tag: kPlayerSprite];
 
-		playerController = [[PlayerController alloc] initWithSprite: node];
-		//[spriteControllers addObject: playerController];
-		
-		
-		node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"block_1.png"]];
-		[node setPosition: cpv(32*8,32*8)];
-		[self addChild: node z: 0];
+		for (int i = 0; i < 1; i++)
+		{
+			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground.png"]];
+			
+			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+			[self addChild: ground z:-7];
+			[sprites addObject: ground];
+			
+			
+		}
 
-		SpriteController *blockController = [[SpriteController alloc] initWithSprite: node];
-		[spriteControllers addObject: blockController];
-		
-		node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"block_2.png"]];
-		[node setPosition: cpv(32*8,32*4)];
-		[self addChild: node z: 0];
-		
-		AngularBlockController *abc = [[AngularBlockController alloc] initWithSprite: node];
-		[abc setNormalVector: cpv(-1.0,1.0)];
-		[spriteControllers addObject: abc];
+		for (int i = 0; i < 1; i++)
+		{
+			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground2.png"]];
+			
+			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+			[self addChild: ground z:-7];
+			[sprites addObject: ground];
+			
+			
+		}
 
-		node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"block_1.png"]];
-		[node setPosition: cpv(32*1,32*4)];
-		[self addChild: node z: 0];
+		for (int i = 0; i < 1; i++)
+		{
+			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground3.png"]];
+			
+			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+			[self addChild: ground z:-7];
+			[sprites addObject: ground];
+			
+			
+		}
 		
-		blockController = [[SpriteController alloc] initWithSprite: node];
-		[spriteControllers addObject: blockController];
 		
-
-		node = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"block_4.png"]];
-		[node setPosition: cpv(32*1,32*7)];
-		[self addChild: node z: 0];
 		
-		abc = [[AngularBlockController alloc] initWithSprite: node];
-		[abc setNormalVector: cpv(1.0,-1.0)];
-	[spriteControllers addObject: abc];*/
 		
-		for (int i = 0; i < 10; i++)
+		
+		for (int i = 0; i < 3; i++)
 		{
 		Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower.png"]];
 			
-		[flower setPosition: cpv((rand()%15)*32,(rand()%10)*32)];
+		[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
 		[self addChild: flower z:-5];
 			[sprites addObject: flower];
 
 			
 		}
+
+		for (int i = 0; i < 3; i++)
+		{
+			Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower2.png"]];
+			
+			[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+			[self addChild: flower z:-5];
+			[sprites addObject: flower];
+			
+			
+		}
 		
+		for (int i = 0; i < 5; i++)
+		{
+			Sprite *gravel = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"gravel.png"]];
+			
+			[gravel setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+			[self addChild: gravel z:-6];
+			[sprites addObject: gravel];
+			
+			
+		}
+
+		
+		cpVect posis[] = 
+		{
+			cpv(145,0),
+			cpv(240,300)
+		};
+		
+		
+		for (int i = 0; i < 2; i++)
+		{
+			Sprite *root = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"root1.png"]];
+			
+			[root setPosition: posis[i]];
+			[self addChild: root z:-5];
+			[sprites addObject: root];
+			
+			
+		}
+		
+		
+		
+		Sprite *sunshine = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"rays_small.png"]];
+		[sunshine setPosition: cpv(240-32,160+19)];
+		[self addChild: sunshine z:10];
+		[sprites addObject: sunshine];
 		
 	}
 	

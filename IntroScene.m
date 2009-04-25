@@ -120,7 +120,7 @@
 		
 		id loading = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"loading.png"]];
 		[loading setPosition:cpv(240, 80)];
-//		[loading setOpacity: 1.0f];
+		[loading setOpacity: 1.0f];
 		[self addChild: loading z: 0 tag:LOADING_TAG];
 		
 		
@@ -133,7 +133,10 @@
 		_preloadCounter = 0;
 		prevPercent = 0.0f;
 		preloadArray = [NSArray arrayWithObjects:@"medium_background.png",
-						@"block_1.png",
+						@"block_1_1.png",
+						@"block_1_2.png",
+						@"shadow_block_1_1.png",
+						@"shadow_block_1_2.png",						
 						@"block_2.png",
 						@"block_3.png",
 						@"block_4.png",
@@ -147,18 +150,24 @@
 						@"player1.png",
 						@"player2.png",
 						@"player3.png",						
+						@"player4.png",
+						@"player5.png",
+						@"player6.png",						
 						@"bird0.png",
 						@"bird1.png",
 						@"bird2.png",
-						@"redbird0.png",
-						@"redbird1.png",
-						@"redbird2.png",
-						@"yellowbird0.png",
-						@"yellowbird1.png",
-						@"yellowbird2.png",
+						@"bird3.png",
+						@"menu_bg.png",
+
 						@"flower.png",
+						@"flower2.png",
+						@"gravel.png",
+						@"ground.png",
+						@"ground2.png",
+						@"ground3.png",
 						@"menu.png",
 						@"small_background.png",
+						@"rays_small.png",
 						@"vert_cross_back.png",
 						nil];
 		[preloadArray retain];

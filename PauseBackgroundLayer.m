@@ -7,6 +7,7 @@
 //
 
 #import "PauseBackgroundLayer.h"
+#import "GameInfo.h"
 
 
 @implementation PauseBackgroundLayer
@@ -15,7 +16,7 @@
     self = [super init];
     if (self) 
 	{
-        Sprite *backgroundImage = [Sprite spriteWithFile: @"menu_background.png"];
+        Sprite *backgroundImage = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_bg.png"]];
 		[backgroundImage setPosition:cpv(0, 0)];
 		
 		//assign

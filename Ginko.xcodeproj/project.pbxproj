@@ -67,7 +67,6 @@
 		030F47550F7851BB004EA3FE /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F47540F7851BB004EA3FE /* IntroScene.m */; };
 		030F47EB0F78578D004EA3FE /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F47EA0F78578D004EA3FE /* MenuScene.m */; };
 		030F48780F78D357004EA3FE /* MenuBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F48770F78D357004EA3FE /* MenuBackgroundLayer.m */; };
-		030F48960F78D597004EA3FE /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F48950F78D597004EA3FE /* menu_background.png */; };
 		030F48C70F78D68E004EA3FE /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F48C60F78D68E004EA3FE /* fire.png */; };
 		030F49390F78DB20004EA3FE /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F49380F78DB20004EA3FE /* MainMenuLayer.m */; };
 		030F499B0F78E308004EA3FE /* HelpMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F499A0F78E308004EA3FE /* HelpMenuLayer.m */; };
@@ -233,7 +232,6 @@
 		030F47EA0F78578D004EA3FE /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		030F48760F78D357004EA3FE /* MenuBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBackgroundLayer.h; sourceTree = "<group>"; };
 		030F48770F78D357004EA3FE /* MenuBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBackgroundLayer.m; sourceTree = "<group>"; };
-		030F48950F78D597004EA3FE /* menu_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_background.png; sourceTree = "<group>"; };
 		030F48C60F78D68E004EA3FE /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		030F49370F78DB20004EA3FE /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		030F49380F78DB20004EA3FE /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
@@ -727,7 +725,6 @@
 				03F8F4F00F7A4D7900E6E02E /* blue */,
 				030F499C0F78E36D004EA3FE /* help_background.png */,
 				030F48C60F78D68E004EA3FE /* fire.png */,
-				030F48950F78D597004EA3FE /* menu_background.png */,
 				030F47290F7850C3004EA3FE /* fps_images.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -790,7 +787,6 @@
 			files = (
 				030F46ED0F784FEC004EA3FE /* CMakeLists.txt in Resources */,
 				030F472A0F7850C3004EA3FE /* fps_images.png in Resources */,
-				030F48960F78D597004EA3FE /* menu_background.png in Resources */,
 				030F48C70F78D68E004EA3FE /* fire.png in Resources */,
 				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,
 				03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */,

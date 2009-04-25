@@ -24,7 +24,7 @@
 	
 	id initialTexture; //damit aus versehen nicht eine textur 2x released wird und eine gar nicht :/
 	
-	Texture2D *frame0, *frame1, *frame2, *frame3;
+	Texture2D *frame0, *frame1, *frame2, *frame3, *frame4, *frame5, *frame6;
 }
 @property (readonly,assign) BOOL isMoving;
 

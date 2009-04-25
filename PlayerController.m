@@ -30,6 +30,10 @@
 		frame1 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player1.png"]] retain];
 		frame2 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player2.png"]] retain];
 		frame3 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player3.png"]] retain];
+		frame4 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player4.png"]] retain];
+		frame5 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player5.png"]] retain];
+		frame6 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player6.png"]] retain];
+		
 		rotadd = 0.0;
 		frameAdd = 1;
 		lastX = [controlledSprite position].x / 32;
@@ -59,6 +63,10 @@
 	[frame1 release];
 	[frame2 release];
 	[frame3 release];
+	[frame4 release];
+	[frame5 release];
+	[frame6 release];
+	
 	NSLog(@"player controller dealloc");
 	[super dealloc];
 }
@@ -102,11 +110,11 @@
 	if (isMoving)
 	{	
 		frameThreshold += dt;
-		if (frameThreshold > 0.15)
+		if (frameThreshold > 0.10)
 		{
 			frameThreshold = 0.0f;
 			spriteFrame += frameAdd;
-			if (spriteFrame > 3)
+			if (spriteFrame > 6)
 			{
 				spriteFrame = 0;
 				//frameAdd = -1;
@@ -125,6 +133,12 @@
 				[controlledSprite setTexture: frame2];
 			if (spriteFrame == 3)
 				[controlledSprite setTexture: frame3];
+			if (spriteFrame == 4)
+				[controlledSprite setTexture: frame4];
+			if (spriteFrame == 5)
+				[controlledSprite setTexture: frame5];
+			if (spriteFrame == 6)
+				[controlledSprite setTexture: frame6];
 			
 			
 			
@@ -213,6 +227,8 @@
 		
 		float len = cpvlength(distance);
 		float time = 1.5f/296.0f*len;
+		
+		printf("TIME: %f\n",time);
 //		time = 1.0f;
 		
 		//NSLog(@"waypoint: (%f,%f) - %@",[waypoint location].x,[waypoint location].y,[[waypoint assignedObject] controlledSprite]);

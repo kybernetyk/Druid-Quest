@@ -36,8 +36,12 @@
  */
 @interface Sprite : TextureNode <CocosNodeFrames>
 {
-	NSMutableDictionary *animations;	
+	NSMutableDictionary *animations;
+	
+	NSString *lolFilename;
 }
+
+@property (readwrite, assign) NSString *lolFilename;
 
 /** creates an sprite with an image file */
 + (id) spriteWithFile:(NSString *)imageFile;

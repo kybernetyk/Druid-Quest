@@ -26,14 +26,14 @@
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:YES];
 	
-	[FastDirector sharedDirector];
+	//[FastDirector sharedDirector];
 	[[Director sharedDirector] setPixelFormat: kRGBA8];
 	[[Director sharedDirector] attachInWindow:window];
 
 
 	[[Director sharedDirector] setLandscape: YES];
-	[[Director sharedDirector] setDisplayFPS: NO];
-	[[Director sharedDirector] setAnimationInterval:1.0/60];
+	[[Director sharedDirector] setDisplayFPS: YES];
+	[[Director sharedDirector] setAnimationInterval:1.0/30];
 	
 	
 	

@@ -21,13 +21,14 @@
 		spriteFrame = 0;
 		frameThreshold = 0;
 		initialTexture = [spriteToControll texture];
-		if (colorPrefix == nil)
+//		if (colorPrefix == nil)
 		{
 			frame0 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird0.png"]] retain];
 			frame1 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird1.png"]] retain];
 			frame2 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird2.png"]] retain];
+			frame3 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird3.png"]] retain];
 		}
-		else
+/*		else
 		{
 			NSString *fname0 = [NSString stringWithFormat:@"%@bird0.png",colorPrefix];
 			NSString *fname1 = [NSString stringWithFormat:@"%@bird1.png",colorPrefix];
@@ -49,7 +50,7 @@
 			frame2 = [mg addImage: path2];
 			[frame2 retain];
 
-		}
+		}*/
 		[controlledSprite setTexture: frame0];
 		
 		idleFlapTime = ((rand()%8000) / 1000.0f);
@@ -86,7 +87,7 @@
 			idleFlapTime = ((rand()%8000) / 1000.0f);
 			flapThreshold = 0.0f;
 			spriteFrame ++;
-			if (spriteFrame > 1)
+			if (spriteFrame > 0)
 			{
 				spriteFrame = 0;
 			}
@@ -106,7 +107,11 @@
 		{
 			isMoving = YES;
 			destPoint.x = destPoint.x * [controlledSprite scaleX];
-			flyaction = [MoveTo actionWithDuration: 10.0f position: destPoint];
+			//flyaction = [MoveTo actionWithDuration: 10.0f position: destPoint];
+	//		flyaction = [MoveBy actionWithDuration: 10.0f position: destPoint];
+			
+			float time = (rand()%5) + 5.0f;
+			flyaction = [MoveBy actionWithDuration: time position: cpv(0.0,700.0)];
 			//[flyaction retain];
 			[controlledSprite runAction: flyaction];
 			frameThreshold = 0.0f;
@@ -122,7 +127,7 @@
 		{
 			frameThreshold = 0.0f;
 			spriteFrame ++;
-			if (spriteFrame > 2)
+			if (spriteFrame > 3)
 			{
 				spriteFrame = 1;
 				//frameAdd = -1;
@@ -137,6 +142,8 @@
 			[controlledSprite setTexture: frame1];
 			if (spriteFrame == 2)
 			[controlledSprite setTexture: frame2];
+			if (spriteFrame == 3)
+				[controlledSprite setTexture: frame3];
 			
 	
 	//NSLog(@"sprite controller %@ grid positon: %f,%f",self ,gridPosition.x, gridPosition.y);

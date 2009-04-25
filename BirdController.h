@@ -23,7 +23,7 @@
 	id flyaction;
 	id initialTexture;
 	
-	Texture2D *frame0, *frame1, *frame2;
+	Texture2D *frame0, *frame1, *frame2, *frame3;
 }
 @property (readwrite, assign) cpVect destPoint;
 - (id) initWithSprite: (Sprite *) spriteToControll colorPrefix: (NSString *)colorPrefix;

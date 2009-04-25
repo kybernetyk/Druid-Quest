@@ -24,6 +24,7 @@
 @end
 
 @implementation Sprite
+@synthesize lolFilename;
 
 #pragma mark Sprite - image file
 + (id) spriteWithFile:(NSString*) filename
@@ -38,7 +39,10 @@
 	self = [super init];
 	if( self ) {
 		self.texture = [[[TextureMgr sharedTextureMgr] addImage: filename] retain];
+	
+		[self setLolFilename: filename];
 	}
+	
 	
 	return self;
 }
