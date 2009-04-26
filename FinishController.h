@@ -11,7 +11,19 @@
 
 @interface FinishController : SpriteController 
 {
+	Sprite *animationSprite;
+	
+	Texture2D *frame0, *frame1, *frame2, *frame3, *frame4, *frame5, *frame6; 
+	
+	Texture2D *currentFrame;
+	
+	id initialTexture;
+	
+	int		spriteFrame;
+	float	frameThreshold;	
 
 }
+
+@property (readwrite,retain) Sprite *animationSprite;
 
 @end

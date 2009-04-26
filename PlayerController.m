@@ -34,12 +34,14 @@
 		frame5 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player5.png"]] retain];
 		frame6 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player6.png"]] retain];
 		
+//		playerShadow = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player_shadow.png"]] retain];
+		
 		rotadd = 0.0;
 		frameAdd = 1;
 		lastX = [controlledSprite position].x / 32;
 		lastY = [controlledSprite position].y / 32;
-		[controlledSprite setTexture: frame0];
 		
+
 		
 		if( gettimeofday( &lastUpdated, NULL) != 0 ) {
 			NSException* myException = [NSException
@@ -66,6 +68,8 @@
 	[frame4 release];
 	[frame5 release];
 	[frame6 release];
+	
+
 	
 	NSLog(@"player controller dealloc");
 	[super dealloc];
@@ -275,6 +279,27 @@
 	
 	[controlledSprite runAction: tmpseq];
 	[path release];
+}
+
+
+@end
+
+
+@implementation PlayerShadowController
+@synthesize playerSprite;
+
+- (void) update
+{
+	float rot =	[playerSprite rotation];
+	
+	
+	[controlledSprite setRotation: rot];
+	
+	cpVect pos = [playerSprite position];
+	pos.x += 12;
+	pos.y -= 6;
+	
+	[controlledSprite setPosition: pos];
 }
 
 

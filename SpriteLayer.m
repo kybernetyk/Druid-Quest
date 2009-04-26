@@ -14,7 +14,7 @@
 #import "Waypoint.h"
 #import "BlockFactory.h"
 #import "BirdController.h"
-
+#import "FinishController.h"
 
 @implementation SpriteLayer
 @synthesize playerController;
@@ -77,6 +77,17 @@ SpriteController *fieldcopy[32][32];
 				if (_entType == kPlayer)
 				{
 					playerController = controller;
+					
+					/*Sprite *playerShadow = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"player_shadow.png"]];
+					PlayerShadowController *psc = [[PlayerShadowController alloc] initWithSprite: playerShadow];
+					[psc setPlayerSprite: node];
+					
+					[spriteControllers addObject: psc];
+					
+					
+					[self addChild: playerShadow z:-1];
+					[sprites addObject: playerShadow];
+					*/
 					//NSLog(@"playerController retaincount: %i",[playerController retainCount]);
 				}
 				else
@@ -90,6 +101,13 @@ SpriteController *fieldcopy[32][32];
 				if (_entType == kPlayer)
 				{
 					[self addChild: node z: 5 tag: kPlayerSprite];
+					
+					//Sprite *playerShadow = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"player_shadow.png"]];
+					
+					//[playerShadow setPosition: cpv(24,4)];
+					//[node addChild: playerShadow z:-10];
+					
+					//[sprites addObject: playerShadow];
 				}
 				else
 				{
@@ -102,7 +120,7 @@ SpriteController *fieldcopy[32][32];
 					if (_entType == kSimpleBlock && birdSet < 5 && createBird)
 					{
 						Sprite *bird = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"bird0.png"]];
-						[self addChild: bird z: 5];
+						[self addChild: bird z: 9];
 						cpVect p = [(Sprite*)node position];
 						p.x -= 16;
 						
@@ -132,6 +150,16 @@ SpriteController *fieldcopy[32][32];
 			if (_entType == kFinish)
 			{
 				[[GameInfo sharedInstance] setFinishPosition: cpv(_entXPos,_entYPos)];
+				
+				
+				Sprite *finish_anim = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"finish_anim0.png"]];
+				[finish_anim setPosition: [(Sprite*)node position]];
+				[self addChild: finish_anim z: -6];
+				[sprites addObject: finish_anim];
+
+				FinishController *fc = (FinishController *)controller;
+				[fc setAnimationSprite: finish_anim];
+
 			}
 
 			if (_entType == kSimpleBlock)
@@ -252,6 +280,10 @@ SpriteController *fieldcopy[32][32];
 			
 		}
 		
+		Sprite *border = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"small_border.png"]];
+		[border setPosition: cpv(240-16,160-16)];
+		[self addChild: border z:8];
+		[sprites addObject: border];
 		
 		
 		Sprite *sunshine = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"rays_small.png"]];

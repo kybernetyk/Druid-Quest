@@ -34,3 +34,14 @@
 
 
 @end
+
+@interface PlayerShadowController : SpriteController
+{
+	Sprite *playerSprite;
+
+}
+
+@property (readwrite, retain) Sprite *playerSprite;
+
+@end
+

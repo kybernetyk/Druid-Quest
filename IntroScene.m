@@ -158,7 +158,7 @@
 						@"bird2.png",
 						@"bird3.png",
 						@"menu_bg.png",
-
+						@"end_bg.png",
 						@"flower.png",
 						@"flower2.png",
 						@"gravel.png",
@@ -166,9 +166,20 @@
 						@"ground2.png",
 						@"ground3.png",
 						@"menu.png",
+						@"small_border.png",
 						@"small_background.png",
 						@"rays_small.png",
 						@"vert_cross_back.png",
+						@"player_shadow.png",
+						@"finish_anim0.png",
+						@"finish_anim1.png",
+						@"finish_anim2.png",
+						@"finish_anim3.png",
+						@"finish_anim4.png",
+						@"finish_anim5.png",
+						@"finish_anim6.png",
+
+						
 						nil];
 		[preloadArray retain];
 		id bla = [IntervalAction actionWithDuration: 0.05f];
