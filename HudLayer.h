@@ -14,6 +14,7 @@
 {
 	Label *score;
 	Label *time;
+	Label *level;
 }
 
 @end

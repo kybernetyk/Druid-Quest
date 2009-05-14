@@ -27,6 +27,10 @@
 		Sprite *sprite2 = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"steps.png"]];
 		[sprite2 setPosition: cpv(480/2-[sprite2 contentSize].width-14,-320/2+11-4)];
 		[self addChild: sprite2];
+
+		Sprite *sprite3 = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"level.png"]];
+		[sprite3 setPosition: cpv(480/2-[sprite3 contentSize].width,152)];
+		[self addChild: sprite3];
 		
 		NSString *scoreString = [NSString stringWithFormat:@"%.4i", [[GameInfo sharedInstance] score]];
 		
@@ -44,9 +48,16 @@
 		[time setPosition:cpv(-480/2+[sprite contentSize].width-8,-320/2-2-3)];
 		[time retain];
 		
+		
+		NSString *levelString = [NSString stringWithFormat:@"%.2i", [[GameInfo sharedInstance] currentLevel]];
+		
+		level = [[LabelAtlas labelAtlasWithString: levelString charMapFile:@"numfont.png" itemWidth: 11 itemHeight: 20 startCharMap:'.'] retain];
+		[level setPosition: cpv(480/2-[level contentSize].width-8+8,138)];
+		[level retain];
+		
 		[self addChild: score];
 		[self addChild: time];
-		
+		[self addChild: level];
 	}
 	return self;
 }
@@ -83,6 +94,7 @@
 {
 	[score release];
 	[time release];
+	[level release];
 	[super dealloc];
 }
 @end
