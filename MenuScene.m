@@ -12,7 +12,7 @@
 #import "MenuBackgroundLayer.h"
 #import "MainMenuLayer.h"
 #import "HelpMenuLayer.h"
-
+#import "GameOverScene.h"
 
 @implementation MenuScene
 
@@ -75,9 +75,10 @@ enum MenuSceneNodeTags
 	[[GameInfo sharedInstance] reset];
 	
 	[[Director sharedDirector] removeEventHandler: self];
-	//[[Director sharedDirector] replaceScene: [[GameScene alloc] init]];
 	
 	[[Director sharedDirector] replaceScene: [GameScene node]];
+	//[[Director sharedDirector] replaceScene: [GameOverScene node]];
+	
 	//[self release];	
 }
 

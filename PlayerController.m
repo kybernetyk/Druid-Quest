@@ -12,8 +12,8 @@
 #import "GameScene.h"
 
 @implementation PlayerController
-@synthesize controlledSprite;
-@synthesize gridPosition;
+//@synthesize controlledSprite;
+//@synthesize gridPosition;
 @synthesize isMoving;
 
 #pragma mark -- init / dealloc

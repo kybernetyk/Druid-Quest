@@ -20,16 +20,17 @@
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 		
-		MenuItem *continue_ = [MenuItemFont itemFromString:@"Continue"
+		MenuItem *continue_ = [MenuItemFont itemFromString:@"[ Continue ]"
 												target:self
 											  selector:@selector(continueGame:)];
+
+		MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
 		
-		
-        MenuItem *exit_ = [MenuItemFont itemFromString:@"Exit Game"
+        MenuItem *exit_ = [MenuItemFont itemFromString:@"[ Main Menu ]"
 											   target:self
 											 selector:@selector(exitToMainMenu:)];
 		
-        Menu *menu = [Menu menuWithItems: continue_, exit_,nil];
+        Menu *menu = [Menu menuWithItems: continue_, nothing,exit_,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         

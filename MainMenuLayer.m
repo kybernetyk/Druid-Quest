@@ -24,16 +24,17 @@ enum MainMenuLayerTags
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 
-		MenuItem *start = [MenuItemFont itemFromString:@"Start Game"
+		MenuItem *start = [MenuItemFont itemFromString:@"[ Start Game ]"
 												target:self
 											  selector:@selector(startSinglePlayerGame:)];
 
+		MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
 		
-        MenuItem *help = [MenuItemFont itemFromString:@"Help"
+        MenuItem *help = [MenuItemFont itemFromString:@"[ Help ]"
 											   target:self
 											 selector:@selector(help:)];
 
-        Menu *menu = [Menu menuWithItems: start, help,nil];
+        Menu *menu = [Menu menuWithItems: start,nothing, help,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         [menu alignItemsVertically];

@@ -16,7 +16,7 @@
 #import "MenuScene.h"
 #import "HudLayer.h"
 #import "PauseScene.h"
-#import "cocoslive.h"
+#import "GameOverScene.h"
 
 @implementation GameScene
 
@@ -123,34 +123,8 @@ enum GameSceneLayerTags
 
 	if ([[GameInfo sharedInstance] currentLevel] > [[GameInfo sharedInstance] lastLevel])
 	{
-		_nextScene = [MenuScene node];
-		id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
-		NSMutableDictionary *d = [NSMutableDictionary dictionary];
-		
-		float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
-		int minutes = [[GameInfo sharedInstance] time]/60;
-		int hours = [[GameInfo sharedInstance] time]/60/60;
-		int seconds = [[GameInfo sharedInstance] time];
-		
-		if (seconds >= 60)
-			seconds = seconds%60;
-		
-		if (minutes >= 60)
-			minutes = minutes%60;
-		
-		
-		NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
-		
-		[d setObject:@"omegaman" forKey:@"cc_playername"];
-		[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
-		[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
-		[d setObject:timeString forKey:@"usr_time"];
-		[d setObject:[NSNumber numberWithInt:(int)[[GameInfo sharedInstance] score]] forKey:@"usr_steps"];
-		
-		
-		
-		d = [NSDictionary dictionaryWithDictionary: d];
-		[rolf sendScore: d];
+		_nextScene = [GameOverScene node];
+	
 	}
 	else
 	{
