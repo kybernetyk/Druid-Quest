@@ -102,7 +102,7 @@ static GameInfo *sharedSingleton = nil;
 	[self setCurrentLevel: 1];
 	[self setLastLevel: 11]; //11
 	[self setTime: 0.0f];
-	[self setActiveGraphicsPack: @"druid"];
+	[self setActiveGraphicsPack: @"dbrighter"];
 	[self setActiveMapPack: @"druid"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
