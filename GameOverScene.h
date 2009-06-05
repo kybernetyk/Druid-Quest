@@ -14,12 +14,17 @@
 @interface GameOverScene : Scene <TouchEventsDelegate> 
 {
 	CocosNode *background;
+	
+	Label *textLabel;
 }
 
-- (void) proceedToMainMenuScene;
+- (void) proceedToMainMenuScene: (id) sender;
+- (void) proceedToHighscoreSubmit: (id) sender;
 
 - (NSString *) congratulationsString;
 - (NSString *) worldWideHighscoreString;
+
+- (void) fetchHighscores;
 
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

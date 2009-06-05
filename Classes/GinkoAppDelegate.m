@@ -37,11 +37,12 @@
 	
 	
 	
+	
     // Override point for customization after application launch
-    [window makeKeyAndVisible];
+//	nameEnterViewController = nil;
+	nameEnterViewController = [[NameEnterViewController alloc] initWithNibName: @"NameEnterViewController" bundle: nil];
 	
-	
-	
+	[window makeKeyAndVisible];
 	[[Director sharedDirector] runWithScene: [IntroScene node]];
 }
 
@@ -50,10 +51,16 @@
 	[[TextureMgr sharedTextureMgr] removeAllTextures];
 }
 
-- (void)dealloc {
+- (void)dealloc 
+{
     [window release];
     [super dealloc];
 }
 
+- (void) showHighscoreInput: (id) sender
+{
+	[nameEnterViewController setGameOverScene: sender];
+	[window addSubview: [nameEnterViewController view]];
+}
 
 @end

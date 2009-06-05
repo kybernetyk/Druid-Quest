@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NameEnterViewController.h"
+//#import "GameOverScene.h"
 
 @interface GinkoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
+	NameEnterViewController *nameEnterViewController;
 }
+
+- (void) showHighscoreInput: (id) sender;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 

@@ -70,10 +70,12 @@
 		030F48C70F78D68E004EA3FE /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F48C60F78D68E004EA3FE /* fire.png */; };
 		030F49390F78DB20004EA3FE /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F49380F78DB20004EA3FE /* MainMenuLayer.m */; };
 		030F499B0F78E308004EA3FE /* HelpMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F499A0F78E308004EA3FE /* HelpMenuLayer.m */; };
-		030F499D0F78E36D004EA3FE /* help_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F499C0F78E36D004EA3FE /* help_background.png */; };
 		030F4A1D0F78E754004EA3FE /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F4A1C0F78E754004EA3FE /* GameScene.m */; };
 		030F4A200F78E772004EA3FE /* GameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F4A1F0F78E772004EA3FE /* GameInfo.m */; };
 		031E5B7F0FD803E100F1991A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E5B7E0FD803E100F1991A /* GameOverScene.m */; };
+		0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0344F9750FD9574F00E766FE /* NameEnterViewController.m */; };
+		0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0344F9760FD9574F00E766FE /* NameEnterViewController.xib */; };
+		0344FA780FD958C700E766FE /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0344FA770FD958C700E766FE /* menu_background.png */; };
 		0350CF990F7BCEC700C45E8D /* AngularBlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350CF980F7BCEC700C45E8D /* AngularBlockController.m */; };
 		039255880F7FA9C0008964C8 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 039255870F7FA9C0008964C8 /* Waypoint.m */; };
 		039301280F8A5B420022DB77 /* BirdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039301270F8A5B420022DB77 /* BirdController.m */; };
@@ -238,13 +240,16 @@
 		030F49380F78DB20004EA3FE /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		030F49990F78E308004EA3FE /* HelpMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpMenuLayer.h; sourceTree = "<group>"; };
 		030F499A0F78E308004EA3FE /* HelpMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpMenuLayer.m; sourceTree = "<group>"; };
-		030F499C0F78E36D004EA3FE /* help_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_background.png; sourceTree = "<group>"; };
 		030F4A1B0F78E754004EA3FE /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		030F4A1C0F78E754004EA3FE /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		030F4A1E0F78E772004EA3FE /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		030F4A1F0F78E772004EA3FE /* GameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfo.m; sourceTree = "<group>"; };
 		031E5B7D0FD803E100F1991A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		031E5B7E0FD803E100F1991A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		0344F9740FD9574F00E766FE /* NameEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEnterViewController.h; sourceTree = "<group>"; };
+		0344F9750FD9574F00E766FE /* NameEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEnterViewController.m; sourceTree = "<group>"; };
+		0344F9760FD9574F00E766FE /* NameEnterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameEnterViewController.xib; sourceTree = "<group>"; };
+		0344FA770FD958C700E766FE /* menu_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_background.png; sourceTree = "<group>"; };
 		0350CF970F7BCEC700C45E8D /* AngularBlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngularBlockController.h; sourceTree = "<group>"; };
 		0350CF980F7BCEC700C45E8D /* AngularBlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngularBlockController.m; sourceTree = "<group>"; };
 		039255860F7FA9C0008964C8 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
@@ -694,6 +699,9 @@
 			children = (
 				1D3623240D0F684500981E51 /* GinkoAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GinkoAppDelegate.m */,
+				0344F9740FD9574F00E766FE /* NameEnterViewController.h */,
+				0344F9750FD9574F00E766FE /* NameEnterViewController.m */,
+				0344F9760FD9574F00E766FE /* NameEnterViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -738,13 +746,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0344FA770FD958C700E766FE /* menu_background.png */,
 				039304E60F8AAAE20022DB77 /* numfont.png */,
 				039304970F8AA4DE0022DB77 /* font3.png */,
 				0393046D0F8AA16C0022DB77 /* font2.png */,
 				039940AC0F80F4DC00770565 /* mpacks */,
 				03F8F4F50F7A4DAD00E6E02E /* gpacks */,
 				03F8F4F00F7A4D7900E6E02E /* blue */,
-				030F499C0F78E36D004EA3FE /* help_background.png */,
 				030F48C60F78D68E004EA3FE /* fire.png */,
 				030F47290F7850C3004EA3FE /* fps_images.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -809,12 +817,13 @@
 				030F46ED0F784FEC004EA3FE /* CMakeLists.txt in Resources */,
 				030F472A0F7850C3004EA3FE /* fps_images.png in Resources */,
 				030F48C70F78D68E004EA3FE /* fire.png in Resources */,
-				030F499D0F78E36D004EA3FE /* help_background.png in Resources */,
 				03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */,
 				039940B10F80F4DC00770565 /* mpacks in Resources */,
 				0393046E0F8AA16C0022DB77 /* font2.png in Resources */,
 				039304980F8AA4DE0022DB77 /* font3.png in Resources */,
 				039304E70F8AAAE20022DB77 /* numfont.png in Resources */,
+				0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */,
+				0344FA780FD958C700E766FE /* menu_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,6 +922,7 @@
 				039307DB0F8AE8C90022DB77 /* CJSONScanner.m in Sources */,
 				039307DC0F8AE8C90022DB77 /* CJSONSerializer.m in Sources */,
 				031E5B7F0FD803E100F1991A /* GameOverScene.m in Sources */,
+				0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

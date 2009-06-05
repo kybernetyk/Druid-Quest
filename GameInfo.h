@@ -20,6 +20,8 @@
 	NSString *activeGraphicsPack;
 	NSString *activeMapPack;
 
+	NSString *playerName;
+	
 	BOOL isPaused;
 	
 	float zoom;
@@ -48,6 +50,7 @@
 @property (readwrite, assign) int worldWidth, worldHeight;
 @property (readwrite, assign) int levelGridWidth;
 @property (readwrite, assign) int levelGridHeight;
+@property (readwrite, copy) NSString *playerName;
 
 @property (readwrite,assign) cpVect finishPosition;
 

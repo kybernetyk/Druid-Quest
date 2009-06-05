@@ -23,8 +23,8 @@ enum HelpMenuLayerTags {
 	
 	if (self)
 	{
-		Sprite *backgroundImage = [Sprite spriteWithFile: @"help_background.png"];
-		[backgroundImage setPosition:cpv(480/2, 320/2)];
+//		Sprite *backgroundImage = [Sprite spriteWithFile: @"help_background.png"];
+//		[backgroundImage setPosition:cpv(480/2, 320/2)];
 		
 		//assign
 		//[self addChild:backgroundImage z: 0 tag: kBackgroundImage];

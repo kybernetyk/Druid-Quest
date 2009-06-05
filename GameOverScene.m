@@ -10,7 +10,7 @@
 #import "MenuScene.h"
 #import "GameInfo.h"
 #import "cocoslive.h"
-
+#import "GinkoAppDelegate.h"
 
 @implementation GameOverScene
 
@@ -25,13 +25,13 @@
 
 		//assigns - retains also cause of NSArray
 		[self addChild: background];
+
 		
+		NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Fetching Scores ..."];
 		
-		NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], [self worldWideHighscoreString]];
-		
-		Label *name = [Label labelWithString: goText dimensions:CGSizeMake(300,240) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:14];
-		name.position = cpv(180,150);
-		[self addChild:name];
+		textLabel = [Label labelWithString: goText dimensions:CGSizeMake(300,240) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:14];
+		textLabel.position = cpv(180,150);
+		[self addChild:textLabel];
 		
 		
 		
@@ -39,15 +39,6 @@
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 
-		
-		MenuItem *submit = [MenuItemFont itemFromString:@"[ Submit Score ]"
-													target:self
-												  selector:@selector(proceedToMainMenuScene:)];
-        Menu *menu = [Menu menuWithItems: submit, nil];
-		[menu alignItemsVertically];
-		menu.position = cpv(100,25);
-		[self addChild: menu];
-		
 
 		MenuItem *returnToMainMenu = [MenuItemFont itemFromString:@"[ Main Menu ]"
 												 target:self
@@ -57,7 +48,10 @@
 		menu2.position = cpv(380,25);
 		[self addChild: menu2];
 		
-		
+	//	id rolf = [ScoreServerRequest serverWithGameName:@"DuduDash" delegate: self];
+	//	[rolf requestScores: kQueryFlagIgnore limit: 5 offset: 0 flags: kQueryFlagIgnore];
+
+		[self fetchHighscores];
 		
 		//[[Director sharedDirector] addEventHandler: self];
 	}
@@ -65,6 +59,14 @@
 	return self;
 }
 
+- (void) fetchHighscores
+{
+	NSLog(@"fetching scores ...");
+	
+	id rolf = [ScoreServerRequest serverWithGameName:@"DuduDash" delegate: self];
+	[rolf requestScores: kQueryAllTime limit: 5 offset: 0 flags: kQueryFlagIgnore];
+
+}
 
 - (void) dealloc
 {
@@ -73,6 +75,11 @@
 	[self removeAllChildrenWithCleanup: YES];
 	//[background release];
 	[super dealloc];	
+}
+
+- (void) proceedToHighscoreSubmit: (id) sender
+{
+	[[[UIApplication sharedApplication] delegate] showHighscoreInput: self];
 }
 
 - (void) proceedToMainMenuScene: (id) sender
@@ -93,6 +100,8 @@
 - (NSString *) worldWideHighscoreString
 {
 	NSString *ret = @"Online Scores:\n1800\t\tRolf\n1700\t\tOmfg\n1600\t\tBernd\n1500\t\thans\n1400\t\tigoR";
+	
+	
 	
 	return ret;
 }
@@ -127,6 +136,48 @@
 	d = [NSDictionary dictionaryWithDictionary: d];
 	[rolf sendScore: d];
 }
+
+
+
+-(void) scoreRequestOk:(id) sender
+{
+	NSMutableString *scoresString = [NSMutableString string];
+	NSArray *scoresArray = [sender parseScores];
+	
+	[scoresString appendString:@"Online Scores:\n"];
+	
+	for (NSDictionary *scoreEntry in scoresArray)
+	{
+		[scoresString appendFormat:@"%i\t\t%@\n",[[scoreEntry valueForKey:@"usr_rating"] intValue],[scoreEntry valueForKey:@"cc_playername"]];
+	}
+		
+	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], scoresString];
+	[textLabel setString: goText];
+
+	
+	//create submit scores button - we're online!
+	MenuItem *submitScoresItem = [MenuItemFont itemFromString:@"[ Submit Score ]"
+													   target:self
+													 selector:@selector(proceedToHighscoreSubmit:)];
+	Menu *menu = [Menu menuWithItems: submitScoresItem, nil];
+	[menu alignItemsVertically];
+	menu.position = cpv(100,25);
+	[self addChild: menu];
+	
+	
+}
+
+-(void) scoreRequestFail:(id) sender
+{
+	NSLog(@"score req failed!");
+
+
+	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Error fetching online scores ..."];
+	
+	[textLabel setString: goText];
+	
+}
+
 
 #pragma mark -- TouchEventsDelegate implementation
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
