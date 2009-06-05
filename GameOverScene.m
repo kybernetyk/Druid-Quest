@@ -39,6 +39,17 @@
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 
+		//create submit scores button - we're online!
+		submitScoresItem = [MenuItemFont itemFromString:@"[ Submit Score ]"
+												 target:self
+											   selector:@selector(proceedToHighscoreSubmit:)];
+		Menu *menu = [Menu menuWithItems: submitScoresItem, nil];
+		[menu alignItemsVertically];
+		menu.position = cpv(100,25);
+		[self addChild: menu];
+
+		//[submitScoresItem setVisible: NO];
+		[submitScoresItem setIsEnabled: NO];
 
 		MenuItem *returnToMainMenu = [MenuItemFont itemFromString:@"[ Main Menu ]"
 												 target:self
@@ -51,6 +62,8 @@
 	//	id rolf = [ScoreServerRequest serverWithGameName:@"DuduDash" delegate: self];
 	//	[rolf requestScores: kQueryFlagIgnore limit: 5 offset: 0 flags: kQueryFlagIgnore];
 
+		scoreWasPostedAlready = NO;
+		
 		[self fetchHighscores];
 		
 		//[[Director sharedDirector] addEventHandler: self];
@@ -62,9 +75,13 @@
 - (void) fetchHighscores
 {
 	NSLog(@"fetching scores ...");
+
+	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Updating Scores ..."];
+	[textLabel setString: goText];
+
 	
 	id rolf = [ScoreServerRequest serverWithGameName:@"DuduDash" delegate: self];
-	[rolf requestScores: kQueryAllTime limit: 5 offset: 0 flags: kQueryFlagIgnore];
+	[rolf requestScores: kQueryAllTime limit: 6 offset: 0 flags: kQueryFlagIgnore];
 
 }
 
@@ -79,6 +96,9 @@
 
 - (void) proceedToHighscoreSubmit: (id) sender
 {
+	//[submitScoresItem setVisible: NO];
+	[submitScoresItem setIsEnabled: NO];
+	scoreWasPostedAlready = YES;
 	[[[UIApplication sharedApplication] delegate] showHighscoreInput: self];
 }
 
@@ -106,36 +126,6 @@
 	return ret;
 }
 
-- (void) postHighScoresToServer
-{
-	id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
-	NSMutableDictionary *d = [NSMutableDictionary dictionary];
-	
-	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
-	int minutes = [[GameInfo sharedInstance] time]/60;
-	int hours = [[GameInfo sharedInstance] time]/60/60;
-	int seconds = [[GameInfo sharedInstance] time];
-	
-	if (seconds >= 60)
-		seconds = seconds%60;
-	
-	if (minutes >= 60)
-		minutes = minutes%60;
-	
-	
-	NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
-	
-	[d setObject:@"omegaman" forKey:@"cc_playername"];
-	[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
-	[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
-	[d setObject:timeString forKey:@"usr_time"];
-	[d setObject:[NSNumber numberWithInt:(int)[[GameInfo sharedInstance] score]] forKey:@"usr_steps"];
-	
-	
-	
-	d = [NSDictionary dictionaryWithDictionary: d];
-	[rolf sendScore: d];
-}
 
 
 
@@ -154,15 +144,13 @@
 	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], scoresString];
 	[textLabel setString: goText];
 
+	if (!scoreWasPostedAlready)
+	{
+		[submitScoresItem setIsEnabled: YES];
+		//scoreWasPostedAlready = YES;
+	}
 	
-	//create submit scores button - we're online!
-	MenuItem *submitScoresItem = [MenuItemFont itemFromString:@"[ Submit Score ]"
-													   target:self
-													 selector:@selector(proceedToHighscoreSubmit:)];
-	Menu *menu = [Menu menuWithItems: submitScoresItem, nil];
-	[menu alignItemsVertically];
-	menu.position = cpv(100,25);
-	[self addChild: menu];
+//	[submitScoresItem setVisible: YES];
 	
 	
 }
@@ -175,7 +163,7 @@
 	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Error fetching online scores ..."];
 	
 	[textLabel setString: goText];
-	
+	[submitScoresItem setIsEnabled: NO];
 }
 
 

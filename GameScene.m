@@ -105,15 +105,6 @@ enum GameSceneLayerTags
 	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:[GameScene node] withColorRGB:0x000000]];
 }
 
--(void) scorePostOk:(id) sender
-{
-	NSLog(@"score post ok!");
-}
-
--(void) scorePostFail:(id) sender
-{
-	NSLog(@"score post failed!");
-}
 
 
 - (void) loadNextLevel

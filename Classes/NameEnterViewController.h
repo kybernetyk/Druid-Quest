@@ -12,6 +12,9 @@
 @interface NameEnterViewController : UIViewController 
 {
 	IBOutlet id nameTextField;
+	IBOutlet id statusLabel;
+	IBOutlet id progressSpin;
+	
 	id gameOverScene;
 }
 
@@ -20,5 +23,6 @@
 - (IBAction) submitScoreToServer: (id) sender;
 
 - (void) updateFromGameInfo;
+- (void) postHighScoresToServer;
 
 @end

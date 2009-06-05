@@ -16,6 +16,9 @@
 	CocosNode *background;
 	
 	Label *textLabel;
+	MenuItem *submitScoresItem;
+	
+	BOOL scoreWasPostedAlready;
 }
 
 - (void) proceedToMainMenuScene: (id) sender;

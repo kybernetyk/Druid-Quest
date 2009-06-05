@@ -8,6 +8,7 @@
 
 #import "NameEnterViewController.h"
 #import "GameInfo.h"
+#import "cocoslive.h"
 
 @implementation NameEnterViewController
 @synthesize gameOverScene;
@@ -33,18 +34,81 @@
 
 - (void) updateFromGameInfo
 {
+	[statusLabel setHidden: YES];
+	[progressSpin stopAnimating];
 	NSLog(@"updatring from game info! %@",[[GameInfo sharedInstance] playerName] );
 	[nameTextField setText: [[GameInfo sharedInstance] playerName]];
 }
 
 - (IBAction) submitScoreToServer: (id) sender
 {
+	[statusLabel setHidden: NO];
+	[progressSpin startAnimating];
+	
 	[[GameInfo sharedInstance] setPlayerName: [nameTextField text]];
+	[[GameInfo sharedInstance] saveToFile];
+	
 	[nameTextField resignFirstResponder];
 	
+	[self postHighScoresToServer];
+	
+	
+}
+
+-(void) scorePostOk:(id) sender
+{
+	NSLog(@"score post ok!");
+	
 	[gameOverScene fetchHighscores];
+	[statusLabel setHidden: YES];
+	[progressSpin stopAnimating];
+
 	[[self view] removeFromSuperview];
 }
+
+-(void) scorePostFail:(id) sender
+{
+	NSLog(@"score post failed!");
+	[statusLabel setHidden: YES];
+	[progressSpin stopAnimating];
+
+//	[gameOverScene fetchHighscores];
+	[[self view] removeFromSuperview];
+
+}
+
+
+- (void) postHighScoresToServer
+{
+	id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
+	NSMutableDictionary *d = [NSMutableDictionary dictionary];
+	
+	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+	int minutes = [[GameInfo sharedInstance] time]/60;
+	int hours = [[GameInfo sharedInstance] time]/60/60;
+	int seconds = [[GameInfo sharedInstance] time];
+	
+	if (seconds >= 60)
+		seconds = seconds%60;
+	
+	if (minutes >= 60)
+		minutes = minutes%60;
+	
+	
+	NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
+	
+	[d setObject:[[GameInfo sharedInstance] playerName] forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int)[[GameInfo sharedInstance] score]] forKey:@"usr_steps"];
+	
+	
+	
+	d = [NSDictionary dictionaryWithDictionary: d];
+	[rolf sendScore: d];
+}
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

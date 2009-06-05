@@ -101,7 +101,7 @@ static GameInfo *sharedSingleton = nil;
 	[self setLives: 0];
 	[self setZoom: 1.0f];
 	[self setCurrentLevel: 1];
-	[self setLastLevel: 1]; //11
+	[self setLastLevel: 11]; //11
 	[self setTime: 0.0f];
 	[self setActiveGraphicsPack: @"dbrighter"];
 	[self setActiveMapPack: @"druid"];
@@ -109,7 +109,26 @@ static GameInfo *sharedSingleton = nil;
 	[self setWorldHeight: 320];
 	[self setIsPaused: NO];
 	[self setPlayerName: @"player"];
+	
+	[self loadFromFile];
 }
+
+- (void) loadFromFile
+{
+	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile:@"savegame.plist"];
+	NSString *name = [d objectForKey: @"player_name"];
+	
+	[self setPlayerName: name];
+}
+
+- (void) saveToFile
+{
+	NSMutableDictionary *d = [NSMutableDictionary dictionary];
+	[d setObject: playerName forKey: @"player_name"];
+	
+	[d writeToFile:@"savegame.plist" atomically: YES];
+}
+
 
 -(NSString*) fullPathFromRelativePath:(NSString*) relPath
 {

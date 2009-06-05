@@ -60,4 +60,7 @@
 - (NSString *) pathForMapFile: (NSString *) filename;
 - (NSString *) currentMapFilename;
 
+- (void) loadFromFile;
+- (void) saveToFile;
+
 @end
