@@ -8,6 +8,7 @@
 
 #import "MainMenuLayer.h"
 #import "cocos2d.h"
+#import "HighScoresScene.h"
 
 @implementation MainMenuLayer
 enum MainMenuLayerTags
@@ -21,6 +22,7 @@ enum MainMenuLayerTags
     self = [super init];
     if (self) 
 	{
+		
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 
@@ -34,7 +36,14 @@ enum MainMenuLayerTags
 											   target:self
 											 selector:@selector(help:)];
 
-        Menu *menu = [Menu menuWithItems: start,nothing, help,nil];
+		MenuItem *nothing2 = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
+		
+		MenuItem *scores = [MenuItemFont itemFromString:@"[ High Scores ]"
+											   target:self
+											 selector:@selector(highscores:)];
+		
+		
+        Menu *menu = [Menu menuWithItems: start,nothing, help, nothing2, scores,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         [menu alignItemsVertically];
@@ -61,6 +70,11 @@ enum MainMenuLayerTags
 - (void) help: (id) sender
 {
 	[[parent parent] showHelp];
+}
+
+- (void) highscores: (id) sender
+{
+	[[Director sharedDirector] pushScene: [HighScoresScene node]];
 }
 
 @end

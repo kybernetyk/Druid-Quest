@@ -76,6 +76,7 @@
 		0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0344F9750FD9574F00E766FE /* NameEnterViewController.m */; };
 		0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0344F9760FD9574F00E766FE /* NameEnterViewController.xib */; };
 		0344FA780FD958C700E766FE /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0344FA770FD958C700E766FE /* menu_background.png */; };
+		034FCAE10FDB0EDF00FB6A76 /* HighScoresScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 034FCAE00FDB0EDF00FB6A76 /* HighScoresScene.m */; };
 		0350CF990F7BCEC700C45E8D /* AngularBlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350CF980F7BCEC700C45E8D /* AngularBlockController.m */; };
 		039255880F7FA9C0008964C8 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 039255870F7FA9C0008964C8 /* Waypoint.m */; };
 		039301280F8A5B420022DB77 /* BirdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039301270F8A5B420022DB77 /* BirdController.m */; };
@@ -250,6 +251,8 @@
 		0344F9750FD9574F00E766FE /* NameEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEnterViewController.m; sourceTree = "<group>"; };
 		0344F9760FD9574F00E766FE /* NameEnterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameEnterViewController.xib; sourceTree = "<group>"; };
 		0344FA770FD958C700E766FE /* menu_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_background.png; sourceTree = "<group>"; };
+		034FCADF0FDB0EDF00FB6A76 /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
+		034FCAE00FDB0EDF00FB6A76 /* HighScoresScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresScene.m; sourceTree = "<group>"; };
 		0350CF970F7BCEC700C45E8D /* AngularBlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngularBlockController.h; sourceTree = "<group>"; };
 		0350CF980F7BCEC700C45E8D /* AngularBlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngularBlockController.m; sourceTree = "<group>"; };
 		039255860F7FA9C0008964C8 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
@@ -561,6 +564,23 @@
 			name = Scene;
 			sourceTree = "<group>";
 		};
+		034FCADD0FDB0EC200FB6A76 /* HighScores */ = {
+			isa = PBXGroup;
+			children = (
+				034FCADE0FDB0ECF00FB6A76 /* Scene */,
+			);
+			name = HighScores;
+			sourceTree = "<group>";
+		};
+		034FCADE0FDB0ECF00FB6A76 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				034FCADF0FDB0EDF00FB6A76 /* HighScoresScene.h */,
+				034FCAE00FDB0EDF00FB6A76 /* HighScoresScene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
 		039255850F7FA9B0008964C8 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +737,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				034FCADD0FDB0EC200FB6A76 /* HighScores */,
 				031E5B7B0FD803C600F1991A /* GameOver */,
 				039307060F8AD3A80022DB77 /* Pause */,
 				030F4A190F78E736004EA3FE /* Game */,
@@ -923,6 +944,7 @@
 				039307DC0F8AE8C90022DB77 /* CJSONSerializer.m in Sources */,
 				031E5B7F0FD803E100F1991A /* GameOverScene.m in Sources */,
 				0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */,
+				034FCAE10FDB0EDF00FB6A76 /* HighScoresScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
