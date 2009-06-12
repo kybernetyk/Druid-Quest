@@ -149,8 +149,6 @@ static GameInfo *sharedSingleton = nil;
 	float time = [[d objectForKey: @"time"] floatValue];
 	int score = [[d objectForKey: @"score"] intValue];
 	
-	if (name)
-		[self setPlayerName: name];
 	
 	[self setCurrentLevel: level];
 	[self setTime: time];
@@ -158,6 +156,12 @@ static GameInfo *sharedSingleton = nil;
 	
 	if (level == 0)
 		[self reset];
+	if (level > lastLevel)
+		[self reset];
+	
+	if (name)
+		[self setPlayerName: name];
+
 }
 
 - (void) saveToFile
