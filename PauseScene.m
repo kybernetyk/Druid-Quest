@@ -9,6 +9,7 @@
 #import "PauseScene.h"
 #import "PauseBackgroundLayer.h"
 #import "PauseMenuLayer.h"
+#import "GameInfo.h"
 
 @implementation PauseScene
 - (id) init
@@ -25,6 +26,7 @@
 		[pml setPosition: cpv(0, 0)];
 		[self addChild: pml];
 
+		[[GameInfo sharedInstance] saveToFile];
 	}
 	return self;
 }

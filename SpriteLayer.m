@@ -49,6 +49,15 @@ SpriteController *fieldcopy[32][32];
 		[[GameInfo sharedInstance] setLevelGridWidth: [[mapInfo objectForKey:@"MapGridWidth"] intValue]];
 		[[GameInfo sharedInstance] setLevelGridHeight: [[mapInfo objectForKey:@"MapGridHeight"] intValue]];
 		
+		int mapw = [[GameInfo sharedInstance] worldWidth];
+		int maph = [[GameInfo sharedInstance] worldHeight];
+		
+		BOOL isSmallLevel = YES;
+		
+		if (mapw == 720 && maph == 480)
+			isSmallLevel = NO;
+		
+		
 		NSArray *mapEntities = [mapInfo objectForKey:@"Entities"];
 		if (!mapEntities)
 		{
@@ -191,85 +200,15 @@ SpriteController *fieldcopy[32][32];
 		}
 		
 
-		for (int i = 0; i < 1; i++)
-		{
-			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground.png"]];
-			
-			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
-			[self addChild: ground z:-7];
-			[sprites addObject: ground];
-			
-			
-		}
-
-		for (int i = 0; i < 1; i++)
-		{
-			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground2.png"]];
-			
-			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
-			[self addChild: ground z:-7];
-			[sprites addObject: ground];
-			
-			
-		}
-
-		for (int i = 0; i < 1; i++)
-		{
-			Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground3.png"]];
-			
-			[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
-			[self addChild: ground z:-7];
-			[sprites addObject: ground];
-			
-			
-		}
 		
-		
-		
-		
-		
-		for (int i = 0; i < 3; i++)
-		{
-		Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower.png"]];
-			
-		[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
-		[self addChild: flower z:-5];
-			[sprites addObject: flower];
-
-			
-		}
-
-		for (int i = 0; i < 3; i++)
-		{
-			Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower2.png"]];
-			
-			[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
-			[self addChild: flower z:-5];
-			[sprites addObject: flower];
-			
-			
-		}
-		
-		for (int i = 0; i < 5; i++)
-		{
-			Sprite *gravel = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"gravel.png"]];
-			
-			[gravel setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
-			[self addChild: gravel z:-6];
-			[sprites addObject: gravel];
-			
-			
-		}
-
-		
-		cpVect posis[] = 
+/*		cpVect posis[] = 
 		{
 			cpv(145,0),
 			cpv(240,300)
 		};
 		
-		
-		for (int i = 0; i < 2; i++)
+*/		
+		/*for (int i = 0; i < 2; i++)
 		{
 			Sprite *root = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"root1.png"]];
 			
@@ -278,18 +217,148 @@ SpriteController *fieldcopy[32][32];
 			[sprites addObject: root];
 			
 			
+		}*/
+		
+		
+		//NSLog(@"LEVEL SIZE: %i,%i",[[GameInfo sharedInstance] worldWidth],[[GameInfo sharedInstance] worldHeight]);
+		
+		if (isSmallLevel)
+		{
+			for (int i = 0; i < 1; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground.png"]];
+				
+				[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 1; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground2.png"]];
+				
+				[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 1; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground3.png"]];
+				
+				[ground setPosition: cpv((rand()%12)*32+48,(rand()%7)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 3; i++)
+			{
+				Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower.png"]];
+				
+				[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+				[self addChild: flower z:-5];
+				[sprites addObject: flower];
+				
+				
+			}
+			
+			for (int i = 0; i < 3; i++)
+			{
+				Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower2.png"]];
+				
+				[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+				[self addChild: flower z:-5];
+				[sprites addObject: flower];
+			}
+			
+			for (int i = 0; i < 5; i++)
+			{
+				Sprite *gravel = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"gravel.png"]];
+				
+				[gravel setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
+				[self addChild: gravel z:-6];
+				[sprites addObject: gravel];
+			}
+			
+			Sprite *border = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"small_border.png"]];
+			[border setPosition: cpv(240-16,160-16)];
+			[self addChild: border z:8];
+			[sprites addObject: border];
+		
+			Sprite *sunshine = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"rays_small.png"]];
+			[sunshine setPosition: cpv(240-32,160+19)];
+			[self addChild: sunshine z:10];
+			[sprites addObject: sunshine];
 		}
-		
-		Sprite *border = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"small_border.png"]];
-		[border setPosition: cpv(240-16,160-16)];
-		[self addChild: border z:8];
-		[sprites addObject: border];
-		
-		
-		Sprite *sunshine = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"rays_small.png"]];
-		[sunshine setPosition: cpv(240-32,160+19)];
-		[self addChild: sunshine z:10];
-		[sprites addObject: sunshine];
+		else
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground.png"]];
+				
+				[ground setPosition: cpv((rand()%19)*32+48,(rand()%12)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 2; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground2.png"]];
+				
+				[ground setPosition: cpv((rand()%19)*32+48,(rand()%12)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 2; i++)
+			{
+				Sprite *ground = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"ground3.png"]];
+				
+				[ground setPosition: cpv((rand()%19)*32+48,(rand()%12)*32+48)];
+				[self addChild: ground z:-7];
+				[sprites addObject: ground];
+			}
+			
+			for (int i = 0; i < 6; i++)
+			{
+				Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower.png"]];
+				
+				[flower setPosition: cpv((rand()%20)*32+32,(rand()%13)*32+32)];
+				[self addChild: flower z:-5];
+				[sprites addObject: flower];
+				
+				
+			}
+			
+			for (int i = 0; i < 6; i++)
+			{
+				Sprite *flower = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"flower2.png"]];
+				
+				[flower setPosition: cpv((rand()%20)*32+32,(rand()%13)*32+32)];
+				[self addChild: flower z:-5];
+				[sprites addObject: flower];
+			}
+			
+			for (int i = 0; i < 10; i++)
+			{
+				Sprite *gravel = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"gravel.png"]];
+				
+				[gravel setPosition: cpv((rand()%20)*32+32,(rand()%13)*32+32)];
+				[self addChild: gravel z:-6];
+				[sprites addObject: gravel];
+			}
+			
+			Sprite *border = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"medium_border.png"]];
+			[border setPosition: cpv(360-16,240-16)];
+			[self addChild: border z:8];
+			[sprites addObject: border];
+			
+			Sprite *sunshine = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"rays_medium.png"]];
+			[sunshine setPosition: cpv(360-32,240+19)];
+			[self addChild: sunshine z:10];
+			[sprites addObject: sunshine];
+			
+		}
 		
 	}
 	

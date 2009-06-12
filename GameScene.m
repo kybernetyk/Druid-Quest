@@ -109,6 +109,8 @@ enum GameSceneLayerTags
 
 - (void) loadNextLevel
 {
+	[[GameInfo sharedInstance] saveToFile];
+	
 	id _nextScene = nil;
 	[[GameInfo sharedInstance] setCurrentLevel: [[GameInfo sharedInstance] currentLevel] + 1];
 
@@ -184,8 +186,11 @@ enum GameSceneLayerTags
 	
 	[[GameInfo sharedInstance] setMinZoom: z];
 	[[GameInfo sharedInstance] setMaxZoom: z*(world_w/screen_w)];//(3.0/2.0)];
-	[[GameInfo sharedInstance] setZoom: z];
-	//[[GameInfo sharedInstance] setZoom: z*1.50];
+
+//	[[GameInfo sharedInstance] setZoom: z];
+
+	[[GameInfo sharedInstance] setZoom: [[GameInfo sharedInstance] maxZoom]];
+	
 	[self checkCameraBounds];
 }
 
@@ -382,6 +387,7 @@ enum GameSceneLayerTags
 BOOL mayMovePlayer = YES;
 BOOL mayMoveCamera = YES;
 BOOL mayActivateCross = YES;
+BOOL mayPause = YES;
 
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -394,7 +400,7 @@ BOOL mayActivateCross = YES;
 	NSSet *allTouches = [event allTouches];
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
 	mayMoveCamera = YES;
-	
+	mayPause = YES;
 
 	//checken ob der user den spieler bewegen will (abfrage == true)
 	//oder ob er aufs spielfeld getappt hat, um das feld zu bewegen (abfrage == false)
@@ -485,7 +491,7 @@ BOOL mayActivateCross = YES;
 	CGPoint location = [myTouch locationInView: [myTouch view]];
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
-
+	mayPause = NO;
 
 	NSSet *allTouches = [event allTouches];
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
@@ -627,23 +633,24 @@ BOOL mayActivateCross = YES;
 	location = [[Director sharedDirector] convertCoordinate: location];
 
 	id crosslayer = [self getChildByTag: kControllerCrossLayer];
-
-	//NSLog(@"%f,%f",location.x,location.y);
-	
-	if (CGRectContainsPoint (CGRectMake(0.0f, 320-32-DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
+	if (mayPause && CGRectContainsPoint (CGRectMake(0.0f, 320-32-DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))
 	{
 		[[GameInfo sharedInstance] setIsPaused: ![[GameInfo sharedInstance] isPaused]];
-
+		
 		
 		NSLog(@"paused: %i",[[GameInfo sharedInstance] isPaused]);
 		
-	//	[[Director sharedDirector] pause];
+		//	[[Director sharedDirector] pause];
 		//[[Director sharedDirector] pushScene:[FadeTransition transitionWithDuration:0.6 scene:[PauseScene node] withColorRGB:0x000000]];
 		[[Director sharedDirector] pushScene: [PauseScene node]];
 		//NSLog(@"pause!");
 		
 		return kEventHandled;
 	}
+	
+	
+	//NSLog(@"%f,%f",location.x,location.y);
+	
 	
 	
 	//waren 2 finger aktiv? dann das kreuz deaktiviern
@@ -662,6 +669,8 @@ BOOL mayActivateCross = YES;
 	if (mayActivateCross == NO)
 		return kEventHandled;
 
+	
+	
 	
 	//player movement
 	if (CGRectContainsPoint (CGRectMake(64.0f, 288.0f-DICKE_FINGER_TAP_TOLLERANZ, 384.0f, 32.0f+DICKE_FINGER_TAP_TOLLERANZ),location))

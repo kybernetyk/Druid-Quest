@@ -32,6 +32,13 @@ enum MainMenuLayerTags
 
 		MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
 		
+		MenuItem *resume = [MenuItemFont itemFromString:@"[ Resume Game ]"
+												target:self
+											  selector:@selector(resumeSinglePlayerGame:)];
+		
+		MenuItem *nothing3 = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
+		
+		
         MenuItem *help = [MenuItemFont itemFromString:@"[ Help ]"
 											   target:self
 											 selector:@selector(help:)];
@@ -43,7 +50,7 @@ enum MainMenuLayerTags
 											 selector:@selector(highscores:)];
 		
 		
-        Menu *menu = [Menu menuWithItems: start,nothing, help, nothing2, scores,nil];
+        Menu *menu = [Menu menuWithItems: start,nothing, resume, nothing3, help, nothing2, scores,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         [menu alignItemsVertically];
@@ -66,6 +73,12 @@ enum MainMenuLayerTags
 {
 	[[parent parent] startSinglePlayerGame];
 }
+
+- (void) resumeSinglePlayerGame: (id) sender
+{
+	[[parent parent] resumeSinglePlayerGame];
+}
+
 
 - (void) help: (id) sender
 {

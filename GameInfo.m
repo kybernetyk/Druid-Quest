@@ -103,7 +103,7 @@ static GameInfo *sharedSingleton = nil;
 	[self setCurrentLevel: 1];
 	[self setLastLevel: 11]; //11
 	[self setTime: 0.0f];
-	[self setActiveGraphicsPack: @"dbrighter"];
+	[self setActiveGraphicsPack: @"druidquest"];
 	[self setActiveMapPack: @"druid"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
@@ -121,10 +121,32 @@ static GameInfo *sharedSingleton = nil;
 	[self setPlayerName: name];
 }
 
+- (void) resumeFromFile
+{
+	[self reset];
+	
+	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile:@"savegame.plist"];
+	NSString *name = [d objectForKey: @"player_name"];
+	int level = [[d objectForKey: @"current_level"] intValue];
+	float time = [[d objectForKey: @"time"] floatValue];
+	int score = [[d objectForKey: @"score"] intValue];
+	
+	[self setPlayerName: name];
+	[self setCurrentLevel: level];
+	[self setTime: time];
+	[self setScore: score];
+	
+	if (level == 0)
+		[self reset];
+}
+
 - (void) saveToFile
 {
 	NSMutableDictionary *d = [NSMutableDictionary dictionary];
 	[d setObject: playerName forKey: @"player_name"];
+	[d setObject: [NSNumber numberWithInt: currentLevel] forKey:@"current_level"];
+	[d setObject: [NSNumber numberWithFloat: time] forKey: @"time"];
+	[d setObject: [NSNumber numberWithInt: score] forKey: @"score"];
 	
 	[d writeToFile:@"savegame.plist" atomically: YES];
 }

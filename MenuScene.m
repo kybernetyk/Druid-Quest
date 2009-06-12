@@ -82,6 +82,15 @@ enum MenuSceneNodeTags
 	//[self release];	
 }
 
+
+- (void) resumeSinglePlayerGame
+{
+	[[GameInfo sharedInstance] reset];
+	[[GameInfo sharedInstance] resumeFromFile];
+	[[Director sharedDirector] removeEventHandler: self];
+	[[Director sharedDirector] replaceScene: [GameScene node]];
+}
+
 - (void) showMainMenu
 {
 	[[self getChildByTag: kMainMenuLayer] switchTo: 0];

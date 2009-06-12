@@ -60,7 +60,8 @@
 - (NSString *) pathForMapFile: (NSString *) filename;
 - (NSString *) currentMapFilename;
 
-- (void) loadFromFile;
+- (void) loadFromFile; //loads name from file
+- (void) resumeFromFile; //resumes a game state from file (score, time, etc)
 - (void) saveToFile;
 
 @end

@@ -15,6 +15,7 @@
 }
 
 - (void) startSinglePlayerGame;
+- (void) resumeSinglePlayerGame;
 
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

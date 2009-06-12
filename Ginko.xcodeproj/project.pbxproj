@@ -72,6 +72,7 @@
 		030F499B0F78E308004EA3FE /* HelpMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F499A0F78E308004EA3FE /* HelpMenuLayer.m */; };
 		030F4A1D0F78E754004EA3FE /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F4A1C0F78E754004EA3FE /* GameScene.m */; };
 		030F4A200F78E772004EA3FE /* GameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F4A1F0F78E772004EA3FE /* GameInfo.m */; };
+		031AE3A00FE2EDEF0031F36D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 031AE39F0FE2EDEF0031F36D /* Default.png */; };
 		031E5B7F0FD803E100F1991A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E5B7E0FD803E100F1991A /* GameOverScene.m */; };
 		0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0344F9750FD9574F00E766FE /* NameEnterViewController.m */; };
 		0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0344F9760FD9574F00E766FE /* NameEnterViewController.xib */; };
@@ -245,6 +246,7 @@
 		030F4A1C0F78E754004EA3FE /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		030F4A1E0F78E772004EA3FE /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		030F4A1F0F78E772004EA3FE /* GameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfo.m; sourceTree = "<group>"; };
+		031AE39F0FE2EDEF0031F36D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		031E5B7D0FD803E100F1991A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		031E5B7E0FD803E100F1991A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		0344F9740FD9574F00E766FE /* NameEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEnterViewController.h; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				031AE39F0FE2EDEF0031F36D /* Default.png */,
 				0344FA770FD958C700E766FE /* menu_background.png */,
 				039304E60F8AAAE20022DB77 /* numfont.png */,
 				039304970F8AA4DE0022DB77 /* font3.png */,
@@ -845,6 +848,7 @@
 				039304E70F8AAAE20022DB77 /* numfont.png in Resources */,
 				0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */,
 				0344FA780FD958C700E766FE /* menu_background.png in Resources */,
+				031AE3A00FE2EDEF0031F36D /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

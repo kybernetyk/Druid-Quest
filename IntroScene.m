@@ -132,7 +132,7 @@
 		isPreloading = YES;
 		_preloadCounter = 0;
 		prevPercent = 0.0f;
-		preloadArray = [NSArray arrayWithObjects:@"medium_background.png",
+		preloadArray = [NSArray arrayWithObjects:
 						@"block_1_1.png",
 						@"block_1_2.png",
 						@"shadow_block_1_1.png",
@@ -168,7 +168,10 @@
 						@"menu.png",
 						@"small_border.png",
 						@"small_background.png",
+						@"medium_border.png",
+						@"medium_background.png",
 						@"rays_small.png",
+						@"rays_medium.png",
 						@"vert_cross_back.png",
 						@"player_shadow.png",
 						@"finish_anim0.png",
