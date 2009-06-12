@@ -115,23 +115,43 @@ static GameInfo *sharedSingleton = nil;
 
 - (void) loadFromFile
 {
-	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile:@"savegame.plist"];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filename = [NSString stringWithFormat:@"%@/%@",documentsDirectory,@"savegame.plist"];
+	
+	
+	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile: filename];
 	NSString *name = [d objectForKey: @"player_name"];
 	
-	[self setPlayerName: name];
+	if (name)
+		[self setPlayerName: name];
 }
 
 - (void) resumeFromFile
 {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filename = [NSString stringWithFormat:@"%@/%@",documentsDirectory,@"savegame.plist"];
+	
+	
 	[self reset];
 	
-	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile:@"savegame.plist"];
+	NSMutableDictionary *d = [NSMutableDictionary dictionaryWithContentsOfFile: filename];
+	
+	if (!d)
+	{
+		[self reset];
+		return;
+	}
+	
 	NSString *name = [d objectForKey: @"player_name"];
 	int level = [[d objectForKey: @"current_level"] intValue];
 	float time = [[d objectForKey: @"time"] floatValue];
 	int score = [[d objectForKey: @"score"] intValue];
 	
-	[self setPlayerName: name];
+	if (name)
+		[self setPlayerName: name];
+	
 	[self setCurrentLevel: level];
 	[self setTime: time];
 	[self setScore: score];
@@ -142,13 +162,21 @@ static GameInfo *sharedSingleton = nil;
 
 - (void) saveToFile
 {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filename = [NSString stringWithFormat:@"%@/%@",documentsDirectory,@"savegame.plist"];
+	
+	
 	NSMutableDictionary *d = [NSMutableDictionary dictionary];
-	[d setObject: playerName forKey: @"player_name"];
+	
+	if (playerName)
+		[d setObject: playerName forKey: @"player_name"];
+	
 	[d setObject: [NSNumber numberWithInt: currentLevel] forKey:@"current_level"];
 	[d setObject: [NSNumber numberWithFloat: time] forKey: @"time"];
 	[d setObject: [NSNumber numberWithInt: score] forKey: @"score"];
 	
-	[d writeToFile:@"savegame.plist" atomically: YES];
+	[d writeToFile: filename atomically: YES];
 }
 
 
