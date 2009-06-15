@@ -15,6 +15,7 @@
 #import "BlockFactory.h"
 #import "BirdController.h"
 #import "FinishController.h"
+#import "TeleporterController.h"
 
 @implementation SpriteLayer
 @synthesize playerController;
@@ -34,16 +35,11 @@ SpriteController *fieldcopy[32][32];
 	if (self)
 	{
 		memset(fieldcopy,0x00,32*32*sizeof(SpriteController *));
-		
+
+		/* CREATE EMPTY MAP + LOAD MAP FILE */
 		spriteControllers = [[NSMutableArray alloc] init];
 		sprites = [[NSMutableArray alloc] init];
-		
-		//NSString *p = [[NSBundle mainBundle] pathForResource:@"map1" ofType:@"plist"];
-	//	NSLog(@"%@",p);
-		
 		NSDictionary *mapInfo = [NSDictionary dictionaryWithContentsOfFile: filename];
-	//	NSLog(@"dict: %@",mapInfo);
-		
 		NSAssert1(mapInfo,@"Error! Map File %@ not found!",filename);
 		
 		[[GameInfo sharedInstance] setLevelGridWidth: [[mapInfo objectForKey:@"MapGridWidth"] intValue]];
@@ -57,7 +53,12 @@ SpriteController *fieldcopy[32][32];
 		if (mapw == 720 && maph == 480)
 			isSmallLevel = NO;
 		
+		/* END LOAD MAP FILE */
 		
+		TeleporterController *teleportOne = nil;
+		TeleporterController *teleportTwo = nil;
+		
+		/* CREATE SPRITES AND THEIR CONTROLLERS */
 		NSArray *mapEntities = [mapInfo objectForKey:@"Entities"];
 		if (!mapEntities)
 		{
@@ -79,7 +80,6 @@ SpriteController *fieldcopy[32][32];
 
 			controller = [nodecon objectForKey:@"controller"];
 			node = [nodecon objectForKey:@"node"];
-//			NSLog(@"nodecon retaincount: %i",[nodecon retainCount]);
 			
 			if (controller)
 			{	
@@ -98,6 +98,26 @@ SpriteController *fieldcopy[32][32];
 					[sprites addObject: playerShadow];
 					*/
 					//NSLog(@"playerController retaincount: %i",[playerController retainCount]);
+				}
+				else if (_entType == kTeleporter)
+				{
+					NSLog(@"TELEPORTER! %@",controller);
+					if (teleportOne && teleportTwo)
+					{
+						NSLog(@"ERROR! MORE THAN TWO TELEPORTERS IN LEVEL!!");
+						exit (98);
+					}
+						
+					if (teleportOne == nil)
+					{
+						teleportOne = controller;
+					}
+					else if (teleportTwo == nil)
+					{
+						teleportTwo = controller;
+					}
+					
+					[spriteControllers addObject: controller];
 				}
 				else
 				{
@@ -198,30 +218,30 @@ SpriteController *fieldcopy[32][32];
 			
 			node = nil;	
 		}
-		
+		/* END CREATING SPRITES AND CONTROLLERS*/
 
 		
-/*		cpVect posis[] = 
+		/* CONNECT TELEPORTERS */
+		if ((teleportOne != nil && teleportTwo == nil) ||
+			(teleportOne == nil && teleportTwo != nil))
 		{
-			cpv(145,0),
-			cpv(240,300)
-		};
+			NSLog(@"Error! Only one teleporter was found!");
+			exit(97);
+		}
 		
-*/		
-		/*for (int i = 0; i < 2; i++)
+			
+		if (teleportOne && teleportTwo)
 		{
-			Sprite *root = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"root1.png"]];
+			NSLog(@"Linking %@ and %@",teleportOne, teleportTwo);
+			[teleportOne setLinkedTeleport: teleportTwo];
+			[teleportTwo setLinkedTeleport: teleportOne];
+		}
 			
-			[root setPosition: posis[i]];
-			[self addChild: root z:-5];
-			[sprites addObject: root];
-			
-			
-		}*/
+		/* END CONNECTING TELEPORTERS */
 		
 		
-		//NSLog(@"LEVEL SIZE: %i,%i",[[GameInfo sharedInstance] worldWidth],[[GameInfo sharedInstance] worldHeight]);
-		
+
+		/* CREATE GROUND CLUTTER AND DECO */
 		if (isSmallLevel)
 		{
 			for (int i = 0; i < 1; i++)
@@ -359,7 +379,7 @@ SpriteController *fieldcopy[32][32];
 			[sprites addObject: sunshine];
 			
 		}
-		
+		/* END CREATE GROUND CLUTTER AND DECO */
 	}
 	
 	return self;
@@ -432,7 +452,7 @@ SpriteController *fieldcopy[32][32];
 //it sets bContinue to YES, sets the _position to the found block and the blocks bounce vector as the new direction
 //the pathfinding loop will call this method then again with these modified values
 //it sucks but hey ...
-- (Waypoint *) getWaypointByCastingRayFrom: (cpVect *) _position withDirection: (cpVect *) direction continuePointer: (BOOL *) bContinue
+- (NSArray *) getWaypointByCastingRayFrom: (cpVect *) _position withDirection: (cpVect *) direction continuePointer: (BOOL *) bContinue
 {
 	int xAdd = direction->x;
 	int yAdd = direction->y;
@@ -444,6 +464,8 @@ SpriteController *fieldcopy[32][32];
 	int yPos = startY;
 	
 //	NSLog(@"sx: %i sy: %i xA: %i yA: %i",startX,startY,xAdd,yAdd);
+	NSMutableArray *retPoints = [NSMutableArray array];
+	[retPoints retain];
 	
 	while (1)
 	{
@@ -466,10 +488,14 @@ SpriteController *fieldcopy[32][32];
 				cpVect ret = cpv(xPos*32,yPos*32);
 				*bContinue = NO;
 				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setIsTeleport: NO];
 
 				[v setLocation: ret];
 				[v setAssignedObject: c];
-				return v;
+				[retPoints addObject: v];
+				
+				return retPoints;
+		//		return v;
 			}
 
 			//nullvector - bitte vor diesem feld stehen bleiben
@@ -482,9 +508,48 @@ SpriteController *fieldcopy[32][32];
 				*bContinue = NO;
 				//NSValue *v = [NSValue valueWithCGPoint: ret];
 				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setIsTeleport: NO];
 				[v setLocation: ret];
 				[v setAssignedObject: c];
-				return v;
+				[retPoints addObject: v];
+				
+								return retPoints;
+				//return v;
+			}
+			//teleporter
+			else if (bounce.x == -1.0f && bounce.y == -1.0f)
+			{
+				TeleporterController *tc = (TeleporterController *)c;
+				TeleporterController *linkedTeleport = [tc linkedTeleport];
+				
+				if (linkedTeleport == nil)
+				{
+					NSLog(@"OMG TELEPORT WAS NOT LINKED! ERROR!");
+					exit(99);
+				}
+				
+				//cpVect ret = cpv ([linkedTeleport gridPosition].x * 32, [linkedTeleport gridPosition].y * 32);
+				
+				cpVect ret = cpv((xPos)*32,(yPos)*32);
+				
+				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setIsTeleport: NO];
+				[v setLocation: ret];
+				[v setAssignedObject: c];
+				[retPoints addObject: v];
+			
+				v = [[[Waypoint alloc] init] autorelease];
+				[v setIsTeleport: YES];
+				[v setLocation: cpv ([linkedTeleport gridPosition].x * 32, [linkedTeleport gridPosition].y * 32)];
+				[v setAssignedObject: c];
+				[retPoints addObject: v];
+				
+				_position->x = [linkedTeleport gridPosition].x;
+				_position->y = [linkedTeleport gridPosition].y;
+				bContinue = YES;
+				
+				return retPoints;
+				
 			}
 			else //ansonsten auf dieses feld bewegen und naechsten wegpunkt holen
 			{
@@ -497,10 +562,13 @@ SpriteController *fieldcopy[32][32];
 				_position->y = yPos;
 //				NSValue *v = [NSValue valueWithCGPoint: ret];
 				Waypoint *v = [[[Waypoint alloc] init] autorelease];
+				[v setIsTeleport: NO];
 				[v setLocation: ret];
 				[v setAssignedObject: c];
+				[retPoints addObject: v];
 				
-				return v;
+				return retPoints;
+				//return v;
 			}
 		}
 		
@@ -515,8 +583,10 @@ SpriteController *fieldcopy[32][32];
 	Waypoint *v = [[[Waypoint alloc] init] autorelease];
 	[v setLocation: ret];
 	[v setAssignedObject: nil];
+	[retPoints addObject: v];
 	
-	return v;
+	return retPoints;
+	//return v;
 }
 
 //returns a NSArray filled with waypoints for a given spritecontroller to follow
@@ -563,15 +633,18 @@ SpriteController *fieldcopy[32][32];
 	//or we get a nil waypoint back
 	do
 	{
-		id waypoint = [self getWaypointByCastingRayFrom: &currentPos withDirection: &dir continuePointer: &bContinue];
-
+		id waypoints = [self getWaypointByCastingRayFrom: &currentPos withDirection: &dir continuePointer: &bContinue];
+		for (id waypoint in waypoints)
+		{
+			[waypoint retain];
+			
+			[path addObject: waypoint];
+			
+		}
+		[waypoints release];
 		
-		if (waypoint == nil)
-			break;
-		[waypoint retain];
-		
-		[path addObject: waypoint];
-	//	NSLog(@"waypoint: %@ | continue: %i",waypoint, bContinue);
+		//		if (waypoints == nil)
+//			break;
 		if (bContinue == NO)
 			break;
 		if (loopCount++ > 10)
@@ -580,11 +653,15 @@ SpriteController *fieldcopy[32][32];
 			break;
 		}
 		
+		
 	} while (1);
 	
 	//NSLog(@"%@",fieldcopy[0][0]);
-	
-	//NSLog(@"our path: %@",path);
+	NSLog(@"our path: ");
+	for (id waypoint in path)
+	{
+		NSLog(@"%f,%f",[waypoint location].x,[waypoint location].y);
+	}
 	return path;
 }
 

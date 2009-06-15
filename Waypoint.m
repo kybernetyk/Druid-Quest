@@ -12,5 +12,7 @@
 @implementation Waypoint
 @synthesize location;
 @synthesize assignedObject;
+@synthesize isTeleport;
+
 
 @end

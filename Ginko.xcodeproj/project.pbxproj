@@ -102,6 +102,8 @@
 		03993F900F7FF84D00770565 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03993F8F0F7FF84D00770565 /* BlockFactory.m */; };
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
 		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
+		03C4FCAA0FE3202E002617FA /* bg_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03C4FCA90FE3202E002617FA /* bg_music.wav */; };
+		03C4FCFD0FE6CD1A002617FA /* TeleporterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */; };
 		03F8F4C10F7A4B1300E6E02E /* GameBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */; };
 		03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F50F7A4DAD00E6E02E /* gpacks */; };
 		03F8F56D0F7A52B400E6E02E /* ControllerCrossLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F56C0F7A52B400E6E02E /* ControllerCrossLayer.m */; };
@@ -299,6 +301,9 @@
 		0399403F0F7FFFFF00770565 /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		039940400F7FFFFF00770565 /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
 		039940AC0F80F4DC00770565 /* mpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mpacks; sourceTree = "<group>"; };
+		03C4FCA90FE3202E002617FA /* bg_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bg_music.wav; sourceTree = "<group>"; };
+		03C4FCFB0FE6CD1A002617FA /* TeleporterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeleporterController.h; sourceTree = "<group>"; };
+		03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeleporterController.m; sourceTree = "<group>"; };
 		03F8F4BF0F7A4B1300E6E02E /* GameBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBackgroundLayer.h; sourceTree = "<group>"; };
 		03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBackgroundLayer.m; sourceTree = "<group>"; };
 		03F8F4F50F7A4DAD00E6E02E /* gpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gpacks; sourceTree = "<group>"; };
@@ -712,6 +717,8 @@
 				039940400F7FFFFF00770565 /* FinishController.m */,
 				039301260F8A5B420022DB77 /* BirdController.h */,
 				039301270F8A5B420022DB77 /* BirdController.m */,
+				03C4FCFB0FE6CD1A002617FA /* TeleporterController.h */,
+				03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -769,6 +776,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03C4FCA90FE3202E002617FA /* bg_music.wav */,
 				031AE39F0FE2EDEF0031F36D /* Default.png */,
 				0344FA770FD958C700E766FE /* menu_background.png */,
 				039304E60F8AAAE20022DB77 /* numfont.png */,
@@ -849,6 +857,7 @@
 				0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */,
 				0344FA780FD958C700E766FE /* menu_background.png in Resources */,
 				031AE3A00FE2EDEF0031F36D /* Default.png in Resources */,
+				03C4FCAA0FE3202E002617FA /* bg_music.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,6 +958,7 @@
 				031E5B7F0FD803E100F1991A /* GameOverScene.m in Sources */,
 				0344F9770FD9574F00E766FE /* NameEnterViewController.m in Sources */,
 				034FCAE10FDB0EDF00FB6A76 /* HighScoresScene.m in Sources */,
+				03C4FCFD0FE6CD1A002617FA /* TeleporterController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

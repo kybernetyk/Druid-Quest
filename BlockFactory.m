@@ -11,6 +11,7 @@
 #import "PlayerController.h"
 #import "AngularBlockController.h"
 #import "FinishController.h"
+#import "TeleporterController.h"
 
 @implementation BlockFactory
 
@@ -90,6 +91,14 @@
 			[controller setNormalVector: cpv(-1.0,-1.0)];
 			//NSLog(@"north_west! %i,%i",posX,posY);
 			break;
+		
+		case kTeleporter:
+			spriteFileName = @"teleporter_1.png";
+			node = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
+			[node setPosition:cpv(posX *32,posY *32)];
+			controller = [[TeleporterController alloc] initWithSprite: node];
+			break;
+
 			
 		case kEmpty:
 		default:

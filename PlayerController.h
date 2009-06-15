@@ -13,6 +13,7 @@
 @interface PlayerController : SpriteController
 {
 	BOOL	isMoving;
+	BOOL	isTeleporting;
 	int		spriteFrame;
 	struct  timeval lastUpdated;
 	float	frameThreshold;

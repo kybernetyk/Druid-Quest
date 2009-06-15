@@ -15,6 +15,8 @@
 	Label *score;
 	Label *time;
 	Label *level;
+	
+	Sprite *sprite,*sprite2,*sprite3;
 }
 
 @end

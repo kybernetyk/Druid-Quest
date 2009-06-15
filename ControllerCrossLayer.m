@@ -74,7 +74,7 @@ enum BackgroundLayerNodeTags
 		image = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"menu.png"]];
 		[image setPosition:cpv(-480/2+16, 320/2-16)];
 		[image setOpacity: 200];
-		[self addChild:image z: 1 tag: kCrossLeftImage];
+		[self addChild:image z: 1 tag: kMenuImage];
 		
 	}
     return self;

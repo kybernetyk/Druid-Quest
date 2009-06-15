@@ -25,6 +25,7 @@
 		isMoving = NO;
 		spriteFrame = 1;
 		frameThreshold = 0;
+		isTeleporting = NO;
 		initialTexture = [spriteToControll texture];
 		frame0 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player0.png"]] retain];
 		frame1 = [[[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:@"player1.png"]] retain];
@@ -83,14 +84,16 @@
 	if (curx != lastX)
 	{
 		lastX = curx;
-		[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
+		if (!isTeleporting)
+			[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
 	}
 	
 	int cury = [controlledSprite position].y / 32;
 	if (cury != lastY)
 	{
 		lastY = cury;
-		[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
+		if (!isTeleporting)
+			[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 1];
 	}
 	
 	
@@ -111,7 +114,7 @@
 	dt = MAX(0,dt);
 	lastUpdated = now;	
 	
-	if (isMoving)
+	if (isMoving && !isTeleporting)
 	{	
 		frameThreshold += dt;
 		if (frameThreshold > 0.10)
@@ -162,6 +165,16 @@
 
 }
 
+- (void) startTeleport
+{
+	isTeleporting = YES;
+}
+
+- (void) stopTeleport
+{
+	isTeleporting = NO;
+}
+
 #pragma mark private managment funcs
 - (void) _movementActionEnded
 {
@@ -177,6 +190,8 @@
 	if (((int)gridPosition.x) < 0 || ((int)(gridPosition.x)) >= [[GameInfo sharedInstance] levelGridWidth] ||
 		((int)gridPosition.y) < 0 || ((int)(gridPosition.y)) >= [[GameInfo sharedInstance] levelGridHeight] )
 	{
+		
+		NSLog(@"x: %f\ny: %f",gridPosition.x, gridPosition.y);
 		NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
 		GameScene *currentScene = [[Director sharedDirector] runningScene];
 		[currentScene resetScene];
@@ -220,6 +235,8 @@
 	CGPoint currentPosition = [controlledSprite position];
 	for (Waypoint *waypoint in path)
 	{
+		
+		
 		//geschwindigkeit festlegen mit der wir uns bewegen
 		//damit nicht alles 2 sekunden dauert, sondern je nach laenge schneller geht
 		CGPoint waypointPosition = [waypoint location];
@@ -238,6 +255,30 @@
 		//NSLog(@"waypoint: (%f,%f) - %@",[waypoint location].x,[waypoint location].y,[[waypoint assignedObject] controlledSprite]);
 		
 		id action = nil;
+		
+		if ([waypoint isTeleport])
+		{
+			NSLog(@"OMG TELEPORT PATH!!!");
+			id fc = [CallFunc actionWithTarget: self selector: @selector(startTeleport)];
+			id hideAction = [FadeTo actionWithDuration: 0.25 opacity: 0];
+			id moveAction = [MoveTo actionWithDuration: 0.1 position: waypointPosition];
+			id showAction = [FadeTo actionWithDuration: 0.25 opacity: 255];
+			id fc2 = [CallFunc actionWithTarget: self selector: @selector(stopTeleport)]; 
+			
+			id seq1 = [Sequence actionOne: fc two: hideAction];
+			id seq2 = [Sequence actionOne: seq1 two: moveAction];
+			id seq3 = [Sequence actionOne: seq2 two: showAction];
+			id seq4 = [Sequence actionOne: seq3 two: fc2];
+			
+			
+			tmpseq = [Sequence actionOne: tmpseq two: seq4];
+			//isTeleporting = YES;
+			
+			[waypoint release];
+			continue;
+		}
+		
+	
 		//rechts
 		if (distance.x > 0.0)
 		{	
@@ -266,10 +307,10 @@
 			action = [RotateTo actionWithDuration: 0.25 angle: 180.0f];
 			tmpseq = [Sequence actionOne: tmpseq two: action];
 		}
-		
-		
+
 		action = [MoveTo actionWithDuration: time position: waypointPosition];
 		tmpseq = [Sequence actionOne: tmpseq two: action];
+		
 		[waypoint release];
 	}
 //	NSLog(@"retcount: %i",[self retainCount]);

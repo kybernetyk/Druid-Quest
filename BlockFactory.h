@@ -20,7 +20,8 @@ enum blockTags
 	kBlockNormal_South_East = 4,
 	kBlockNormal_North_East = 5,
 	kBlockNormal_North_West = 6,
-	kBlockNormal_South_West = 7
+	kBlockNormal_South_West = 7,
+	kTeleporter = 8
 
 };
 

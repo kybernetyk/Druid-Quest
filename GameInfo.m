@@ -101,10 +101,10 @@ static GameInfo *sharedSingleton = nil;
 	[self setLives: 0];
 	[self setZoom: 1.0f];
 	[self setCurrentLevel: 1];
-	[self setLastLevel: 11]; //11
+	[self setLastLevel: 4]; //11
 	[self setTime: 0.0f];
 	[self setActiveGraphicsPack: @"druidquest"];
-	[self setActiveMapPack: @"druid"];
+	[self setActiveMapPack: @"roadblocks"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
 	[self setIsPaused: NO];

@@ -13,9 +13,13 @@
 {
 	CGPoint location;
 	SpriteController *assignedObject;
+	
+	BOOL isTeleport;
 }
 
 @property (readwrite,assign) CGPoint location;
+
 @property (readwrite,assign) SpriteController *assignedObject;
+@property (readwrite,assign) BOOL isTeleport;
 
 @end

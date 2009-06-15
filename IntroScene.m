@@ -181,7 +181,11 @@
 						@"finish_anim4.png",
 						@"finish_anim5.png",
 						@"finish_anim6.png",
-
+						@"teleporter_1.png",
+						@"teleporter_2.png",
+						@"teleporter_3.png",
+						@"teleporter_4.png",
+						@"teleporter_5.png",						
 						
 						nil];
 		[preloadArray retain];
