@@ -101,7 +101,7 @@ SpriteController *fieldcopy[32][32];
 				}
 				else if (_entType == kTeleporter)
 				{
-					NSLog(@"TELEPORTER! %@",controller);
+				//	NSLog(@"TELEPORTER! %@",controller);
 					if (teleportOne && teleportTwo)
 					{
 						NSLog(@"ERROR! MORE THAN TWO TELEPORTERS IN LEVEL!!");

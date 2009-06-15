@@ -19,6 +19,7 @@
 	MenuItem *submitScoresItem;
 	
 	BOOL scoreWasPostedAlready;
+	float rating;
 }
 
 - (void) proceedToMainMenuScene: (id) sender;

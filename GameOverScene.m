@@ -20,6 +20,8 @@
 	self = [super init];
 	if (self)
 	{
+		rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+		
 		background = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"end_bg.png"]];
 		[background setPosition: cpv(480/2,320/2)];
 
@@ -111,7 +113,7 @@
 
 - (NSString *) congratulationsString
 {
-	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+	//float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
 	NSString *ret = [NSString stringWithFormat:@"Congratulations!\nYou have found your way back!\n\nYour Score is: %i", (int)rating];
 
 	return ret;
