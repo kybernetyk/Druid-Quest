@@ -18,7 +18,7 @@
     if (self) 
 	{
 //		label = [Label labelWithString:value fontName:_fontName fontSize:_fontSize];
-		NSLog(@"lalalal");
+	//	NSLog(@"lalalal");
 		
 		sprite = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"time.png"]];
 		[sprite setPosition: cpv(-480/2+[sprite contentSize].width/2 ,-320/2+11-3)];

@@ -57,7 +57,7 @@
 		idleTurnTime = ((rand()%8000) / 1000.0f);
 		turnThreshold = flapThreshold = 0.0f;
 		
-		printf("flap: %f, %f\n",idleFlapTime, idleTurnTime);
+		//printf("flap: %f, %f\n",idleFlapTime, idleTurnTime);
 		
 	}
 	
@@ -159,7 +159,7 @@
 	[frame0 release];
 	[frame1 release];
 	[frame2 release];
-	NSLog(@"bird controller dealloc");
+//	NSLog(@"bird controller dealloc");
 	[super dealloc];
 }
 

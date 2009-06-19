@@ -22,6 +22,11 @@
 		//assign
 		[self addChild:backgroundImage];
 		
+		Sprite *scrollImage = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_scroll.png"]];
+		[scrollImage setPosition:cpv(0, 0)];
+		[self addChild:scrollImage];
+		
+		
 /*		id part = [[ParticleFire alloc] init];//[[ParticleFire alloc] initWithTotalParticles: 256];
 		[part setPosition: cpv(0,-160)];
 		[part setScaleX: 6.0f];
@@ -36,7 +41,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"pause background layer dealloc");
+	//NSLog(@"pause background layer dealloc");
 	
 	[self removeAllChildrenWithCleanup: YES];
 	

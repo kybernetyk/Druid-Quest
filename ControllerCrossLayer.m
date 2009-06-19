@@ -82,7 +82,7 @@ enum BackgroundLayerNodeTags
 
 - (void) dealloc
 {
-	NSLog(@"controller cross layer dealloc");
+//	NSLog(@"controller cross layer dealloc");
 	
 	id node = [self getChildByTag: kCrossUpImage];
 	[self removeChild: node cleanup: YES];

@@ -72,7 +72,7 @@
 	
 
 	
-	NSLog(@"player controller dealloc");
+	//NSLog(@"player controller dealloc");
 	[super dealloc];
 }
 #pragma mark gameLogic
@@ -191,8 +191,8 @@
 		((int)gridPosition.y) < 0 || ((int)(gridPosition.y)) >= [[GameInfo sharedInstance] levelGridHeight] )
 	{
 		
-		NSLog(@"x: %f\ny: %f",gridPosition.x, gridPosition.y);
-		NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+	//	NSLog(@"x: %f\ny: %f",gridPosition.x, gridPosition.y);
+	//	NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
 		GameScene *currentScene = [[Director sharedDirector] runningScene];
 		[currentScene resetScene];
 	}
@@ -200,7 +200,7 @@
 	if (gridPosition.x == [[GameInfo sharedInstance] finishPosition].x &&
 		gridPosition.y == [[GameInfo sharedInstance] finishPosition].y)
 	{
-		NSLog(@"WIN WIN WIN! %i",[self retainCount]);
+		//NSLog(@"WIN WIN WIN! %i",[self retainCount]);
 		
 		GameScene *currentScene = [[Director sharedDirector] runningScene];
 
@@ -242,14 +242,14 @@
 		CGPoint waypointPosition = [waypoint location];
 		CGPoint distance = cpvsub(waypointPosition,currentPosition);
 
-		printf("dist: %f,%f\n",distance.x,distance.y);
+		//printf("dist: %f,%f\n",distance.x,distance.y);
 		//next calc from current waypoint position
 		currentPosition = waypointPosition;
 		
 		float len = cpvlength(distance);
 		float time = 1.5f/296.0f*len;
 		
-		printf("TIME: %f\n",time);
+	//	printf("TIME: %f\n",time);
 //		time = 1.0f;
 		
 		//NSLog(@"waypoint: (%f,%f) - %@",[waypoint location].x,[waypoint location].y,[[waypoint assignedObject] controlledSprite]);
@@ -258,7 +258,7 @@
 		
 		if ([waypoint isTeleport])
 		{
-			NSLog(@"OMG TELEPORT PATH!!!");
+			//NSLog(@"OMG TELEPORT PATH!!!");
 			id fc = [CallFunc actionWithTarget: self selector: @selector(startTeleport)];
 			id hideAction = [FadeTo actionWithDuration: 0.25 opacity: 0];
 			id moveAction = [MoveTo actionWithDuration: 0.1 position: waypointPosition];

@@ -28,7 +28,7 @@
 {
 	normalVector = _normal;
 	
-	NSLog(@"norm: %f,%f",normalVector.x,normalVector.y);
+//	NSLog(@"norm: %f,%f",normalVector.x,normalVector.y);
 	float addx = -8 * normalVector.x;
 	float addy = 8 * normalVector.y;
 

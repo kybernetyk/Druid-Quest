@@ -9,6 +9,7 @@
 #import "MainMenuLayer.h"
 #import "cocos2d.h"
 #import "HighScoresScene.h"
+#import "GameInfo.h"
 
 @implementation MainMenuLayer
 enum MainMenuLayerTags
@@ -26,13 +27,41 @@ enum MainMenuLayerTags
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 
-		MenuItem *start = [MenuItemFont itemFromString:@"[ Start Game ]"
+		/*MenuItem *start = [MenuItemFont itemFromString:@"[ Start Game ]"
 												target:self
-											  selector:@selector(startSinglePlayerGame:)];
-
-		MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
+											  selector:@selector(startSinglePlayerGame:)];*/
+		MenuItem *start = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_play.png"] 
+											   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_play_a.png"] 
+													  target:self 
+													selector:@selector(startSinglePlayerGame:)];
 		
-		MenuItem *resume = [MenuItemFont itemFromString:@"[ Resume Game ]"
+		MenuItem *resume = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_resume.png"] 
+											   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_resume_a.png"] 
+													  target:self 
+													selector:@selector(resumeSinglePlayerGame:)];
+
+		
+		MenuItem *scores = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_scores.png"] 
+											   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_scores_a.png"] 
+													  target:self 
+													selector:@selector(highscores:)];
+		
+		MenuItem *help = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_help.png"] 
+											   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_help_a.png"] 
+													  target:self 
+													selector:@selector(help:)];
+		
+		 Menu *menu = [Menu menuWithItems: start, resume, help, scores,nil];
+		
+/*		MenuItem *exit = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_play.png"] 
+											   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_play.png"] 
+													  target:self 
+													selector:@selector(startSinglePlayerGame:)];*/
+		
+		
+		//MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
+		
+/*		MenuItem *resume = [MenuItemFont itemFromString:@"[ Resume Game ]"
 												target:self
 											  selector:@selector(resumeSinglePlayerGame:)];
 		
@@ -50,7 +79,7 @@ enum MainMenuLayerTags
 											 selector:@selector(highscores:)];
 		
 		
-        Menu *menu = [Menu menuWithItems: start,nothing, resume, nothing3, help, nothing2, scores,nil];
+        Menu *menu = [Menu menuWithItems: start,nothing, resume, nothing3, help, nothing2, scores,nil];*/
 		
 		//[Menu menuWithItems:start, help, nil];
         [menu alignItemsVertically];

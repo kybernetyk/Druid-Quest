@@ -13,7 +13,8 @@
 
 enum BackgroundLayerNodeTags 
 {
-	kBackgroundImage
+	kBackgroundImage,
+	kScrollImage
 };
 
 - (id) init 
@@ -21,13 +22,14 @@ enum BackgroundLayerNodeTags
     self = [super init];
     if (self) 
 	{
-		
-
-        Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_bg.png"]];
+		Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_bg.png"]];
 		[backgroundImage setPosition:cpv(0, 0)];
-  
-		//assign
 		[self addChild:backgroundImage z: 0 tag: kBackgroundImage];
+
+		Sprite *scrollImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_scroll.png"]];
+		[scrollImage setPosition:cpv(0, 0)];
+		[self addChild:scrollImage z: 0 tag: kScrollImage];
+		
 		
 	//	id part = [[ParticleFire alloc] init];//[[ParticleFire alloc] initWithTotalParticles: 256];
 	//	[part setPosition: cpv(0,-160)];
@@ -46,12 +48,13 @@ enum BackgroundLayerNodeTags
 	NSLog(@"menu background layer dealloc");
 	
 	Sprite *backgroundImage = (Sprite*)[self getChildByTag: kBackgroundImage];
+	Sprite *scrollImage = (Sprite*)[self getChildByTag: kScrollImage];
 	
 	[self removeChildByTag: kBackgroundImage cleanup: YES];
-
+	[self removeChildByTag: kScrollImage cleanup: YES];
 	
 	[backgroundImage release];
-	
+	[scrollImage release];
 
 	
 	[super dealloc];

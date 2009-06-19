@@ -201,7 +201,7 @@ SpriteController *fieldcopy[32][32];
 				else
 					_shadow = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile:@"shadow_block_1_2.png"]];
 				
-				NSLog(@"lolfilename: %@",[node lolFilename]);
+		//		NSLog(@"lolfilename: %@",[node lolFilename]);
 				
 				//[flower setPosition: cpv((rand()%13)*32+32,(rand()%8)*32+32)];
 				cpVect po = [((Sprite *)node) position];
@@ -232,7 +232,7 @@ SpriteController *fieldcopy[32][32];
 			
 		if (teleportOne && teleportTwo)
 		{
-			NSLog(@"Linking %@ and %@",teleportOne, teleportTwo);
+		//	NSLog(@"Linking %@ and %@",teleportOne, teleportTwo);
 			[teleportOne setLinkedTeleport: teleportTwo];
 			[teleportTwo setLinkedTeleport: teleportOne];
 		}
@@ -401,7 +401,7 @@ SpriteController *fieldcopy[32][32];
 
 - (void) dealloc
 {
-	NSLog(@"Sprite Layer dealloc");
+//	NSLog(@"Sprite Layer dealloc");
 	memset(fieldcopy,0x00,32*32*sizeof(SpriteController *));
 	
 //	id node = [self getChildByTag: kPlayerSprite];
@@ -577,7 +577,7 @@ SpriteController *fieldcopy[32][32];
 	
 	//player will die ... he shot himself to the border lol
 	cpVect ret = cpv((xPos)*32,(yPos)*32);
-	NSLog(@"die die die: %i,%i",xPos,yPos);
+	//NSLog(@"die die die: %i,%i",xPos,yPos);
 	*bContinue = NO;
 //	NSValue *v = [NSValue valueWithCGPoint: ret];
 	Waypoint *v = [[[Waypoint alloc] init] autorelease];
@@ -657,11 +657,11 @@ SpriteController *fieldcopy[32][32];
 	} while (1);
 	
 	//NSLog(@"%@",fieldcopy[0][0]);
-	NSLog(@"our path: ");
+/*	NSLog(@"our path: ");
 	for (id waypoint in path)
 	{
 		NSLog(@"%f,%f",[waypoint location].x,[waypoint location].y);
-	}
+	}*/
 	return path;
 }
 

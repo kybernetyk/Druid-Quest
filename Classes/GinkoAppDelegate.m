@@ -48,12 +48,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	NSLog(@"level: %i\nscore: %i\n",[[GameInfo sharedInstance] currentLevel], [[GameInfo sharedInstance] score]);
+	//NSLog(@"level: %i\nscore: %i\n",[[GameInfo sharedInstance] currentLevel], [[GameInfo sharedInstance] score]);
 	
 	if ([[GameInfo sharedInstance] currentLevel] > 1)
 		[[GameInfo sharedInstance] saveToFile];
 	
-	NSLog(@"will terminate biatch");
+	//NSLog(@"will terminate biatch");
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application

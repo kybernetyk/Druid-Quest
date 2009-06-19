@@ -23,7 +23,7 @@
 {
 	[aTextField resignFirstResponder];
 
-	NSLog(@"return!");
+	//NSLog(@"return!");
 	return NO;
 }
 
@@ -36,7 +36,7 @@
 {
 	[statusLabel setHidden: YES];
 	[progressSpin stopAnimating];
-	NSLog(@"updatring from game info! %@",[[GameInfo sharedInstance] playerName] );
+	//NSLog(@"updatring from game info! %@",[[GameInfo sharedInstance] playerName] );
 	[nameTextField setText: [[GameInfo sharedInstance] playerName]];
 }
 
@@ -57,7 +57,7 @@
 
 -(void) scorePostOk:(id) sender
 {
-	NSLog(@"score post ok!");
+	//NSLog(@"score post ok!");
 	
 	[gameOverScene fetchHighscores];
 	[statusLabel setHidden: YES];
@@ -68,7 +68,7 @@
 
 -(void) scorePostFail:(id) sender
 {
-	NSLog(@"score post failed!");
+	//NSLog(@"score post failed!");
 	[statusLabel setHidden: YES];
 	[progressSpin stopAnimating];
 

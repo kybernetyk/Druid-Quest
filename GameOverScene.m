@@ -76,7 +76,7 @@
 
 - (void) fetchHighscores
 {
-	NSLog(@"fetching scores ...");
+	//NSLog(@"fetching scores ...");
 
 	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Updating Scores ..."];
 	[textLabel setString: goText];
@@ -89,7 +89,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"Game Over scene dealloc");
+	//NSLog(@"Game Over scene dealloc");
 	
 	[self removeAllChildrenWithCleanup: YES];
 	//[background release];
@@ -159,7 +159,7 @@
 
 -(void) scoreRequestFail:(id) sender
 {
-	NSLog(@"score req failed!");
+	//NSLog(@"score req failed!");
 
 
 	NSString *goText = [NSString stringWithFormat:@"%@\n\n%@",[self congratulationsString], @"Error fetching online scores ..."];
@@ -172,7 +172,7 @@
 #pragma mark -- TouchEventsDelegate implementation
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches began %@", self);
+	//NSLog(@"touches began %@", self);
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
 	//	NSLog(@"touchBegan at: %f, %f",location.x,location.y);
@@ -184,7 +184,7 @@
 
 - (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-	NSLog(@"touches moved");
+	//NSLog(@"touches moved");
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
 	location = [[Director sharedDirector] convertCoordinate: location];
@@ -194,7 +194,7 @@
 
 - (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches ended");
+//	NSLog(@"touches ended");
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	
@@ -208,7 +208,7 @@
 
 - (BOOL)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches cancelled");
+//	NSLog(@"touches cancelled");
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	

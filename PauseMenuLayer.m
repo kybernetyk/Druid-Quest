@@ -20,17 +20,20 @@
 		[MenuItemFont setFontSize:20];
         [MenuItemFont setFontName:@"Helvetica"];
 		
-		MenuItem *continue_ = [MenuItemFont itemFromString:@"[ Continue ]"
-												target:self
-											  selector:@selector(continueGame:)];
+		
+		MenuItem *continue_ = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_resume.png"] 
+												selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_resume_a.png"] 
+													   target:self 
+													 selector:@selector(continueGame:)];
+		
 
-		MenuItem *nothing = [MenuItemFont itemFromString:@"   " target: nil selector: nil];
+		MenuItem *exit_ = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_exit.png"] 
+												   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_exit_a.png"] 
+														  target:self 
+														selector:@selector(exitToMainMenu:)];
 		
-        MenuItem *exit_ = [MenuItemFont itemFromString:@"[ Main Menu ]"
-											   target:self
-											 selector:@selector(exitToMainMenu:)];
 		
-        Menu *menu = [Menu menuWithItems: continue_, nothing,exit_,nil];
+        Menu *menu = [Menu menuWithItems: continue_, exit_,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         
@@ -44,7 +47,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"pause menu layer dealloc");
+	//NSLog(@"pause menu layer dealloc");
 
 	[self removeAllChildrenWithCleanup: YES];
 	
@@ -54,7 +57,7 @@
 - (void) continueGame: (id) sender
 {
 //	[[parent parent] startSinglePlayerGame];
-	NSLog(@"continue");
+//	NSLog(@"continue");
 	[[GameInfo sharedInstance] setIsPaused: NO];
 	//[[Director sharedDirector] resume];
 	[[Director sharedDirector] popScene];
@@ -63,7 +66,7 @@
 - (void) exitToMainMenu: (id) sender
 {
 	//[[parent parent] showHelp];
-	NSLog(@"exit to main menu!");
+//	NSLog(@"exit to main menu!");
 	[[Director sharedDirector] popScene];
 	[[Director sharedDirector] replaceScene: [MenuScene node]];
 }

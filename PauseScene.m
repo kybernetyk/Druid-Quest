@@ -14,7 +14,7 @@
 @implementation PauseScene
 - (id) init
 {
-	NSLog(@"MenuScene Init");
+	//NSLog(@"MenuScene Init");
 	self = [super init];
 	if (self)
 	{

@@ -24,7 +24,7 @@ enum MenuSceneNodeTags
 
 - (id) init
 {
-	NSLog(@"MenuScene Init");
+	//NSLog(@"MenuScene Init");
 	self = [super init];
 	if (self)
 	{
@@ -54,7 +54,7 @@ enum MenuSceneNodeTags
 
 - (void) dealloc
 {
-	NSLog(@"menuscene dealloc");
+	//NSLog(@"menuscene dealloc");
 	[self removeAllChildrenWithCleanup: YES];
 //	[[self getChildByTag: kMenuBackgroundLayer] release];
 //	[[self getChildByTag: kMainMenuLayer] release];

@@ -57,7 +57,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"High Scores scene dealloc");
+//	NSLog(@"High Scores scene dealloc");
 	
 	[self removeAllChildrenWithCleanup: YES];
 	//[background release];
@@ -68,7 +68,7 @@
 
 - (void) fetchHighscores
 {
-	NSLog(@"fetching scores ...");
+	//NSLog(@"fetching scores ...");
 	
 	NSString *goText = [NSString stringWithFormat: @"Updating Scores ..."];
 	[textLabel setString: goText];
@@ -111,7 +111,7 @@
 
 -(void) scoreRequestFail:(id) sender
 {
-	NSLog(@"score req failed!");
+//	NSLog(@"score req failed!");
 	
 	
 	NSString *goText = [NSString stringWithFormat: @"Error fetching online scores ..."];

@@ -25,7 +25,7 @@ enum BackgroundLayerNodeTags
 		NSAssert(mapInfo,@"map not found!");
 		
 		NSString *filename = [NSString stringWithFormat:@"%@_background.png",[mapInfo objectForKey:@"BackgroundGraphic"]];
-		NSLog(@"filename is: %@",filename);
+	//	NSLog(@"filename is: %@",filename);
 		
         Sprite *backgroundImage = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: filename]];
 		NSAssert(backgroundImage,@"could not load background image!");
@@ -38,14 +38,14 @@ enum BackgroundLayerNodeTags
 		[[GameInfo sharedInstance] setWorldWidth: [[backgroundImage texture] contentSize].width];
 		[[GameInfo sharedInstance] setWorldHeight: [[backgroundImage texture] contentSize].height];
 		
-		NSLog(@"%i,%i",[[GameInfo sharedInstance] worldWidth],[[GameInfo sharedInstance] worldHeight]);
+		//NSLog(@"%i,%i",[[GameInfo sharedInstance] worldWidth],[[GameInfo sharedInstance] worldHeight]);
     }
     return self;
 }
 
 - (void) dealloc
 {
-	NSLog(@"game background layer dealloc");
+	//NSLog(@"game background layer dealloc");
 	
 	id node = [self getChildByTag: kBackgroundImage];
 	

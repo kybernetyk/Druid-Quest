@@ -41,7 +41,7 @@ enum GameSceneLayerTags
 	{
 //		NSLog(@"self retaincount: %i",[self retainCount]);
 
-		NSLog(@"gameScene init");
+//		NSLog(@"gameScene init");
 		[self loadScene];
 //		NSLog(@"self retaincount: %i",[self retainCount]);		
 	}
@@ -54,7 +54,7 @@ enum GameSceneLayerTags
 
 	[self unloadScene];
 
-	NSLog(@"game scene dealloc");
+//	NSLog(@"game scene dealloc");
 	[super dealloc];
 }
 
@@ -67,7 +67,7 @@ enum GameSceneLayerTags
 - (void) onExit
 {
 	[super onExit];
-	NSLog(@"game scene on exit!");
+//	NSLog(@"game scene on exit!");
 	
 //	[self unloadScene];
 	[[Director sharedDirector] removeEventHandler: self];
@@ -139,7 +139,7 @@ enum GameSceneLayerTags
 
 - (void) loadScene
 {
-	NSLog(@"gameScene loadScene");
+//	NSLog(@"gameScene loadScene");
 	id cameraLayer = [[Layer alloc] init];
 	[self addChild: cameraLayer z: 0 tag: kCameraLayer];
 	[cameraLayer setPosition: cpv(0,0)];
@@ -267,7 +267,7 @@ enum GameSceneLayerTags
 
 - (void) unloadScene
 {
-	NSLog(@"gameScene unload");
+	//NSLog(@"gameScene unload");
 	id cameraLayer = [self getChildByTag: kCameraLayer];
 	//NSLog(@"kCameraLayer %@ refcount: %i",cameraLayer,[cameraLayer retainCount]);
 	
@@ -746,13 +746,13 @@ BOOL mayPause = YES;
 
 - (BOOL)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches cancelled");
+	//NSLog(@"touches cancelled");
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	
 	//translate location to landscape mode
 	location = [[Director sharedDirector] convertCoordinate: location];
-	NSLog(@"Cancelled!");
+	//NSLog(@"Cancelled!");
 	return kEventHandled;
 	
 }
