@@ -13,6 +13,7 @@
 @interface GinkoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	NameEnterViewController *nameEnterViewController;
+		UIImageView *splashView; 
 }
 
 - (void) showHighscoreInput: (id) sender;

@@ -71,7 +71,7 @@
 	//printf("%f,%f vs. %f,%f\n",[controlledSprite position].x,[controlledSprite position].y,[player position].x,[player position].y);
 	//gridPosition = cpv([controlledSprite position].x/32,[controlledSprite position].y/32);
 	gridPosition = cpv(-1,-1);
-	struct timeval now;
+//	struct timeval now;
 	float dt = [[Director sharedDirector] deltaTime];
 	
 	if (!isMoving)

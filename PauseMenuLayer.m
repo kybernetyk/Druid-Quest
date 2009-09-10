@@ -68,7 +68,10 @@
 	//[[parent parent] showHelp];
 //	NSLog(@"exit to main menu!");
 	[[Director sharedDirector] popScene];
-	[[Director sharedDirector] replaceScene: [MenuScene node]];
+	//[[Director sharedDirector] replaceScene: [MenuScene node]];
+	
+	[[Director sharedDirector] replaceScene: [FadeTransition transitionWithDuration:0.6 scene: [MenuScene node] withColorRGB:0xffffff]];
+
 }
 
 @end

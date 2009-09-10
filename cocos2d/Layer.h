@@ -119,4 +119,7 @@
 -(void) switchTo: (unsigned int) n;
 /** release the current layer and switches to another layer indexed by n */
 -(void) switchToAndReleaseMe: (unsigned int) n;
+
+@property (readonly, assign) unsigned int enabledLayer;
+
 @end

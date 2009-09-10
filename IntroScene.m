@@ -10,6 +10,7 @@
 #import "MenuScene.h"
 #import "GameInfo.h"
 
+
 @implementation IntroScene
 #define LOADING_BAR_X 480/2
 #define LOADING_BAR_Y 40
@@ -17,6 +18,11 @@
 
 - (void) preloadingFinished
 {
+	NSString *s = @"surprise";
+	[s retain];
+	[s release];
+	
+	
 	isPreloading = NO;
 	[self removeChildByTag: LOADING_TAG cleanup: YES];
 	
@@ -43,7 +49,7 @@
 - (void) preloadNextResource
 {
 	NSString *spriteFileName = [preloadArray objectAtIndex: _preloadCounter];
-	NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
+	//NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
 	id tex = [[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 	[tex retain];
 	
@@ -59,7 +65,7 @@
 	
 	if (perc >= 0.75 && prevPercent != 0.75)
 	{
-	NSLog(@"perc: %f",perc);
+	//NSLog(@"perc: %f",perc);
 		prevPercent = 0.75;
 		[self removeChild:loadingBar cleanup:YES];
 		
@@ -69,7 +75,7 @@
 	}
 	if (perc >= 0.50 && perc < 0.75 && prevPercent != 0.50)
 	{
-			NSLog(@"perc: %f",perc);
+		//	NSLog(@"perc: %f",perc);
 		prevPercent = 0.50f;
 		[self removeChild:loadingBar cleanup:YES];
 		
@@ -79,7 +85,7 @@
 	}
 	if (perc >= 0.25 && perc < 0.50 && prevPercent != 0.25)
 	{
-			NSLog(@"perc: %f",perc);
+		//	NSLog(@"perc: %f",perc);
 		prevPercent = 0.25f;
 		[self removeChild:loadingBar cleanup:YES];
 		
@@ -127,7 +133,7 @@
 		//retained >.<
 		[[Director sharedDirector] addEventHandler: self];
 		
-		NSLog(@"pre caching ...");
+		//NSLog(@"pre caching ...");
 		
 		isPreloading = YES;
 		_preloadCounter = 0;
@@ -216,7 +222,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"intro scene dealloc");
+	//NSLog(@"intro scene dealloc");
 	
 
 	[preloadArray release];
@@ -233,14 +239,17 @@
 - (void) proceedToMainMenuScene
 {
 	[[Director sharedDirector] removeEventHandler: self];
-	[[Director sharedDirector] replaceScene: [MenuScene node]];
+//	[[Director sharedDirector] replaceScene: [MenuScene node]];
+	
+	[[Director sharedDirector] replaceScene: [FadeTransition transitionWithDuration:0.6 scene: [MenuScene node] withColorRGB:0xffffff]];
+	
 	//[self release];	
 }
 
 #pragma mark -- TouchEventsDelegate implementation
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches began %@", self);
+	//NSLog(@"touches began %@", self);
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
 	//	NSLog(@"touchBegan at: %f, %f",location.x,location.y);
@@ -252,7 +261,7 @@
 
 - (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-	NSLog(@"touches moved");
+	//NSLog(@"touches moved");
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
 	location = [[Director sharedDirector] convertCoordinate: location];
@@ -262,7 +271,7 @@
 
 - (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches ended");
+	//NSLog(@"touches ended");
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	
@@ -277,7 +286,7 @@
 
 - (BOOL)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touches cancelled");
+	//NSLog(@"touches cancelled");
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	

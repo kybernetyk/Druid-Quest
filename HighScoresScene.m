@@ -48,8 +48,11 @@
 		[menu2 alignItemsVertically];
 		menu2.position = cpv(380,25);
 		[self addChild: menu2];
+		[[Director sharedDirector] addEventHandler: self];
 		
 		[self fetchHighscores];
+		
+
 	}
 	
 	return self;
@@ -125,4 +128,58 @@
 	return @"lol";
 	
 }
+
+#pragma mark -- TouchEventsDelegate implementation
+- (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touches began %@", self);
+	UITouch *myTouch =  [touches anyObject];
+	CGPoint location = [myTouch locationInView: [myTouch view]];
+	//	NSLog(@"touchBegan at: %f, %f",location.x,location.y);
+	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	
+	return kEventHandled;
+}
+
+- (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{  
+	//NSLog(@"touches moved");
+	UITouch *myTouch =  [touches anyObject];
+	CGPoint location = [myTouch locationInView: [myTouch view]];
+	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	return kEventHandled;
+}
+
+- (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touches ended");
+	UITouch *touch = [touches anyObject];
+	CGPoint location = [touch locationInView: [touch view]];
+	
+	//translate location to landscape mode
+	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	//[self proceedToMainMenuScene];
+	[self proceedToMainMenuScene: self];
+	
+	return kEventHandled;
+}
+
+- (BOOL)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//NSLog(@"touches cancelled");
+	UITouch *touch = [touches anyObject];
+	CGPoint location = [touch locationInView: [touch view]];
+	
+	//translate location to landscape mode
+	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	return kEventHandled;
+	
+}
+
+
+
 @end

@@ -90,7 +90,7 @@ enum GameSceneLayerTags
 	
 //	NSLog(@"playerController retaincount: %i",[playerController retainCount]);
 	
-	HudLayer *hud = [self getChildByTag: kHudLayer];
+	HudLayer *hud = (HudLayer*)[self getChildByTag: kHudLayer];
 	if (hud)
 	{
 		[hud update];
@@ -112,12 +112,13 @@ enum GameSceneLayerTags
 	[[GameInfo sharedInstance] saveToFile];
 	
 	id _nextScene = nil;
+	unsigned int rgb = 0x000000;
 	[[GameInfo sharedInstance] setCurrentLevel: [[GameInfo sharedInstance] currentLevel] + 1];
 
 	if ([[GameInfo sharedInstance] currentLevel] > [[GameInfo sharedInstance] lastLevel])
 	{
 		_nextScene = [GameOverScene node];
-	
+		rgb = 0xffffff;
 	}
 	else
 	{
@@ -132,7 +133,7 @@ enum GameSceneLayerTags
 	
 	
 //	[[Director sharedDirector] replaceScene: [FadeBLTransition transitionWithDuration:5.0 scene: gs]];
-	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:_nextScene withColorRGB:0x000000]];
+	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:_nextScene withColorRGB: rgb]];
 
 	//[[Director sharedDirector] replaceScene: [SlideInLTransition transitionWithDuration:2.0 scene: gs]];
 }

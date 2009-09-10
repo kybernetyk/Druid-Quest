@@ -193,7 +193,7 @@
 		
 	//	NSLog(@"x: %f\ny: %f",gridPosition.x, gridPosition.y);
 	//	NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
-		GameScene *currentScene = [[Director sharedDirector] runningScene];
+		GameScene *currentScene = (GameScene*)[[Director sharedDirector] runningScene];
 		[currentScene resetScene];
 	}
 	
@@ -202,7 +202,7 @@
 	{
 		//NSLog(@"WIN WIN WIN! %i",[self retainCount]);
 		
-		GameScene *currentScene = [[Director sharedDirector] runningScene];
+		GameScene *currentScene = (GameScene*)[[Director sharedDirector] runningScene];
 
 		[currentScene loadNextLevel];
 //		[[Director sharedDirector] pause];

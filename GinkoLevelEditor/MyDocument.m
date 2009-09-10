@@ -8,6 +8,7 @@
 
 #import "MyDocument.h"
 #import "MapEntity.h"
+#import "GinkoLevelEditorAppDelegate.h"
 
 @implementation MyDocument
 @synthesize renderView;
@@ -177,8 +178,6 @@ enum blockTags
 	}*/
 	
 	[renderView setNeedsDisplay: YES];
-	
-	
 }
 
 - (NSMutableDictionary *) mapInfoDictionary
@@ -240,7 +239,22 @@ enum blockTags
 
 - (IBAction) exportMap: (id) sender
 {
-	[self exportMapToFile:@"/Users/jrk/map1.plist"];
+//	NSFileManager *fm = [NSFileManager defaultManager];
+//	if 
+
+	//NSString *fn = [[[[[self fileName] pathComponents] lastObject] componentsSeparatedByString:@"."] objectAtIndex: 0];
+	
+	NSString *fn = [self displayName];
+	
+
+	NSString *name = [NSString stringWithFormat:@"/Users/jrk/%@.plist",fn];
+//	NSLog(@"exporting map to %@",name);
+	
+	[self exportMapToFile: name];
+	
+	
+	//[ad lol];
+	
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

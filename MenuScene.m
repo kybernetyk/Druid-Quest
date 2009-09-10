@@ -76,7 +76,8 @@ enum MenuSceneNodeTags
 	
 	[[Director sharedDirector] removeEventHandler: self];
 	
-	[[Director sharedDirector] replaceScene: [GameScene node]];
+	//[[Director sharedDirector] replaceScene: [GameScene node]];
+	[[Director sharedDirector] replaceScene: [FadeTransition transitionWithDuration:0.6 scene: [GameScene node] withColorRGB:0xffffff]];
 	//[[Director sharedDirector] replaceScene: [GameOverScene node]];
 	
 	//[self release];	
@@ -88,7 +89,8 @@ enum MenuSceneNodeTags
 	[[GameInfo sharedInstance] reset];
 	[[GameInfo sharedInstance] resumeFromFile];
 	[[Director sharedDirector] removeEventHandler: self];
-	[[Director sharedDirector] replaceScene: [GameScene node]];
+//	[[Director sharedDirector] replaceScene: [GameScene node]];
+	[[Director sharedDirector] replaceScene: [FadeTransition transitionWithDuration:0.6 scene: [GameScene node] withColorRGB:0xffffff]];
 }
 
 - (void) showMainMenu
@@ -135,6 +137,17 @@ enum MenuSceneNodeTags
 	//translate location to landscape mode
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
+	if ([[self getChildByTag: kMainMenuLayer] enabledLayer] == 1) //help is active!
+	{
+		[[self getChildByTag: kMainMenuLayer] switchTo: 0];
+	}
+	
+
+	
+	//[[self getChildByTag: kMainMenuLayer] switchTo: 1];
+	
+//	NSLog(@"active layer: %@", [self getChildByTag: kMainMenuLayer]);
+
 	return kEventHandled;
 }
 

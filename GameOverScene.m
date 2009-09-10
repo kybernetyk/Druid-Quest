@@ -13,7 +13,7 @@
 #import "GinkoAppDelegate.h"
 
 @implementation GameOverScene
-
+@synthesize rating;
 
 - (id) init
 {
@@ -107,7 +107,9 @@
 - (void) proceedToMainMenuScene: (id) sender
 {
 	[[Director sharedDirector] removeEventHandler: self];
-	[[Director sharedDirector] replaceScene: [MenuScene node]];
+	//[[Director sharedDirector] replaceScene: [MenuScene node]];
+	
+	[[Director sharedDirector] replaceScene: 	[FadeTransition transitionWithDuration:0.6 scene:[MenuScene node] withColorRGB: 0xffffff]];
 	//[self release];	
 }
 

@@ -546,7 +546,7 @@ SpriteController *fieldcopy[32][32];
 				
 				_position->x = [linkedTeleport gridPosition].x;
 				_position->y = [linkedTeleport gridPosition].y;
-				bContinue = YES;
+				*bContinue = YES;
 				
 				return retPoints;
 				

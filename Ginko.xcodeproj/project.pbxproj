@@ -103,7 +103,6 @@
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
 		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
 		03C36B520FEC112100A1CD0C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C36B510FEC112100A1CD0C /* icon.png */; };
-		03C4FCAA0FE3202E002617FA /* bg_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03C4FCA90FE3202E002617FA /* bg_music.wav */; };
 		03C4FCFD0FE6CD1A002617FA /* TeleporterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */; };
 		03F8F4C10F7A4B1300E6E02E /* GameBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */; };
 		03F8F4FA0F7A4DAD00E6E02E /* gpacks in Resources */ = {isa = PBXBuildFile; fileRef = 03F8F4F50F7A4DAD00E6E02E /* gpacks */; };
@@ -303,7 +302,6 @@
 		039940400F7FFFFF00770565 /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
 		039940AC0F80F4DC00770565 /* mpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mpacks; sourceTree = "<group>"; };
 		03C36B510FEC112100A1CD0C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		03C4FCA90FE3202E002617FA /* bg_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bg_music.wav; sourceTree = "<group>"; };
 		03C4FCFB0FE6CD1A002617FA /* TeleporterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeleporterController.h; sourceTree = "<group>"; };
 		03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeleporterController.m; sourceTree = "<group>"; };
 		03F8F4BF0F7A4B1300E6E02E /* GameBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBackgroundLayer.h; sourceTree = "<group>"; };
@@ -698,14 +696,6 @@
 			name = Layer;
 			sourceTree = "<group>";
 		};
-		03F8F4F00F7A4D7900E6E02E /* blue */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = blue;
-			path = gpacks/blue;
-			sourceTree = "<group>";
-		};
 		03F8F7490F7AEAFF00E6E02E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,7 +769,6 @@
 			isa = PBXGroup;
 			children = (
 				03C36B510FEC112100A1CD0C /* icon.png */,
-				03C4FCA90FE3202E002617FA /* bg_music.wav */,
 				031AE39F0FE2EDEF0031F36D /* Default.png */,
 				0344FA770FD958C700E766FE /* menu_background.png */,
 				039304E60F8AAAE20022DB77 /* numfont.png */,
@@ -787,7 +776,6 @@
 				0393046D0F8AA16C0022DB77 /* font2.png */,
 				039940AC0F80F4DC00770565 /* mpacks */,
 				03F8F4F50F7A4DAD00E6E02E /* gpacks */,
-				03F8F4F00F7A4D7900E6E02E /* blue */,
 				030F48C60F78D68E004EA3FE /* fire.png */,
 				030F47290F7850C3004EA3FE /* fps_images.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -860,7 +848,6 @@
 				0344F9780FD9574F00E766FE /* NameEnterViewController.xib in Resources */,
 				0344FA780FD958C700E766FE /* menu_background.png in Resources */,
 				031AE3A00FE2EDEF0031F36D /* Default.png in Resources */,
-				03C4FCAA0FE3202E002617FA /* bg_music.wav in Resources */,
 				03C36B520FEC112100A1CD0C /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

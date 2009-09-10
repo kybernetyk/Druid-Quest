@@ -30,25 +30,26 @@ enum HelpMenuLayerTags {
 		//[self addChild:backgroundImage z: 0 tag: kBackgroundImage];
 		
 		
-		MenuItem *ret = [MenuItemFont itemFromString:@"Return"
+/*		MenuItem *ret = [MenuItemFont itemFromString:@"Return"
 												target:self
 											  selector:@selector(showMainMenu:)];
 		
 		
 		
-        Menu *menu = [Menu menuWithItems: ret, nil];
+        Menu *menu = [Menu menuWithItems: ret, nil];*/
 		
 		//[Menu menuWithItems:start, help, nil];
-        [menu alignItemsVertically];
+       // [menu alignItemsVertically];
 		
-		[menu setPosition: cpv(420,300)];
+//		[menu setPosition: cpv(420,300)];
 		
 		
-		[self addChild: menu z: 0 tag: kHelpMenu];
+//		[self addChild: menu z: 0 tag: kHelpMenu];
 		
-		Label *name = [Label labelWithString:@"-== Ginko ==-\n\nHalp!\n\nLOL I HALP!" dimensions:CGSizeMake(300,124) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:14];
+		Label *name = [Label labelWithString:@"Help\rUse the arrows on the edge of the screen\rto navigate through the labyrinth.\r\rMove the druid to the magic stone\rto reach the next level.\r\rAvoid getting lost in the woods.\r\rMaster all levels to help\rthe druid find his way back home!"
+								  dimensions:CGSizeMake(480,320) alignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:14];
 		
-		name.position = cpv(180,190);
+		[name setPosition: cpv(240,100)];
 		
 		[self addChild:name];
 		

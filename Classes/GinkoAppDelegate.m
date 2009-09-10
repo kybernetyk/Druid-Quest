@@ -43,6 +43,25 @@
 	nameEnterViewController = [[NameEnterViewController alloc] initWithNibName: @"NameEnterViewController" bundle: nil];
 	
 	[window makeKeyAndVisible];
+	
+	
+	
+	// Make this interesting.  
+	splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];  
+	splashView.image = [UIImage imageNamed:@"Default.png"];  
+	[window addSubview:splashView];  
+	[window bringSubviewToFront:splashView];  
+	[UIView beginAnimations:nil context:nil];  
+	[UIView setAnimationDuration:1.5];  
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:window cache:YES];  
+	[UIView setAnimationDelegate:self];   
+	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];  
+	splashView.alpha = 0.0;  
+	splashView.frame = CGRectMake(-60, -85, 440, 635);  
+	[UIView commitAnimations];  
+	
+	
+	
 	[[Director sharedDirector] runWithScene: [IntroScene node]];
 }
 

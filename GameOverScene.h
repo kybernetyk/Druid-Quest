@@ -22,6 +22,8 @@
 	float rating;
 }
 
+@property (readonly, assign) float rating;
+
 - (void) proceedToMainMenuScene: (id) sender;
 - (void) proceedToHighscoreSubmit: (id) sender;
 

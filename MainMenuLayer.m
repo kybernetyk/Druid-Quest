@@ -100,6 +100,10 @@ enum MainMenuLayerTags
 
 - (void) startSinglePlayerGame: (id) sender
 {
+	NSString *s = @"mode";
+	[s retain];
+	[s release];
+	
 	[[parent parent] startSinglePlayerGame];
 }
 

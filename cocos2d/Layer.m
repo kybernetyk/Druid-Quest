@@ -229,6 +229,7 @@
 #pragma mark MultiplexLayer
 
 @implementation MultiplexLayer
+@synthesize enabledLayer;
 +(id) layerWithLayers: (Layer*) layer, ... 
 {
 	va_list args;

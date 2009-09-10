@@ -11,9 +11,15 @@
 #import "PauseMenuLayer.h"
 #import "GameInfo.h"
 
+
 @implementation PauseScene
 - (id) init
 {
+	
+	NSString *s = @"special";
+	[s retain];
+	[s release];
+	
 	//NSLog(@"MenuScene Init");
 	self = [super init];
 	if (self)

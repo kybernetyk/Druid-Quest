@@ -21,10 +21,10 @@
 	type = [tpe intValue];
 	NSData *d = [coder decodeDataObject];
 	imageName = [[NSString alloc] initWithData: d encoding: NSUTF8StringEncoding];
-	[imageName retain];
+	//[imageName retain];
 	NSLog(@"imgname: %@",imageName);
 	image = [[NSImage alloc] initWithContentsOfFile: 	[[NSBundle mainBundle] pathForImageResource: imageName]];
-	[image retain];
+	//[image retain];
 //	[image setName: imgName];
     return self;
 }

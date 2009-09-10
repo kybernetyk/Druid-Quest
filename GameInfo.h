@@ -36,6 +36,8 @@
 	
 	cpVect finishPosition;
 	
+	NSArray *levelPath;
+	
 }
 +(GameInfo *) sharedInstance;
 

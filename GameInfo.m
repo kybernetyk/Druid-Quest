@@ -89,6 +89,9 @@ static GameInfo *sharedSingleton = nil;
     self = [super init];
     sharedSingleton = self;
 
+	
+	levelPath = [[NSArray alloc] initWithObjects:@"2",nil,@"3",@"5",@"10",@"8",@"6",@"12",@"16",@"7",@"15",@"14",@"13",@"11",@"17",@"9",nil];
+	
     //initialize here
 	[self reset];
 	
@@ -101,10 +104,10 @@ static GameInfo *sharedSingleton = nil;
 	[self setLives: 0];
 	[self setZoom: 1.0f];
 	[self setCurrentLevel: 1];
-	[self setLastLevel: 4]; //11
+	[self setLastLevel: [levelPath count]]; //11
 	[self setTime: 0.0f];
 	[self setActiveGraphicsPack: @"druidquest"];
-	[self setActiveMapPack: @"roadblocks"];
+	[self setActiveMapPack: @"final"];
 	[self setWorldWidth: 480];
 	[self setWorldHeight: 320];
 	[self setIsPaused: NO];
@@ -213,7 +216,9 @@ static GameInfo *sharedSingleton = nil;
 
 - (NSString *) currentMapFilename
 {
-	return [self pathForMapFile: [NSString stringWithFormat:@"map%i.plist",currentLevel]];
+	NSLog(@"returning name: %@",[NSString stringWithFormat:@"level%@.plist",[levelPath objectAtIndex: (currentLevel-1)]]);
+	
+	return [self pathForMapFile: [NSString stringWithFormat:@"level%@.plist",[levelPath objectAtIndex: (currentLevel-1)]]];
 }
 
 @end

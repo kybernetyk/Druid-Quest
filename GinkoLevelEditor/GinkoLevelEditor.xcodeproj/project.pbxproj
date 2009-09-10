@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0392566A0F7FB1DC008964C8 /* MapEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 039256690F7FB1DC008964C8 /* MapEntity.m */; };
 		03993FCC0F7FFBE000770565 /* block_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 03993FCB0F7FFBE000770565 /* block_5.png */; };
+		03A3CCAD10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A3CCAC10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.m */; };
 		03B4FDF70F87E2EE000F8E7A /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B4FDF60F87E2EE000F8E7A /* game_background.png */; };
 		03C4FCC90FE6CAE1002617FA /* teleporter_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C4FCC80FE6CAE1002617FA /* teleporter_1.png */; };
 		03CF02EE0F7ED7B800798FE9 /* block_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 03CF02E90F7ED7B800798FE9 /* block_4.png */; };
@@ -32,6 +33,8 @@
 		039256680F7FB1DC008964C8 /* MapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEntity.h; sourceTree = "<group>"; };
 		039256690F7FB1DC008964C8 /* MapEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapEntity.m; sourceTree = "<group>"; };
 		03993FCB0F7FFBE000770565 /* block_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_5.png; sourceTree = "<group>"; };
+		03A3CCAB10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GinkoLevelEditorAppDelegate.h; sourceTree = "<group>"; };
+		03A3CCAC10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GinkoLevelEditorAppDelegate.m; sourceTree = "<group>"; };
 		03B4FDF60F87E2EE000F8E7A /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_background.png; sourceTree = "<group>"; };
 		03C4FCC80FE6CAE1002617FA /* teleporter_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teleporter_1.png; sourceTree = "<group>"; };
 		03CF02E90F7ED7B800798FE9 /* block_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_4.png; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				03CF030F0F7EDA4800798FE9 /* RenderView.m */,
 				039256680F7FB1DC008964C8 /* MapEntity.h */,
 				039256690F7FB1DC008964C8 /* MapEntity.m */,
+				03A3CCAB10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.h */,
+				03A3CCAC10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				03CF03100F7EDA4800798FE9 /* RenderView.m in Sources */,
 				0392566A0F7FB1DC008964C8 /* MapEntity.m in Sources */,
+				03A3CCAD10402DB40064CBE7 /* GinkoLevelEditorAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

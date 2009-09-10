@@ -9,6 +9,7 @@
 #import "NameEnterViewController.h"
 #import "GameInfo.h"
 #import "cocoslive.h"
+#import "GameOverScene.h"
 
 @implementation NameEnterViewController
 @synthesize gameOverScene;
@@ -51,8 +52,6 @@
 	[nameTextField resignFirstResponder];
 	
 	[self postHighScoresToServer];
-	
-	
 }
 
 -(void) scorePostOk:(id) sender
@@ -83,7 +82,10 @@
 	id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
 	NSMutableDictionary *d = [NSMutableDictionary dictionary];
 	
-	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+//	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+	float rating = [(GameOverScene*)gameOverScene rating];
+	
+	//NSLog(@"rating from scene: %f\rfucked up rating: %f",rating2, rating);
 	int minutes = [[GameInfo sharedInstance] time]/60;
 	int hours = [[GameInfo sharedInstance] time]/60/60;
 	int seconds = [[GameInfo sharedInstance] time];
