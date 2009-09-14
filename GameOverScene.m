@@ -20,6 +20,9 @@
 	self = [super init];
 	if (self)
 	{
+		
+		[[[UIApplication sharedApplication] delegate] playScoreMusic];
+		
 		rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
 		
 		background = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"end_bg.png"]];

@@ -14,10 +14,113 @@
 @implementation GinkoAppDelegate
 
 @synthesize window;
+@synthesize isMusicPlaybackEnabled;
 
+- (void) playMenuMusic
+{
+	if (!isMusicPlaybackEnabled)
+	{
+		whichMusicIsPlaying = kGinkoMusicNone;
+		return;
+	}
+
+	if (whichMusicIsPlaying == kGinkoMusicMenuTheme)
+		return;
+	whichMusicIsPlaying = kGinkoMusicMenuTheme;
+	[audioplayer stop];
+	[audioplayer release];
+	audioplayer = nil;
+	
+	NSError *error;
+	NSURL *url = [NSURL  fileURLWithPath: [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"m4a"] ];
+
+	audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error];
+	[audioplayer setNumberOfLoops: -1]; //repeat bitch
+	NSLog(@"avp: %@ error: %@",audioplayer, error);
+	NSLog(@"starting music: %i",[audioplayer play]);
+}
+
+- (void) playGameMusic
+{
+	if (!isMusicPlaybackEnabled)
+	{
+		whichMusicIsPlaying = kGinkoMusicNone;
+		return;
+	}
+	
+	if (whichMusicIsPlaying == kGinkoMusicGameTheme)
+		return;
+	whichMusicIsPlaying = kGinkoMusicGameTheme;
+	
+	[audioplayer stop];
+	[audioplayer release];
+	audioplayer = nil;
+
+	NSError *error;
+	NSURL *url = [NSURL  fileURLWithPath: [[NSBundle mainBundle] pathForResource:@"game" ofType:@"m4a"] ];
+
+	audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error];
+	[audioplayer setNumberOfLoops: -1]; //repeat bitch
+	NSLog(@"avp: %@ error: %@",audioplayer, error);
+	NSLog(@"starting music: %i",[audioplayer play]);
+	
+}
+
+- (void) playScoreMusic
+{
+	//don't play music if turned off
+	//set music playing to none in case the user wants to restart the shit
+	if (!isMusicPlaybackEnabled)
+	{
+		whichMusicIsPlaying = kGinkoMusicNone;
+		return;
+	}
+
+	whichMusicIsPlaying = kGinkoMusicScoreTheme;
+	[audioplayer stop];
+	[audioplayer release];
+	audioplayer = nil;
+	
+	
+	NSError *error;
+	NSURL *url = [NSURL  fileURLWithPath: 	 [[NSBundle mainBundle] pathForResource:@"score" ofType:@"m4a"] ];
+
+	audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error];
+	[audioplayer setNumberOfLoops: -1]; //repeat bitch
+	
+	NSLog(@"avp: %@ error: %@",audioplayer, error);
+	NSLog(@"starting music: %i",[audioplayer play]);
+	
+}
+
+- (void) stopMusicPlayback
+{
+	[audioplayer stop];
+	[audioplayer release];
+	audioplayer = nil;
+	whichMusicIsPlaying = kGinkoMusicNone;
+}
+
+- (void) setIsMusicPlaybackEnabled:(BOOL) isIt
+{
+	isMusicPlaybackEnabled = isIt;
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	[defs setBool: isMusicPlaybackEnabled forKey: @"play music"];
+}
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
-{    
+{   
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+
+	
+	NSDictionary *thedefs = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool: YES] forKey: @"play music"];
+
+	[defs registerDefaults: thedefs];
+
+	
+	[self setIsMusicPlaybackEnabled: [defs boolForKey:@"play music"]];
+	[self playMenuMusic];
+	
 	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
 	
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -25,6 +128,9 @@
 	
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:YES];
+	
+	
+//	[Director useFastDirector];
 	
 	//[FastDirector sharedDirector];
 	[[Director sharedDirector] setPixelFormat: kRGBA8];
@@ -82,6 +188,11 @@
 
 - (void)dealloc 
 {
+	[audioplayer stop];
+	[audioplayer release];
+	audioplayer = nil;
+	
+	
     [window release];
     [super dealloc];
 }

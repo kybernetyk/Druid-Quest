@@ -61,7 +61,6 @@
 		030F46F70F784FEC004EA3FE /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = 030F46E50F784FEC004EA3FE /* cpSpace.c */; };
 		030F46F80F784FEC004EA3FE /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = 030F46E70F784FEC004EA3FE /* cpSpaceHash.c */; };
 		030F46F90F784FEC004EA3FE /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = 030F46E90F784FEC004EA3FE /* cpVect.c */; };
-		030F470D0F785062004EA3FE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030F470C0F785062004EA3FE /* OpenGLES.framework */; };
 		030F47230F7850A9004EA3FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030F47220F7850A9004EA3FE /* QuartzCore.framework */; };
 		030F472A0F7850C3004EA3FE /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 030F47290F7850C3004EA3FE /* fps_images.png */; };
 		030F47550F7851BB004EA3FE /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 030F47540F7851BB004EA3FE /* IntroScene.m */; };
@@ -79,6 +78,8 @@
 		0344FA780FD958C700E766FE /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0344FA770FD958C700E766FE /* menu_background.png */; };
 		034FCAE10FDB0EDF00FB6A76 /* HighScoresScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 034FCAE00FDB0EDF00FB6A76 /* HighScoresScene.m */; };
 		0350CF990F7BCEC700C45E8D /* AngularBlockController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350CF980F7BCEC700C45E8D /* AngularBlockController.m */; };
+		03779AFA105D908C00EDC3E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03779AF9105D908C00EDC3E6 /* AVFoundation.framework */; };
+		03779AFC105D908C00EDC3E6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03779AFB105D908C00EDC3E6 /* OpenGLES.framework */; };
 		039255880F7FA9C0008964C8 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 039255870F7FA9C0008964C8 /* Waypoint.m */; };
 		039301280F8A5B420022DB77 /* BirdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039301270F8A5B420022DB77 /* BirdController.m */; };
 		039303DF0F8A9B820022DB77 /* HudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 039303DE0F8A9B820022DB77 /* HudLayer.m */; };
@@ -102,6 +103,9 @@
 		03993F900F7FF84D00770565 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03993F8F0F7FF84D00770565 /* BlockFactory.m */; };
 		039940410F7FFFFF00770565 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039940400F7FFFFF00770565 /* FinishController.m */; };
 		039940B10F80F4DC00770565 /* mpacks in Resources */ = {isa = PBXBuildFile; fileRef = 039940AC0F80F4DC00770565 /* mpacks */; };
+		039FA539105D85690087DA66 /* score.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 039FA537105D85690087DA66 /* score.m4a */; };
+		039FA53A105D85690087DA66 /* game.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 039FA538105D85690087DA66 /* game.m4a */; };
+		03A7F12B105D8007007D588F /* menu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 03A7F12A105D8007007D588F /* menu.m4a */; };
 		03C36B520FEC112100A1CD0C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C36B510FEC112100A1CD0C /* icon.png */; };
 		03C4FCFD0FE6CD1A002617FA /* TeleporterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */; };
 		03F8F4C10F7A4B1300E6E02E /* GameBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F8F4C00F7A4B1300E6E02E /* GameBackgroundLayer.m */; };
@@ -230,7 +234,6 @@
 		030F46E90F784FEC004EA3FE /* cpVect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpVect.c; sourceTree = "<group>"; };
 		030F46EA0F784FEC004EA3FE /* cpVect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpVect.h; sourceTree = "<group>"; };
 		030F46EB0F784FEC004EA3FE /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
-		030F470C0F785062004EA3FE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		030F47220F7850A9004EA3FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		030F47290F7850C3004EA3FE /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		030F47530F7851BB004EA3FE /* IntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScene.h; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 		034FCAE00FDB0EDF00FB6A76 /* HighScoresScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresScene.m; sourceTree = "<group>"; };
 		0350CF970F7BCEC700C45E8D /* AngularBlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngularBlockController.h; sourceTree = "<group>"; };
 		0350CF980F7BCEC700C45E8D /* AngularBlockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngularBlockController.m; sourceTree = "<group>"; };
+		03779AF9105D908C00EDC3E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		03779AFB105D908C00EDC3E6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		039255860F7FA9C0008964C8 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
 		039255870F7FA9C0008964C8 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
 		039301260F8A5B420022DB77 /* BirdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirdController.h; sourceTree = "<group>"; };
@@ -301,6 +306,9 @@
 		0399403F0F7FFFFF00770565 /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		039940400F7FFFFF00770565 /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
 		039940AC0F80F4DC00770565 /* mpacks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mpacks; sourceTree = "<group>"; };
+		039FA537105D85690087DA66 /* score.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = score.m4a; sourceTree = "<group>"; };
+		039FA538105D85690087DA66 /* game.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = game.m4a; sourceTree = "<group>"; };
+		03A7F12A105D8007007D588F /* menu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu.m4a; sourceTree = "<group>"; };
 		03C36B510FEC112100A1CD0C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		03C4FCFB0FE6CD1A002617FA /* TeleporterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeleporterController.h; sourceTree = "<group>"; };
 		03C4FCFC0FE6CD1A002617FA /* TeleporterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeleporterController.m; sourceTree = "<group>"; };
@@ -334,8 +342,9 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				030F470D0F785062004EA3FE /* OpenGLES.framework in Frameworks */,
 				030F47230F7850A9004EA3FE /* QuartzCore.framework in Frameworks */,
+				03779AFA105D908C00EDC3E6 /* AVFoundation.framework in Frameworks */,
+				03779AFC105D908C00EDC3E6 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +777,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				039FA537105D85690087DA66 /* score.m4a */,
+				039FA538105D85690087DA66 /* game.m4a */,
+				03A7F12A105D8007007D588F /* menu.m4a */,
 				03C36B510FEC112100A1CD0C /* icon.png */,
 				031AE39F0FE2EDEF0031F36D /* Default.png */,
 				0344FA770FD958C700E766FE /* menu_background.png */,
@@ -787,10 +799,11 @@
 			isa = PBXGroup;
 			children = (
 				030F47220F7850A9004EA3FE /* QuartzCore.framework */,
-				030F470C0F785062004EA3FE /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				03779AF9105D908C00EDC3E6 /* AVFoundation.framework */,
+				03779AFB105D908C00EDC3E6 /* OpenGLES.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -849,6 +862,9 @@
 				0344FA780FD958C700E766FE /* menu_background.png in Resources */,
 				031AE3A00FE2EDEF0031F36D /* Default.png in Resources */,
 				03C36B520FEC112100A1CD0C /* icon.png in Resources */,
+				03A7F12B105D8007007D588F /* menu.m4a in Resources */,
+				039FA539105D85690087DA66 /* score.m4a in Resources */,
+				039FA53A105D85690087DA66 /* game.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,6 +977,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks\"",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.sdk/System/Library/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -975,6 +996,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks\"",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.sdk/System/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ginko_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -995,7 +1021,8 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Druid Quest";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.1;
+				VALID_ARCHS = "i386 armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -1011,7 +1038,8 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Druid Quest";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.1;
+				VALID_ARCHS = "i386 armv6 armv7";
 			};
 			name = Release;
 		};

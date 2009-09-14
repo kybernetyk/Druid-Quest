@@ -83,12 +83,63 @@ enum MainMenuLayerTags
 		
 		//[Menu menuWithItems:start, help, nil];
         [menu alignItemsVertically];
+
 		
 		[self addChild: menu z: 0 tag: kMainMenu];
+		
+		MenuItem *musicon = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_play.png"] 
+												 selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_play.png"] 
+														target: nil
+													  selector:@selector(toggleMusic:)];
+		
+		MenuItem *musicoff = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_pause.png"] 
+												  selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_pause.png"] 
+														 target: nil 
+													   selector:@selector(toggleMusic:)];
+		
+		
+		
+		MenuItemToggle *tog = nil;
+		
+		if ([[[UIApplication sharedApplication] delegate] isMusicPlaybackEnabled])
+		{	
+			tog = [MenuItemToggle itemWithTarget: self selector:@selector (toggleMusic:) items: musicoff, musicon, nil];
+		}
+		else 
+		{
+			tog = [MenuItemToggle itemWithTarget: self selector:@selector (toggleMusic:) items: musicon, musicoff, nil];
+		}
+		
+		
+		[menu addChild: tog];
+		[tog setPosition: cpv (-96,80)];
+		//[tog setPosition: cpv(480-160,320-96)];
+		
+		//[self addChild: tog z: 10 tag: 0xcafe];
+		
+		
 	}
 	
 	return self;
 }
+
+- (void) toggleMusic: (id) sender
+{
+	id del = [[UIApplication sharedApplication] delegate];
+	
+	if ([del isMusicPlaybackEnabled])
+	{
+		[del setIsMusicPlaybackEnabled: NO];
+		[del stopMusicPlayback];
+	}
+	else 
+	{
+		[del setIsMusicPlaybackEnabled: YES];
+		[del playMenuMusic];
+	}
+	
+}
+
 
 - (void) dealloc
 {

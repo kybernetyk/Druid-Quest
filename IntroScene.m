@@ -9,7 +9,9 @@
 #import "IntroScene.h"
 #import "MenuScene.h"
 #import "GameInfo.h"
+#import <AVFoundation/AVAudioPlayer.h>
 
+unsigned long totalbytesused = 0;
 
 @implementation IntroScene
 #define LOADING_BAR_X 480/2
@@ -22,6 +24,8 @@
 	[s retain];
 	[s release];
 	
+	
+	NSLog(@"Preloaded %@ bytes",[NSNumber numberWithLong: totalbytesused]);
 	
 	isPreloading = NO;
 	[self removeChildByTag: LOADING_TAG cleanup: YES];
@@ -52,6 +56,17 @@
 	//NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
 	id tex = [[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 	[tex retain];
+	
+	//	kTexture2DPixelFormat_Automatic = 0,
+//	kTexture2DPixelFormat_RGBA8888,
+//	kTexture2DPixelFormat_RGB565,
+//	kTexture2DPixelFormat_A8,
+//	
+	
+	if ([tex pixelFormat] == kTexture2DPixelFormat_RGBA8888)
+		totalbytesused += ([tex pixelsWide] * [tex pixelsWide] * 4);
+	else if ([tex pixelFormat] == kTexture2DPixelFormat_RGB565)
+		totalbytesused += ([tex pixelsWide] * [tex pixelsWide] * 2);
 	
 	_preloadCounter ++;
 	if (_preloadCounter >= [preloadArray count])
@@ -111,6 +126,23 @@
 	self = [super init];
 	if (self)
 	{
+		
+/*		OSStatus AudioQueueNewOutput (
+									  const AudioStreamBasicDescription   *inFormat,
+									  AudioQueueOutputCallback            inCallbackProc,
+									  void                                *inUserData,
+									  CFRunLoopRef                        inCallbackRunLoop,
+									  CFStringRef                         inCallbackRunLoopMode,
+									  UInt32                              inFlags,
+									  AudioQueueRef                       *outAQ
+									  );*/
+		
+//		AudioQueueRef aqref;
+		
+		
+//		AudioQueueNewOutput (
+
+		
 		background = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"intro_1.png"]];
 		[background setPosition: cpv(480/2,320/2)];
 
@@ -126,8 +158,8 @@
 		
 		id loading = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"loading.png"]];
 		[loading setPosition:cpv(240, 80)];
-		[loading setOpacity: 1.0f];
-		[self addChild: loading z: 0 tag:LOADING_TAG];
+		//[loading setOpacity: 1.0f];
+		[self addChild: loading z: 10 tag:LOADING_TAG];
 		
 		
 		//retained >.<

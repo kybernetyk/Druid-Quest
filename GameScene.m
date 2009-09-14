@@ -42,6 +42,8 @@ enum GameSceneLayerTags
 //		NSLog(@"self retaincount: %i",[self retainCount]);
 
 //		NSLog(@"gameScene init");
+		
+				[[[UIApplication sharedApplication] delegate] playGameMusic];
 		[self loadScene];
 //		NSLog(@"self retaincount: %i",[self retainCount]);		
 	}

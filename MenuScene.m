@@ -28,6 +28,8 @@ enum MenuSceneNodeTags
 	self = [super init];
 	if (self)
 	{
+		[[[UIApplication sharedApplication] delegate] playMenuMusic];
+		
 		MenuBackgroundLayer *layer = [MenuBackgroundLayer node];
 		[layer setPosition: cpv(480/2, 320/2)];
 		

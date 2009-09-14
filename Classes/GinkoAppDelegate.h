@@ -8,17 +8,33 @@
 
 #import <UIKit/UIKit.h>
 #import "NameEnterViewController.h"
+#import <AVFoundation/AVAudioPlayer.h>
 //#import "GameOverScene.h"
+
+#define kGinkoMusicNone 0
+#define kGinkoMusicMenuTheme 1
+#define kGinkoMusicGameTheme 2
+#define kGinkoMusicScoreTheme 3
 
 @interface GinkoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	NameEnterViewController *nameEnterViewController;
-		UIImageView *splashView; 
+	UIImageView *splashView; 
+	
+	AVAudioPlayer *audioplayer;
+	NSUInteger whichMusicIsPlaying;
+	BOOL isMusicPlaybackEnabled;
 }
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (readwrite, assign) BOOL isMusicPlaybackEnabled;
 
 - (void) showHighscoreInput: (id) sender;
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+- (void) playMenuMusic;
+- (void) playGameMusic;
+- (void) playScoreMusic;
+- (void) stopMusicPlayback;
+
 
 @end
 

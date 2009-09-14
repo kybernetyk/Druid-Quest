@@ -14,6 +14,8 @@
 	CocosNode *background;
 	CocosNode *loadingBar;
 	CocosNode *prevLoadingBar;
+	CocosNode *loadingLabel;
+	
 	int _preloadCounter;
 	float prevPercent;
 	NSArray *preloadArray;

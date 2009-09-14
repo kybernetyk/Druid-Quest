@@ -19,6 +19,8 @@
 	self = [super init];
 	if (self)
 	{
+	
+		
 		Sprite *background = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"menu_bg.png"]];
 		[background setPosition: cpv(480/2,320/2)];
 		[self addChild: background];

@@ -11,6 +11,8 @@
 #import "GameScene.h"
 #import "GameInfo.h"
 
+
+
 @implementation PauseMenuLayer
 - (id) init 
 {
@@ -25,15 +27,40 @@
 												selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_resume_a.png"] 
 													   target:self 
 													 selector:@selector(continueGame:)];
-		
 
+
+		
+		MenuItem *musicon = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_play.png"] 
+															   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_play.png"] 
+																	  target: nil
+																	selector:@selector(toggleMusic:)];
+		
+		MenuItem *musicoff = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_pause.png"] 
+												 selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"music_pause.png"] 
+														target: nil 
+													  selector:@selector(toggleMusic:)];
+		
+		
+		
+		MenuItemToggle *tog = nil;
+		
+		if ([[[UIApplication sharedApplication] delegate] isMusicPlaybackEnabled])
+		{	
+			tog = [MenuItemToggle itemWithTarget: self selector:@selector (toggleMusic:) items: musicoff, musicon, nil];
+		}
+		else 
+		{
+			tog = [MenuItemToggle itemWithTarget: self selector:@selector (toggleMusic:) items: musicon, musicoff, nil];
+		}
+
+		
 		MenuItem *exit_ = [MenuItemImage itemFromNormalImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_exit.png"] 
 												   selectedImage:[[GameInfo sharedInstance] pathForGraphicsFile: @"menu_exit_a.png"] 
 														  target:self 
 														selector:@selector(exitToMainMenu:)];
 		
 		
-        Menu *menu = [Menu menuWithItems: continue_, exit_,nil];
+        Menu *menu = [Menu menuWithItems: continue_, tog, exit_,nil];
 		
 		//[Menu menuWithItems:start, help, nil];
         
@@ -52,6 +79,23 @@
 	[self removeAllChildrenWithCleanup: YES];
 	
 	[super dealloc];
+}
+
+- (void) toggleMusic: (id) sender
+{
+	id del = [[UIApplication sharedApplication] delegate];
+	
+	if ([del isMusicPlaybackEnabled])
+	{
+		[del setIsMusicPlaybackEnabled: NO];
+		[del stopMusicPlayback];
+	}
+	else 
+	{
+		[del setIsMusicPlaybackEnabled: YES];
+		[del playGameMusic];
+	}
+
 }
 
 - (void) continueGame: (id) sender
