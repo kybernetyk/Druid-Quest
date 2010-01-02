@@ -24,9 +24,33 @@
 		</dict>
 		<dict>
 			<key>gridPositionX</key>
+			<real>6</real>
+			<key>gridPositionY</key>
+			<real>12</real>
+			<key>type</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>gridPositionX</key>
+			<real>7</real>
+			<key>gridPositionY</key>
+			<real>12</real>
+			<key>type</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>gridPositionX</key>
 			<real>8</real>
 			<key>gridPositionY</key>
 			<real>12</real>
+			<key>type</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>gridPositionX</key>
+			<real>3</real>
+			<key>gridPositionY</key>
+			<real>3</real>
 			<key>type</key>
 			<integer>3</integer>
 		</dict>
@@ -193,142 +217,6 @@
 		<dict>
 			<key>gridPositionX</key>
 			<real>1</real>
-			<key>gridPositionY</key>
-			<real>5</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>10</real>
-			<key>gridPositionY</key>
-			<real>8</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>20</real>
-			<key>gridPositionY</key>
-			<real>9</real>
-			<key>type</key>
-			<integer>7</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>15</real>
-			<key>gridPositionY</key>
-			<real>0.0</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>0.0</real>
-			<key>gridPositionY</key>
-			<real>13</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>20</real>
-			<key>gridPositionY</key>
-			<real>10</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>9</real>
-			<key>gridPositionY</key>
-			<real>2</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>2</real>
-			<key>gridPositionY</key>
-			<real>2</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>15</real>
-			<key>gridPositionY</key>
-			<real>13</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>19</real>
-			<key>gridPositionY</key>
-			<real>2</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>18</real>
-			<key>gridPositionY</key>
-			<real>6</real>
-			<key>type</key>
-			<integer>6</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>12</real>
-			<key>gridPositionY</key>
-			<real>12</real>
-			<key>type</key>
-			<integer>4</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>3</real>
-			<key>gridPositionY</key>
-			<real>13</real>
-			<key>type</key>
-			<integer>4</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>20</real>
-			<key>gridPositionY</key>
-			<real>11</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>6</real>
-			<key>gridPositionY</key>
-			<real>13</real>
-			<key>type</key>
-			<integer>4</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>8</real>
-			<key>gridPositionY</key>
-			<real>1</real>
-			<key>type</key>
-			<integer>6</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>2</real>
-			<key>gridPositionY</key>
-			<real>3</real>
-			<key>type</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>gridPositionX</key>
-			<real>5</real>
 			<key>gridPositionY</key>
 			<real>5</real>
 			<key>type</key>
