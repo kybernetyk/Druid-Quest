@@ -79,7 +79,7 @@
 
 - (void) postHighScoresToServer
 {
-	id rolf = [ScoreServerPost serverWithGameName:@"DuduDash" gameKey:@"1d7d54ed0c9ca9cc7f35e6e3e7abc8fc" delegate: self];
+	id rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: self];
 	NSMutableDictionary *d = [NSMutableDictionary dictionary];
 	
 //	float rating = 1.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;

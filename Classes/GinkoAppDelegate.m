@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "IntroScene.h"
 #import "GameInfo.h"
+#import "cocoslive.h"
 
 @implementation GinkoAppDelegate
 
@@ -110,6 +111,80 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
+	/*
+	NSMutableDictionary *d = [NSMutableDictionary dictionary];
+	
+	float rating = 1000;
+	
+	
+	int minutes = 20;
+	int hours = 0;
+	int seconds = 0;
+	
+	if (seconds >= 60)
+		seconds = seconds%60;
+	
+	if (minutes >= 60)
+		minutes = minutes%60;
+	
+
+	id rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: nil];
+	NSString *timeString = [NSString stringWithFormat:@"%.2i:%.2i:%.2i",hours,minutes,seconds];
+	[d setObject: @"Druid Quest" forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:rating] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)rating] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int) 100] forKey:@"usr_steps"];
+	[rolf sendScore: d];
+	
+	rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: nil];
+	
+	d = [NSMutableDictionary dictionary];
+	[d setObject: @"a" forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:900] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)900] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int) 100] forKey:@"usr_steps"];
+	d = [NSDictionary dictionaryWithDictionary: d];
+	[rolf sendScore: d];
+	
+	rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: nil];
+
+	d = [NSMutableDictionary dictionary];
+	[d setObject: @"Game" forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:800] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)800] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int) 100] forKey:@"usr_steps"];
+	d = [NSDictionary dictionaryWithDictionary: d];
+	[rolf sendScore: d];
+	
+	rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: nil];
+
+	d = [NSMutableDictionary dictionary];
+	[d setObject: @"by" forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:700] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)700] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int) 100] forKey:@"usr_steps"];
+	d = [NSDictionary dictionaryWithDictionary: d];
+	[rolf sendScore: d];
+
+	rolf = [ScoreServerPost serverWithGameName:@"Druid Quest" gameKey:@"3f3ef753f1cda7c134640a5bc7eefcaa" delegate: nil];
+
+	d = [NSMutableDictionary dictionary];
+	[d setObject: @"Flux Forge" forKey:@"cc_playername"];
+	[d setObject:[NSNumber numberWithFloat:600] forKey:@"cc_score"];
+	[d setObject:[NSNumber numberWithInt:(int)600] forKey:@"usr_rating"];
+	[d setObject:timeString forKey:@"usr_time"];
+	[d setObject:[NSNumber numberWithInt:(int) 100] forKey:@"usr_steps"];
+	d = [NSDictionary dictionaryWithDictionary: d];
+	[rolf sendScore: d];
+	
+	
+	
+	return;
+	*/
 	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
 
 	

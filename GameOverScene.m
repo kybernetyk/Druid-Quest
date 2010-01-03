@@ -85,7 +85,7 @@
 	[textLabel setString: goText];
 
 	
-	id rolf = [ScoreServerRequest serverWithGameName:@"DuduDash" delegate: self];
+	id rolf = [ScoreServerRequest serverWithGameName:@"Druid Quest" delegate: self];
 	[rolf requestScores: kQueryAllTime limit: 6 offset: 0 flags: kQueryFlagIgnore];
 
 }

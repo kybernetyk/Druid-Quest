@@ -17,9 +17,6 @@
     self = [super init];
     if (self) 
 	{
-//		label = [Label labelWithString:value fontName:_fontName fontSize:_fontSize];
-	//	NSLog(@"lalalal");
-		
 		sprite = [[Sprite alloc] initWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"time.png"]];
 		[sprite setPosition: cpv(-480/2+[sprite contentSize].width/2 ,-320/2+11-3)];
 		[self addChild: sprite];
@@ -34,26 +31,20 @@
 		
 		NSString *scoreString = [NSString stringWithFormat:@"%.4i", [[GameInfo sharedInstance] score]];
 		
-		//score = [Label labelWithString:@"distance: 0001" fontName:@"Helvetica" fontSize: 20.0f];
 		score = [[LabelAtlas labelAtlasWithString:scoreString charMapFile:@"numfont.png" itemWidth:11 itemHeight:20 startCharMap:'.'] retain];
 		[score setPosition:cpv(480/2-[score contentSize].width,-320/2-2-3)];
-	//	[score retain];
-		
-		//time = [Label labelWithString:@"time: 99.99.99" fontName:@"Helvetica" fontSize: 20.0f];
-//		time = [Label la
 		
 		NSString *timeString = [NSString stringWithFormat:@"%f", [[GameInfo sharedInstance] time]];
 		
 		time = [[LabelAtlas labelAtlasWithString:timeString charMapFile:@"numfont.png" itemWidth:11 itemHeight:20 startCharMap:'.'] retain];
 		[time setPosition:cpv(-480/2+[sprite contentSize].width-8,-320/2-2-3)];
-		//[time retain];
 		
 		
 		NSString *levelString = [NSString stringWithFormat:@"%.2i", [[GameInfo sharedInstance] currentLevel]];
 		
 		level = [[LabelAtlas labelAtlasWithString: levelString charMapFile:@"numfont.png" itemWidth: 11 itemHeight: 20 startCharMap:'.'] retain];
 		[level setPosition: cpv(480/2-[level contentSize].width-8+8,138)];
-	//	[level retain];
+
 		
 		[self addChild: score];
 		[self addChild: time];
