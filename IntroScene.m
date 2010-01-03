@@ -53,7 +53,7 @@ unsigned long totalbytesused = 0;
 - (void) preloadNextResource
 {
 	NSString *spriteFileName = [preloadArray objectAtIndex: _preloadCounter];
-	//NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
+	NSLog(@"loading %@ ...",[[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]);
 	id tex = [[TextureMgr sharedTextureMgr] addImage: [[GameInfo sharedInstance] pathForGraphicsFile:spriteFileName]];
 	[tex retain];
 	

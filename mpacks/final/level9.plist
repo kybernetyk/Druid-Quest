@@ -238,6 +238,14 @@
 			<key>type</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>gridPositionX</key>
+			<real>1</real>
+			<key>gridPositionY</key>
+			<real>2</real>
+			<key>type</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>MapGridHeight</key>
 	<real>15</real>

@@ -90,7 +90,7 @@ static GameInfo *sharedSingleton = nil;
     sharedSingleton = self;
 
 	
-	levelPath = [[NSArray alloc] initWithObjects: @"2",@"3",@"5",@"10",@"8",@"6",@"12",@"16",@"7",@"15",@"24",@"14",@"26",@"25",@"27",@"23",@"13",@"21",@"22",@"11",@"28",@"17",@"9",nil];
+	levelPath = [[NSArray alloc] initWithObjects: @"2",@"4",@"3",@"5",@"10",@"8",@"6",@"12",@"16",@"7",@"15",@"24",@"14",@"11",@"28",@"1",@"26",@"25",@"27",@"23",@"17",@"13",@"21",@"22",@"9",nil];
 	
     //initialize here
 	[self reset];

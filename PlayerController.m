@@ -192,7 +192,9 @@
 	{
 		
 	//	NSLog(@"x: %f\ny: %f",gridPosition.x, gridPosition.y);
-	//	NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+		NSLog(@"O M F G DIE DIE DIE DIE DI DEE DEDEDEDE NOOOOOOOOOOOOOOOOOO");
+		[[GameInfo sharedInstance] setScore: [[GameInfo sharedInstance] score] + 100];
+		
 		GameScene *currentScene = (GameScene*)[[Director sharedDirector] runningScene];
 		[currentScene resetScene];
 	}
