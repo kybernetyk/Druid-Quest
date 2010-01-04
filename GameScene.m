@@ -42,10 +42,10 @@ enum GameSceneLayerTags
 //		NSLog(@"self retaincount: %i",[self retainCount]);
 
 //		NSLog(@"gameScene init");
-		
+		NSLog(@"current level: %i/%i",[[GameInfo sharedInstance] currentLevel], [[GameInfo sharedInstance] lastLevel]);
 				[[[UIApplication sharedApplication] delegate] playGameMusic];
 		[self loadScene];
-//		NSLog(@"self retaincount: %i",[self retainCount]);		
+//		NSLog(@"self retaincount: %i",[self retainCount]);
 	}
 	
 	return self;
@@ -111,8 +111,7 @@ enum GameSceneLayerTags
 
 - (void) loadNextLevel
 {
-	[[GameInfo sharedInstance] saveToFile];
-	
+
 	id _nextScene = nil;
 	unsigned int rgb = 0x000000;
 	[[GameInfo sharedInstance] setCurrentLevel: [[GameInfo sharedInstance] currentLevel] + 1];
@@ -127,7 +126,7 @@ enum GameSceneLayerTags
 		_nextScene = [GameScene node];
 	}
 
-
+	[[GameInfo sharedInstance] saveToFile];
 	
 //	[[Director sharedDirector] replaceScene: gs];
 	

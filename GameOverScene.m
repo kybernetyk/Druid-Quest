@@ -20,10 +20,11 @@
 	self = [super init];
 	if (self)
 	{
+		NSLog(@"current level: %i/%i",[[GameInfo sharedInstance] currentLevel], [[GameInfo sharedInstance] lastLevel]);
 		
 		[[[UIApplication sharedApplication] delegate] playScoreMusic];
 		
-		rating = 10.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 300000.0f;
+		rating = 25.0/([[GameInfo sharedInstance] time] + [[GameInfo sharedInstance] score]) * 321321.0f;
 		
 		background = [Sprite spriteWithFile: [[GameInfo sharedInstance] pathForGraphicsFile: @"end_bg.png"]];
 		[background setPosition: cpv(480/2,320/2)];
