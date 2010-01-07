@@ -38,7 +38,8 @@
 	audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error];
 	[audioplayer setNumberOfLoops: -1]; //repeat bitch
 	NSLog(@"avp: %@ error: %@",audioplayer, error);
-	NSLog(@"starting music: %i",[audioplayer play]);
+	//NSLog(@"starting music: %i",[audioplayer play]);
+		[audioplayer play];
 }
 
 - (void) playGameMusic
@@ -63,8 +64,8 @@
 	audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL: url error: &error];
 	[audioplayer setNumberOfLoops: -1]; //repeat bitch
 	NSLog(@"avp: %@ error: %@",audioplayer, error);
-	NSLog(@"starting music: %i",[audioplayer play]);
-	
+	//NSLog(@"starting music: %i",[audioplayer play]);
+	[audioplayer play];
 }
 
 - (void) playScoreMusic
@@ -90,8 +91,8 @@
 	[audioplayer setNumberOfLoops: -1]; //repeat bitch
 	
 	NSLog(@"avp: %@ error: %@",audioplayer, error);
-	NSLog(@"starting music: %i",[audioplayer play]);
-	
+	//NSLog(@"starting music: %i",[audioplayer play]);
+	[audioplayer play];
 }
 
 - (void) stopMusicPlayback
