@@ -1,1 +1,6 @@
-New Git Project
+A puzzle game for the iPhone. 
+
+Warning: This was my first experiment with Cocos2D (I only used C++ for gamedev before) and the code sucks. Take a look at my other games if you want some non-sucking code :)
+
+License GPL3
+(c) Leon Szpilewski, 2009-2011
